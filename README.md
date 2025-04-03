@@ -24,7 +24,7 @@
 
 # 첫 세팅(추후 삭제 예정)
 ## 1. 나만의 브랜치 생성하기
-1. 현재 페이지에서 branch - new - 브랜치 이름 입력 ex)jiwoo
+1. 현재 페이지에서 branches - new - 브랜치 이름 입력 ex)jiwoo
 2. git - branches - new branch - 추가했던 브랜치 이름 입력
    
 ## 2. 첫 프로젝트 가져오기
