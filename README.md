@@ -1,5 +1,5 @@
 민섭 테스트입니다요
-
+세윤 테스트
 
 
 #수정, 추가된 코드를 업로드 혹은 가져올 때
@@ -34,4 +34,4 @@
 ## 2. 첫 프로젝트 가져오기
 1. 깃이 설치되지 않았다면 참고: https://dev-cini.tistory.com/16 (포스트 내용 3번 과정까지만 문제 발생시, 이후 단계 실행)
 2. 현재 페이지에서 <>code버튼 클릭 후 주소 복사
-3. 안드로이드 스튜디오 실행 file - new - new Project - Project from version control - 복사한 주소 입력 - clone 
+3. 안드로이드 스튜디오 실행 file - new - new Project - Project from version control - 복사한 주소 입력 - clone
