@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "207092680744",
+    "project_id": "alramapp-c7436",
+    "storage_bucket": "alramapp-c7436.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207092680744:android:9a19758ac26fbdbfd8cd1d",
+        "android_client_info": {
+          "package_name": "com.example.alramapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207092680744-1mtlitigctiqkvqmdfltr8m4h9ai5s6d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alramapp",
+            "certificate_hash": "c796a270f5c9ca8cb1c5c3b78ef42142a6c327c6"
+          }
+        },
+        {
+          "client_id": "207092680744-nsg0nsou6hdatrd8mr0783i8r9av0hq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFHoeB2ik59nDV5ntxHR8PwPeLaprZg04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207092680744-nsg0nsou6hdatrd8mr0783i8r9av0hq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
