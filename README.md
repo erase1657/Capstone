@@ -21,7 +21,8 @@
 동작 참고: https://velog.io/@prettylee620/%ED%8C%80%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B9%83%ED%97%88%EB%B8%8C
 
 # 브랜치를 추가하고싶다면 
-![img.png](img.png)
+![branch](https://github.com/user-attachments/assets/8fd41ddc-482f-46eb-8ffb-5f947f2d0ab2)
+
 1. 프로젝트 옆에 브랜치를 다루는 탭으로 이동
 2. new branch 클릭후 원하는 이름의 브랜치 생성. 아직 깃헙에는 브랜치가 생성되지않음
 3. push클릭. 이제 깃헙에도 브랜치 목록이 업데이트 됨
