@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/background"
+    >
+
+    <!--최상단 캐릭터 아이콘-->
+    <ImageView
+        android:id="@+id/welcomicon"
+        android:layout_width="141dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="84dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerInside"
+        android:src="@drawable/dog" />
+
+    <!--액션-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="93dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                >
+
+
+                <ImageView
+                    android:id="@+id/id_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="14dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/fi_rr_check"
+                    android:visibility="invisible"
+                    />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|left"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/mdi_account" />
+
+                    <EditText
+                        android:id="@+id/register_email_input"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|left"
+                        android:layout_marginLeft="38dp"
+                        android:gravity="left|center_vertical"
+                        android:hint="이메일을 입력하세요"
+                        android:includeFontPadding="false"
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:textSize="12dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|left"
+                        android:layout_marginTop="30dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/underline" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:layout_marginTop="47dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/password_check1"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="14dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/fi_rr_check"
+                        android:visibility="invisible"/>
+
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|left"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/material_symbols_lock_outline" />
+
+                        <EditText
+                            android:id="@+id/register_password_input"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|left"
+                            android:layout_marginLeft="38dp"
+                            android:gravity="left|center_vertical"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:hint="비밀번호를 입력하세요(6자 이상)"
+                            android:background="@android:color/transparent"
+                            android:textColor="#FF000000"
+                            android:textSize="12dp"
+                            android:inputType="textPassword"/>
+
+                        <ImageView
+                            android:layout_width="266dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="top|left"
+                            android:layout_marginTop="30dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/underline" />
+
+                        <Button
+                            android:id="@+id/seepassword1"
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/fi_rr_eye" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+            </FrameLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:layout_marginTop="47dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/password_check2"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginRight="14dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/fi_rr_check"
+                    android:visibility="invisible"/>
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|left"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/material_symbols_lock_outline" />
+
+                    <EditText
+                        android:id="@+id/register_password_check"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|left"
+                        android:layout_marginLeft="38dp"
+                        android:gravity="left|center_vertical"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:hint="비밀번호 확인"
+                        android:background="@android:color/transparent"
+                        android:textColor="#FF000000"
+                        android:textSize="12dp"
+                        android:inputType="textPassword"/>
+
+                    <ImageView
+                        android:layout_width="266dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="top|left"
+                        android:layout_marginTop="30dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/underline" />
+
+                    <Button
+                        android:id="@+id/seepassword2"
+                        android:layout_width="24dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/fi_rr_eye" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+        <!--가입 완료 버튼-->
+        <Button
+            android:id="@+id/completebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#535353"
+            android:text="가입 완료"
+            android:layout_marginTop="63dp"
+            android:background="@drawable/false_enable_btn"
+            android:enabled="false"/>
+
+
+        <!--외부 가입 사이트 목록-->
+        <LinearLayout
+            android:layout_width="191dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <!--구글 가입-->
+            <Button
+                android:id="@+id/google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/google"
+                android:layout_weight="1"/>
+            <!--애플 가입-->
+            <Button
+                android:id="@+id/github"
+                android:layout_width="87dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:background="@drawable/github_icon_1_logo_svgrepo_com" />
+            <!--트위터 가입-->
+            <Button
+                android:id="@+id/tiwtter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/twitter"
+                android:layout_weight="1"/>
+            <!--페이스북 가입-->
+            <Button
+                android:id="@+id/facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/facebook"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
