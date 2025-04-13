@@ -47,7 +47,7 @@
                 android:layout_gravity="top|left"
                 android:layout_marginLeft="38dp"
                 android:gravity="left|center_vertical"
-                android:hint="아이디를 입력하세요"
+                android:hint="이메일을 입력하세요"
                 android:includeFontPadding="false"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
@@ -109,12 +109,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:text="로그인"
             android:layout_marginTop="63dp"
             android:background="@drawable/login_btn"/>
 
         <!--회원가입 버튼-->
         <Button
+            android:id="@+id/registerbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
