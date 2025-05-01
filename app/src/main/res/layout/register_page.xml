@@ -262,7 +262,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/google"
                 android:layout_weight="1"/>
-            <!--애플 가입-->
+            <!--깃헙 가입-->
             <Button
                 android:id="@+id/github"
                 android:layout_width="87dp"

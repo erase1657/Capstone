@@ -143,34 +143,35 @@
             android:orientation="horizontal">
             <!--구글 로그인-->
             <Button
-                android:id="@+id/google"
+                android:id="@+id/googlebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/google"
                 android:layout_weight="1"/>
-            <!--애플 로그인-->
+            <!--깃헙 로그인-->
             <Button
-                android:id="@+id/apple"
-                android:layout_width="wrap_content"
+                android:id="@+id/githubbtn"
+
+                android:layout_width="87dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
-                android:background="@drawable/apple"
+                android:background="@drawable/github_icon_1_logo_svgrepo_com"
                 android:layout_weight="1"/>
             <!--트위터 로그인-->
             <Button
-                android:id="@+id/tiwtter"
+                android:id="@+id/twitterbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/twitter"
                 android:layout_weight="1"/>
             <!--페이스북 로그인-->
-            <Button
-                android:id="@+id/facebook"
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebookbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/apple"
+                android:background="@drawable/facebook"
                 android:layout_weight="1"/>
 
         </LinearLayout>
