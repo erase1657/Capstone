@@ -83,10 +83,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
     }
     public void getUserProfile() {
         // [START get_user_profile]
