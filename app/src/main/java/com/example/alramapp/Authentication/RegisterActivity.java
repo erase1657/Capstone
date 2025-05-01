@@ -26,17 +26,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
-    private EditText emailEditText;
-    private EditText passwordEditText;
-    private EditText passwordCheckEditText;
-    private Button CreateAccountButton;
-    private ImageView Id_check;
-    private ImageView Password_check1;
-    private ImageView Password_check2;
-
+    private EditText emailEditText,passwordCheckEditText,passwordEditText;
+    private Button CreateAccountButton, Backbtn;
+    private ImageView Id_check, Password_check1, Password_check2;
     private Button Seepassword1,Seepassword2;
 
-    private Button Google, Github, Twitter, Facebook;
 
     private FirebaseAuth mAuth; //Firebase 인증 객체 선언
 
@@ -47,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_page);
 
         mAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
+
+        Backbtn = findViewById(R.id.backbtn);
 
         emailEditText =  findViewById(R.id.register_email_input);
         passwordEditText = findViewById(R.id.register_password_input);
@@ -72,6 +68,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 createAccount(email,password);
+            }
+        });
+
+        Backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
