@@ -134,47 +134,6 @@
             android:textColor="#FF8B8686"
             android:textSize="17dp"
             />
-        <!--외부 로그인 사이트 목록-->
-        <LinearLayout
-            android:layout_width="191dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            <!--구글 로그인-->
-            <Button
-                android:id="@+id/googlebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/google"
-                android:layout_weight="1"/>
-            <!--깃헙 로그인-->
-            <Button
-                android:id="@+id/githubbtn"
-
-                android:layout_width="87dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/github_icon_1_logo_svgrepo_com"
-                android:layout_weight="1"/>
-            <!--트위터 로그인-->
-            <Button
-                android:id="@+id/twitterbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/twitter"
-                android:layout_weight="1"/>
-            <!--페이스북 로그인-->
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/facebookbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/facebook"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

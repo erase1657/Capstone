@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">test</string>
-    <string name="facebook_app_id">1162569728511906</string>
-    <string name="fb_login_protocol_scheme">fb1162569728511906</string>
-    <string name="facebook_client_token">b27fa836faa8aac7957466b5e0811389</string>
-    <string name="default_web_client_id" translatable="false">207092680744-1mtlitigctiqkvqmdfltr8m4h9ai5s6d.apps.googleusercontent.com</string>
+
 </resources>
