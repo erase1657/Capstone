@@ -213,8 +213,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-
-
     // 이메일 유효성 검사 메서드 (간단한 정규 표현식 사용)
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
