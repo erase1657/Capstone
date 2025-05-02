@@ -7,9 +7,20 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/background"
+
     >
 
     <!--최상단 캐릭터 아이콘-->
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/back"
+        android:fitsSystemWindows="true" />
+
     <ImageView
         android:id="@+id/welcomicon"
         android:layout_width="141dp"
