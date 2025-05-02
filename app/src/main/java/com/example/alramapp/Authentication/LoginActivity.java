@@ -23,12 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private Button GoRegister;
-    private Button LoginButton;
-    private Button Google, Github, Twitter, Facebook;
-
-    private EditText emailEditText;
-    private EditText passwordEditText;
+    private Button GoRegister, LoginButton;
+    private EditText emailEditText, passwordEditText;
     private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth; //Firebase 인증 객체 선언
 
