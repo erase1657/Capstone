@@ -28,7 +28,7 @@
         android:layout_marginTop="84dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside"
-        android:src="@drawable/dog" />
+        android:src="@drawable/cat" />
 
     <!--액션-->
     <LinearLayout
