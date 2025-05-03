@@ -65,7 +65,29 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="146dp"
+        android:layout_height="168dp"
         android:layout_gravity="bottom"
+        android:scaleType="center"
         android:src="@drawable/Vector" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cricle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="720dp"/>
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/state"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="805dp"/>
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/Ranking"
+        android:layout_gravity="end"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="805dp"/>
 </FrameLayout>
