@@ -1,4 +1,4 @@
-package com.example.alramapp.Authentication;
+package com.example.alramapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.alramapp.R;
+import com.example.alramapp.Authentication.LoginActivity;
 
 public class CreateActivity extends AppCompatActivity {
 
@@ -43,7 +40,7 @@ public class CreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.create_page);
 
         profileIcon = findViewById(R.id.profile_cat); // XML의 ImageView ID 사용
         lBtn = findViewById(R.id.arrow_left);
