@@ -1,6 +1,7 @@
 package com.example.alramapp.Authentication;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -26,17 +27,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
-    private EditText emailEditText;
-    private EditText passwordEditText;
-    private EditText passwordCheckEditText;
-    private Button CreateAccountButton;
-    private ImageView Id_check;
-    private ImageView Password_check1;
-    private ImageView Password_check2;
-
+    private EditText emailEditText,passwordCheckEditText,passwordEditText;
+    private Button CreateAccountButton, Backbtn;
+    private ImageView Id_check, Password_check1, Password_check2;
     private Button Seepassword1,Seepassword2;
 
-    private Button Google, Github, Twitter, Facebook;
 
     private FirebaseAuth mAuth; //Firebase 인증 객체 선언
 
@@ -47,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_page);
 
         mAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
+
+        Backbtn = findViewById(R.id.backbtn);
 
         emailEditText =  findViewById(R.id.register_email_input);
         passwordEditText = findViewById(R.id.register_password_input);
@@ -74,6 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
                 createAccount(email,password);
             }
         });
+
+        Backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     @Override
     public void onStart() {
@@ -94,14 +98,19 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+
                             Log.d(TAG, "createUserWithEmail:success");
+                            Toast.makeText(RegisterActivity.this, "계정 생성 성공! 로그인 해주세요.",
+                                    Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
                         } else {
 
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                            Toast.makeText(RegisterActivity.this, "계정 생성 실패. 중복된 이메일입니다.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -212,8 +221,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     // 이메일 유효성 검사 메서드 (간단한 정규 표현식 사용)
     private boolean isValidEmail(String email) {

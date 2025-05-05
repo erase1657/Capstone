@@ -7,9 +7,20 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/background"
+
     >
 
     <!--최상단 캐릭터 아이콘-->
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/back"
+        android:fitsSystemWindows="true" />
+
     <ImageView
         android:id="@+id/welcomicon"
         android:layout_width="141dp"
@@ -17,7 +28,7 @@
         android:layout_marginTop="84dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside"
-        android:src="@drawable/dog" />
+        android:src="@drawable/cat" />
 
     <!--액션-->
     <LinearLayout
@@ -228,10 +239,6 @@
 
 
 
-
-
-
-
         <!--가입 완료 버튼-->
         <Button
             android:id="@+id/completebtn"
@@ -245,48 +252,6 @@
             android:layout_marginTop="63dp"
             android:background="@drawable/false_enable_btn"
             android:enabled="false"/>
-
-
-        <!--외부 가입 사이트 목록-->
-        <LinearLayout
-            android:layout_width="191dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            <!--구글 가입-->
-            <Button
-                android:id="@+id/google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/google"
-                android:layout_weight="1"/>
-            <!--깃헙 가입-->
-            <Button
-                android:id="@+id/github"
-                android:layout_width="87dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_weight="1"
-                android:background="@drawable/github_icon_1_logo_svgrepo_com" />
-            <!--트위터 가입-->
-            <Button
-                android:id="@+id/tiwtter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/twitter"
-                android:layout_weight="1"/>
-            <!--페이스북 가입-->
-            <Button
-                android:id="@+id/facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/facebook"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

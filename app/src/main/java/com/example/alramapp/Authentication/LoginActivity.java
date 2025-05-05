@@ -23,12 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private Button GoRegister;
-    private Button LoginButton;
-    private Button Google, Github, Twitter, Facebook;
-
-    private EditText emailEditText;
-    private EditText passwordEditText;
+    private Button GoRegister, LoginButton;
+    private EditText emailEditText, passwordEditText;
     private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth; //Firebase 인증 객체 선언
 
@@ -43,10 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         GoRegister = findViewById(R.id.registerbtn);
         LoginButton = findViewById(R.id.loginbtn);
-        Google = findViewById(R.id.googlebtn);
-        Facebook = findViewById(R.id.facebookbtn);
-        Github = findViewById(R.id.githubbtn);
-        Twitter = findViewById(R.id.twitterbtn);
+
 
         emailEditText = findViewById(R.id.editemail);
         passwordEditText = findViewById(R.id.editpassword);
@@ -85,37 +78,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //구글 로그인 버튼
-        Google.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, GoogleSignInActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        //페이스북 로그인 버튼
-        Facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, FacebookLoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Twitter.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, GenericIdpActivity.class);
-            intent.putExtra("provider", "twitter");
-            startActivity(intent);
-        });
-
-        //깃헙 로그인 버튼 클릭
-        Github.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, GenericIdpActivity.class);
-            intent.putExtra("provider", "github");
-            startActivity(intent);
-        });
 
     }
     public void getUserProfile() {
@@ -130,12 +92,10 @@ public class LoginActivity extends AppCompatActivity {
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
+
             String uid = user.getUid();
         }
-        // [END get_user_profile]
+
     }
 
     @Override
