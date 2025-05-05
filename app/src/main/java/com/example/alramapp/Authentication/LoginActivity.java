@@ -125,6 +125,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            //첫 로그인에 프로필 생성페이지 이동
+                            Intent intent = new Intent(LoginActivity.this, CreateActivity.class);
+                            startActivity(intent);
+
                         } else {
 
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
