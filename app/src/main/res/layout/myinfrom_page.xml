@@ -33,6 +33,7 @@
             android:src="@drawable/cat"/>
 
         <Button
+            android:id="@+id/modifycharacterbtn"
             android:layout_width="19dp"
             android:layout_height="20dp"
             android:layout_gravity="right"
@@ -137,6 +138,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/logininformbtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -148,6 +150,7 @@
             android:layout_width="22dp"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/questionbtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -159,6 +162,7 @@
             android:layout_width="22dp"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/logoutbtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

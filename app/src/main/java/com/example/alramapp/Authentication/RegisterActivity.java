@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
     private EditText emailEditText,passwordCheckEditText,passwordEditText;

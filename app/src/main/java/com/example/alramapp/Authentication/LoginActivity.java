@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.alramapp.CreateActivity;
+import com.example.alramapp.MyInfromActivity;
 import com.example.alramapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -81,23 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void getUserProfile() {
-        // [START get_user_profile]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-
-            String uid = user.getUid();
-        }
-
-    }
 
     @Override
     public void onStart() {
@@ -129,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                             //첫 로그인에 프로필 생성페이지 이동
                             Intent intent = new Intent(LoginActivity.this, CreateActivity.class);
                             startActivity(intent);
-
                         } else {
 
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
