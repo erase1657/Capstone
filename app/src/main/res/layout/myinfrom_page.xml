@@ -28,6 +28,7 @@
 
         <!--사용자 캐릭터-->
         <ImageView
+            android:id="@+id/profileimage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/cat"/>
@@ -59,12 +60,14 @@
 
             <!--사용자 성별-->
             <ImageView
+                android:id="@+id/genderimage"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/m_btn"/>
 
             <!--사용자 이름-->
             <TextView
+                android:id="@+id/nametextview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -81,6 +84,7 @@
 
         <!--사용자 점수-->
         <TextView
+            android:id="@+id/socretextview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -117,6 +121,7 @@
 
         <!--체력바-->
         <com.willy.ratingbar.BaseRatingBar
+            android:id="@+id/liferating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srb_drawableEmpty="@drawable/ic_health_empty"

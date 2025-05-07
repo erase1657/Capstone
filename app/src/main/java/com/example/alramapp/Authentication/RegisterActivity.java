@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             FirebaseUser user = task.getResult().getUser();
                             if(user != null){
-                                database.UpdateUser(user); //가입회원 정보 데이터베이스에 업데이트
+                                database.RegisterUserUpadate(user); //가입회원 정보 데이터베이스에 업데이트
                             } else {
                                 Log.w(TAG, "FirebaseUser is null after sign up");
                             }

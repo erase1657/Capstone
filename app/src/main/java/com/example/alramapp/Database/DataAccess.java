@@ -17,13 +17,13 @@ import com.google.firebase.database.ValueEventListener;
 public class DataAccess {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dataref = database.getReference();
+    public DatabaseReference dataref = database.getReference();
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     //유저 정보 쓰기
-    public void UpdateUser(FirebaseUser user) {
+    public void RegisterUserUpadate(FirebaseUser user) {
 
         UserInform Info = new UserInform();
         if(user != null){
@@ -43,7 +43,29 @@ public class DataAccess {
         dataref.child("users").child(Info.getUid()).setValue(Info);
     }
 
+    public interface UserLoadCallback {
+        void onUserLoaded(UserInform user);
+    }
+    public void readUserByUid(String uid, final UserLoadCallback callback){
+        if(uid == null || uid.isEmpty()) {
+            callback.onUserLoaded(null);
+            return;
+        }
+        dataref.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserInform userInfo = snapshot.getValue(UserInform.class);
+                callback.onUserLoaded(userInfo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("DataAccess", "Failed to read user data.", error.toException());
+                callback.onUserLoaded(null);
+            }
+        });
+    }
 
 
 

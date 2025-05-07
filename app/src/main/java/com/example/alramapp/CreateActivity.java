@@ -11,13 +11,20 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.alramapp.Authentication.LoginActivity;
+import com.example.alramapp.Database.DataAccess;
+import com.example.alramapp.Database.UserInform;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class CreateActivity extends AppCompatActivity {
 
-    private ImageView profileIcon;
+    private DataAccess database;
+    private FirebaseUser currentUser;
+
+    private ImageView profileIcon;  //캐릭터 이미지
     private Button lBtn, rBtn, fBtn, mBtn, createBtn;
-    private EditText editName;
+    private EditText editName;  //캐릭터 이름
 
     private int[] profileImages = {
             R.drawable.profile_cat,
@@ -27,14 +34,15 @@ public class CreateActivity extends AppCompatActivity {
     };
 
     private int currentProfileIndex = 0; // 현재 표시 중인 프로필 이미지의 인덱스입니다.
-    private String selectedGender = null; // 선택된 성별을 저장할 변수입니다. (null, "f", "m")
+    private String selectedGender = null; // 선택된 성별 값 (null, "f", "m")
 
-    // 성별 버튼의 선택/비선택 상태에 따른 배경 이미지 리소스 ID입니다.
-    // ㅈㅎ9224님의 drawable 폴더에 있는 실제 리소스 ID로 변경해주세요!
-    private int fButtonSelectedDrawable = R.drawable.f_btn_c; // 암컷 버튼 선택 시 이미지
-    private int fButtonNormalDrawable = R.drawable.f_btn;             // 암컷 버튼 기본 이미지
-    private int mButtonSelectedDrawable = R.drawable.m_btn_c; // 수컷 버튼 선택 시 이미지
-    private int mButtonNormalDrawable = R.drawable.m_btn;             // 수컷 버튼 기본 이미지
+    private int fButtonSelectedDrawable = R.drawable.f_btn_c; // 암컷 버튼 이미지(활성)
+    private int fButtonNormalDrawable = R.drawable.f_btn;     // 암컷 버튼 이미지(기본)
+
+    private int mButtonSelectedDrawable = R.drawable.m_btn_c; // 수컷 버튼 이미지(활성)
+    private int mButtonNormalDrawable = R.drawable.m_btn;     // 수컷 버튼 이미지(기본)
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +50,8 @@ public class CreateActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.create_page);
 
-        profileIcon = findViewById(R.id.profile_cat); // XML의 ImageView ID 사용
+
+        profileIcon = findViewById(R.id.profile_cat);
         lBtn = findViewById(R.id.arrow_left);
         rBtn = findViewById(R.id.arrow_right);
         fBtn = findViewById(R.id.f_button);
@@ -50,21 +59,21 @@ public class CreateActivity extends AppCompatActivity {
         editName = findViewById(R.id.editname);
         createBtn = findViewById(R.id.create_button);
 
-        // 액티비티 시작 시 초기 프로필 이미지를 설정합니다.
+        // 초기 캐릭터 설정(cat인 상태)
         profileIcon.setImageResource(profileImages[currentProfileIndex]);
 
         // < 화살표 버튼 클릭 리스너 설정
         lBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 현재 이미지 인덱스를 1 감소시킵니다.
-                currentProfileIndex--;
-                // 인덱스가 0보다 작아지면 (처음 이미지에서 왼쪽으로 이동 시) 마지막 이미지로 순환합니다.
-                if (currentProfileIndex < 0) {
+
+                currentProfileIndex--;  // 현재 이미지 인덱스를 1 감소시킵니다.
+
+                if (currentProfileIndex < 0) {  // 인덱스가 0보다 작아지면 (처음 이미지에서 왼쪽으로 이동 시) 마지막 이미지로 순환합니다.
                     currentProfileIndex = profileImages.length - 1;
                 }
-                // 변경된 인덱스의 이미지로 ImageView를 업데이트합니다.
-                profileIcon.setImageResource(profileImages[currentProfileIndex]);
+
+                profileIcon.setImageResource(profileImages[currentProfileIndex]); // 변경된 인덱스의 이미지로 ImageView를 업데이트합니다.
             }
         }); //lBtn
 
@@ -72,34 +81,37 @@ public class CreateActivity extends AppCompatActivity {
         rBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 현재 이미지 인덱스를 1 증가시킵니다.
-                currentProfileIndex++;
-                // 인덱스가 이미지 목록 크기보다 같거나 커지면 (마지막 이미지에서 오른쪽으로 이동 시) 처음 이미지로 순환합니다.
-                if (currentProfileIndex >= profileImages.length) {
+
+                currentProfileIndex++;  // 현재 이미지 인덱스를 1 증가시킵니다.
+
+                if (currentProfileIndex >= profileImages.length) { // 인덱스가 이미지 목록 크기보다 같거나 커지면 (마지막 이미지에서 오른쪽으로 이동 시) 처음 이미지로 순환합니다.
                     currentProfileIndex = 0;
                 }
-                // 변경된 인덱스의 이미지로 ImageView를 업데이트합니다.
-                profileIcon.setImageResource(profileImages[currentProfileIndex]);
-            }
-        });   //rBtn
 
-        // 'f' (암컷) 성별 선택 버튼 클릭 리스너 설정
+                profileIcon.setImageResource(profileImages[currentProfileIndex]);   // 변경된 인덱스의 이미지로 ImageView를 업데이트합니다.
+            }
+        });
+
+        //여성 선택 버튼
         fBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedGender = "f"; // 선택된 성별을 "f"로 설정합니다.
-                updateGenderButtonUI(); // 성별 버튼의 배경 이미지를 업데이트하는 함수를 호출합니다.
+                selectedGender = "f";
+                updateGenderButtonUI(); //버튼 UI 변경
             }
         });
 
-        // 'm' (수컷) 성별 선택 버튼 클릭 리스ナー 설정
+        //남성 선택 버튼
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedGender = "m"; // 선택된 성별을 "m"으로 설정합니다.
-                updateGenderButtonUI(); // 성별 버튼의 배경 이미지를 업데이트하는 함수를 호출합니다.
+                selectedGender = "m";
+                updateGenderButtonUI(); //버튼 UI 변경
             }
         });
+
+        database = new DataAccess();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // '완료' 버튼 클릭 리스너 설정
         createBtn.setOnClickListener(new View.OnClickListener() {
@@ -108,37 +120,48 @@ public class CreateActivity extends AppCompatActivity {
                 // EditText에서 입력된 이름을 가져와서 앞뒤 공백을 제거합니다.
                 String profileName = editName.getText().toString().trim();
 
-                // 이름이 입력되었는지 확인합니다.
-                if (profileName.isEmpty()) {
+
+                if (profileName.isEmpty()) { // 이름이 입력되었는지 확인합니다.
                     Toast.makeText(CreateActivity.this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                    return; // 이름이 비어있으면 함수 실행을 중단합니다.
+                    return;
                 }
-                // 성별이 선택되었는지 확인합니다.
-                if (selectedGender == null) {
+
+                if (selectedGender == null) { // 성별이 선택되었는지 확인합니다.
                     Toast.makeText(CreateActivity.this, "성별을 선택해주세요.", Toast.LENGTH_SHORT).show();
-                    return; // 성별이 선택되지 않았으면 함수 실행을 중단합니다.
+                    return;
                 }
+                // 프로필 이미지 이름(키)를 문자열로 저장하는 예시
+                String[] profileImageNames = {"profile_cat", "profile_fish", "profile_bird", "profile_dog"};
+                String selectedProfileImageName = profileImageNames[currentProfileIndex];
 
-                // 이름과 성별 모두 확인되면 이동할 액티비티  Intent를 생성합니다.  // 수정해야함
-                Intent intent = new Intent(CreateActivity.this, LoginActivity.class);
+                //업데이트할 객체
+                UserInform info = new UserInform();
+                info.setName(profileName);                      //이름
+                info.setGender(selectedGender);                 //성별
+                info.setImage(selectedProfileImageName);        //캐릭터 이미지
+                info.setLife(5);                                //생명
+                info.setScore(0);                               //점수
 
-                // 다음 액티비티로 전달할 데이터를 Intent에 담습니다.
-                intent.putExtra("profile_image_res_id", profileImages[currentProfileIndex]); // 선택된 프로필 이미지 리소스 ID
-                intent.putExtra("profile_name", profileName); // 입력된 이름
-                intent.putExtra("profile_gender", selectedGender); // 선택된 성별
+                // DB에 업데이트
+                database.dataref.child("users").child(currentUser.getUid()).setValue(info)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(CreateActivity.this, "프로필이 성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();
 
-                // 다음 액티비티를 시작합니다.
-                startActivity(intent);
+                            //모든 절차 통과후 MyInformActivity (임시 Main페이지 완성되면 바꿀 예정)
+                            Intent intent = new Intent(CreateActivity.this, MyInfromActivity.class);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(CreateActivity.this, "프로필 저장에 실패했습니다. 다시 시도하세요.", Toast.LENGTH_SHORT).show();
+                        });
 
-                // (선택 사항) 현재 CreateActivity를 종료하여 뒤로 가기 시 이 화면으로 돌아오지 않도록 합니다.
-                finish();
-                
+
             }
-        }); //완료 버튼
+        });
+    }
 
-    }//onCreate
-
-    // 성별 버튼의 배경 이미지를 선택된 성별에 따라 업데이트하는 함수입니다.
+    // 성별 선택 시 버튼 이미지 변경
     private void updateGenderButtonUI() {
         // 'f' 버튼 상태 업데이트
         if ("f".equals(selectedGender)) { // 문자열 비교 시 equals() 사용이 안전합니다.
@@ -157,5 +180,8 @@ public class CreateActivity extends AppCompatActivity {
             mBtn.setBackgroundResource(mButtonNormalDrawable);
         }
 
-    }//updateGenderButtonUI함수 끝
+    }
+
+
+
 }
