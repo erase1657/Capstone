@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         UserInform info = new UserInform();
         DataAccess database = new DataAccess();
 
-        database.ReadUser();
+
 
 
     }
