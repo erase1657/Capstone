@@ -2,6 +2,7 @@ package com.example.alramapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ import com.example.alramapp.Database.DataAccess;
 import com.example.alramapp.Database.UserInform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.ScaleRatingBar;
 
@@ -24,18 +27,11 @@ public class MyInfromActivity extends AppCompatActivity {
 
     private DataAccess database;
     private FirebaseUser user;
-
-    private int[] ProfileImages = {
-            R.drawable.profile_cat,
-            R.drawable.profile_fish,
-            R.drawable.profile_bird,
-            R.drawable.profile_dog
-    };
-
     private Button ModifyBtn, InformBtn, QuestionBtn, LogoutBtn;
     private ImageView ProfileImage, GenderImage;
     private TextView NameValue, ScoreValue;
     private BaseRatingBar LifeValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,16 +134,16 @@ public class MyInfromActivity extends AppCompatActivity {
         });
     }
 
+    //캐릭터 정보 변경
     void modifycharacter() {
         Intent intent = new Intent(this, CreateActivity.class);
         intent.putExtra("", true);
         startActivity(intent);
-
-
-
     }
 
+    //계정 정보 (다이얼로그)
     void showinform() {
+        Log.d("MyInfromActivity", "showinform() 호출됨");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -158,32 +154,23 @@ public class MyInfromActivity extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("회원 정보")
                     .setMessage("이메일: " + email + "\n" + "UID값: " + uid)
+                    .setNegativeButton("회원탈퇴", (dialog, which) -> {
+                        dialog.dismiss();
+                        confirmDeleteAccount();
+                    })
                     .setPositiveButton("확인", (dialog, which) -> {
                         dialog.dismiss();
                     })
                     .create()
                     .show();
+        } else {
+            Toast.makeText(this, "로그인된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
-    void sendquestion() {
-        String supportEmail = "erase1657@naver.com";
 
-        new AlertDialog.Builder(this)
-                .setTitle("문의하기")
-                .setMessage("문의 이메일: " + supportEmail)
-                .setPositiveButton("문의하기", (dialog, which) -> {
-                    sendInquiryEmail(supportEmail);
-                })
-                .setNegativeButton("취소", (dialog, which) -> {
-                    dialog.dismiss();
-                })
-                .create()
-                .show();
-    }
 
+    //로그아웃
     void logout() {
         FirebaseAuth.getInstance().signOut();
         new AlertDialog.Builder(this)
@@ -201,6 +188,24 @@ public class MyInfromActivity extends AppCompatActivity {
 
     }
 
+    //문의
+    void sendquestion() {
+        String supportEmail = "erase1657@naver.com";
+
+        new AlertDialog.Builder(this)
+                .setTitle("문의하기")
+                .setMessage("문의 이메일: " + supportEmail)
+                .setPositiveButton("문의하기", (dialog, which) -> {
+                    sendInquiryEmail(supportEmail);
+                })
+                .setNegativeButton("취소", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .create()
+                .show();
+    }
+
+    //이메일 문의
     private void sendInquiryEmail(String toEmail) {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("message/rfc822");
@@ -215,6 +220,60 @@ public class MyInfromActivity extends AppCompatActivity {
             Toast.makeText(this, "이메일 앱이 설치되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //회원탈퇴 (재확인 다이얼로그)
+    private void confirmDeleteAccount() {
+        new AlertDialog.Builder(this)
+                .setTitle("회원 탈퇴")
+                .setMessage("정말로 회원 탈퇴를 하시겠습니까? 모든 데이터가 삭제됩니다.")
+                .setPositiveButton("탈퇴하기", (dialog, which) -> {
+                    dialog.dismiss();
+                    deleteAccount();
+                })
+                .setNegativeButton("취소", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
+
+    //회원 탈퇴(파이어베이스 인증 삭제)
+    private void deleteAccount() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String uid = user.getUid();
+
+            user.delete()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // 계정 삭제 성공 후 DB 데이터 삭제 실행
+                            deleteUserDataFromDatabase(uid);
+
+                            // 로그인 화면으로 이동
+                            Intent intent = new Intent(this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "회원 탈퇴에 실패했습니다. 재인증이 필요할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "로그인된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    //회원탈퇴 (데이터베이스 값 삭제)
+    private void deleteUserDataFromDatabase(String uid) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+        userRef.removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(this, "사용자 데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "사용자 데이터 삭제에 실패했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //프로필 값 찾기
     private int getProfileImageResId(String imageName) {
         if (imageName == null) return 0;
 
