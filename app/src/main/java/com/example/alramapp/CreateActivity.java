@@ -23,7 +23,7 @@ public class CreateActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
 
     private ImageView profileIcon;  //캐릭터 이미지
-    private Button lBtn, rBtn, fBtn, mBtn, createBtn;
+    private Button BackBtn, lBtn, rBtn, fBtn, mBtn, createBtn;
     private EditText editName;  //캐릭터 이름
 
     private int[] profileImages = {
@@ -58,9 +58,17 @@ public class CreateActivity extends AppCompatActivity {
         mBtn = findViewById(R.id.m_button);
         editName = findViewById(R.id.editname);
         createBtn = findViewById(R.id.create_button);
+        BackBtn = findViewById(R.id.backbtn);
 
         // 초기 캐릭터 설정(cat인 상태)
         profileIcon.setImageResource(profileImages[currentProfileIndex]);
+
+        BackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         // < 화살표 버튼 클릭 리스너 설정
         lBtn.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +158,6 @@ public class CreateActivity extends AppCompatActivity {
                             //모든 절차 통과후 MyInformActivity (임시 Main페이지 완성되면 바꿀 예정)
                             Intent intent = new Intent(CreateActivity.this, MyInfromActivity.class);
                             startActivity(intent);
-                            finish();
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(CreateActivity.this, "프로필 저장에 실패했습니다. 다시 시도하세요.", Toast.LENGTH_SHORT).show();
