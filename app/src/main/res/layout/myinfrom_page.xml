@@ -31,7 +31,7 @@
             android:id="@+id/profileimage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/cat"/>
+            android:src="@drawable/profile_cat"/>
 
         <Button
             android:id="@+id/modifycharacterbtn"
