@@ -15,6 +15,10 @@ import com.example.alramapp.Database.DataAccess;
 import com.example.alramapp.Database.UserInform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class CreateActivity extends AppCompatActivity {
@@ -142,28 +146,27 @@ public class CreateActivity extends AppCompatActivity {
                 String[] profileImageNames = {"profile_cat", "profile_fish", "profile_bird", "profile_dog"};
                 String selectedProfileImageName = profileImageNames[currentProfileIndex];
 
-                //업데이트할 객체
-                UserInform info = new UserInform();
-                info.setName(profileName);                      //이름
-                info.setGender(selectedGender);                 //성별
-                info.setImage(selectedProfileImageName);        //캐릭터 이미지
-                info.setLife(5);                                //생명
-                info.setScore(0);                               //점수
+                String uid = currentUser.getUid();
+                DatabaseReference userRef = database.dataref.child("users").child(uid);
 
-                // DB에 업데이트
-                database.dataref.child("users").child(currentUser.getUid()).setValue(info)
+                //업데이트할 객체
+                Map<String, Object> updates = new HashMap<>();
+                updates.put("name", profileName);
+                updates.put("gender", selectedGender);
+                updates.put("image", selectedProfileImageName);
+                updates.put("life", 5);
+                updates.put("score", 0);
+
+
+                userRef.updateChildren(updates)
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(CreateActivity.this, "프로필이 성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();
-
-                            //모든 절차 통과후 MyInformActivity (임시 Main페이지 완성되면 바꿀 예정)
                             Intent intent = new Intent(CreateActivity.this, MyInfromActivity.class);
                             startActivity(intent);
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(CreateActivity.this, "프로필 저장에 실패했습니다. 다시 시도하세요.", Toast.LENGTH_SHORT).show();
                         });
-
-
             }
         });
     }

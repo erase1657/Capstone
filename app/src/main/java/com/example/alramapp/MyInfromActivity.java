@@ -172,10 +172,11 @@ public class MyInfromActivity extends AppCompatActivity {
 
     //로그아웃
     void logout() {
-        FirebaseAuth.getInstance().signOut();
+
         new AlertDialog.Builder(this)
                 .setMessage("로그아웃 하시겠습니까?")
                 .setPositiveButton("확인", (dialog, which) -> {
+                    FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
