@@ -2,7 +2,6 @@ package com.example.alramapp.Authentication;
 
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.alramapp.CreateActivity;
+import com.example.alramapp.Database.DataAccess;
+import com.example.alramapp.Database.UserInform;
+import com.example.alramapp.MyInfromActivity;
 import com.example.alramapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth; //Firebase 인증 객체 선언
-
+    DataAccess database;
     //인증 상태 확인
 
     @Override
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_page);
 
         mAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
+        database = new DataAccess();
 
         GoRegister = findViewById(R.id.registerbtn);
         LoginButton = findViewById(R.id.loginbtn);
@@ -80,23 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void getUserProfile() {
-        // [START get_user_profile]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-
-            String uid = user.getUid();
-        }
-
-    }
 
     @Override
     public void onStart() {
@@ -108,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
             reload();
         }
 
-    }//인증 상태 확인 종료
+    }
 
 
 
@@ -123,8 +111,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(LoginActivity.this, "로그인 성공",
                                     Toast.LENGTH_SHORT).show();
+
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+
                         } else {
 
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -134,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-        // [END sign_in_with_email]
+
     }
 
 
@@ -142,7 +132,41 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+    //로그인 후 실행될 로직
     private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            DataAccess database = new DataAccess();
+            database.readUserByUid(user.getUid(), new DataAccess.UserLoadCallback() {
+                @Override
+                public void onUserLoaded(UserInform userInfo) {
+                    if (userInfo != null) {
+                        String name = userInfo.getName();
+                        String gender = userInfo.getGender();
+                        String image = userInfo.getImage();
+
+                        boolean isNameEmpty = (name == null || name.trim().isEmpty());
+                        boolean isGenderEmpty = (gender == null || gender.trim().isEmpty());
+                        boolean isImageEmpty = (image == null || image.trim().isEmpty());
+
+                        if (isNameEmpty || isGenderEmpty || isImageEmpty) { // 세 개 모두 공백일 경우 CreateActivity로 이동
+                            Intent intent = new Intent(LoginActivity.this, CreateActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {// 정보가 충분하면 메인 액티비티 또는 홈 화면으로 이동
+                            Intent intent = new Intent(LoginActivity.this, MyInfromActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    } else {
+                        // 사용자 정보가 없는 경우(에러 처리 또는 새 가입자 처리 등)
+                        Toast.makeText(LoginActivity.this, "사용자 정보를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

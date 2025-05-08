@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|top"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/back"
+        android:fitsSystemWindows="true" />
+
+    <FrameLayout
+        android:layout_width="193dp"
+        android:layout_height="193dp"
+        android:layout_marginTop="59dp"
+        android:gravity="top"
+        android:orientation="horizontal">
+
+        <!--사용자 캐릭터-->
+        <ImageView
+            android:id="@+id/profileimage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile_cat"/>
+
+        <Button
+            android:id="@+id/modifycharacterbtn"
+            android:layout_width="19dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_setting"
+            android:scaleType="centerInside"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="319dp"
+
+        android:layout_height="111dp"
+        android:layout_marginTop="31dp"
+        android:background="@drawable/layout_base"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <!--사용자 성별-->
+            <ImageView
+                android:id="@+id/genderimage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/m_btn"/>
+
+            <!--사용자 이름-->
+            <TextView
+                android:id="@+id/nametextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:maxLines="1"
+                android:text="사용자 이름" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <!--사용자 점수-->
+        <TextView
+            android:id="@+id/socretextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:text="생존 점수: null" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
+    <LinearLayout
+        android:layout_width="261dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/layout_base"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+       >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="체력"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="63dp"
+            android:layout_height="wrap_content"/>
+
+        <!--체력바-->
+        <com.willy.ratingbar.BaseRatingBar
+            android:id="@+id/liferating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_drawableEmpty="@drawable/ic_health_empty"
+            app:srb_drawableFilled="@drawable/ic_health_fill"
+            app:srb_numStars="5"
+            app:srb_stepSize="1"
+            app:srb_rating="1"
+            app:srb_starPadding="5dp"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="319dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="21dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/logininformbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="계정 정보"
+            android:background="@drawable/layout_button"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/questionbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="문의"
+            android:background="@drawable/layout_button"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/logoutbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="로그아웃"
+            android:background="@drawable/layout_button"
+            android:scaleType="centerCrop" />
+
+    </LinearLayout>
+
+</LinearLayout>
