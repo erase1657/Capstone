@@ -39,20 +39,20 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/fork" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/fork" />
 
-            <TextView
-                android:id="@+id/Timer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="00:00"
-                android:textColor="#000000"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/Timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="00:00"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ImageView
@@ -62,34 +62,40 @@
         android:layout_marginTop="370dp"
         android:src="@drawable/line" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="166dp"
-        android:layout_gravity="bottom"
-        android:scaleType="center"
-        android:src="@drawable/vector" />
-    <Button
-        android:id="@+id/AddAlram"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/cricle"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="725dp"/>
+        android:layout_marginTop="740dp">
 
-    <Button
-        android:id="@+id/Status"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@drawable/state"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="805dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/vector"/>
 
-    <Button
-        android:id="@+id/Ranking"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@drawable/ranking"
-        android:layout_gravity="end"
-        android:layout_marginEnd="60dp"
-        android:layout_marginTop="805dp"/>
+        <Button
+            android:id="@+id/AddAlram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cricle"
+            android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:id="@+id/Status"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/state"
+            android:layout_marginTop="65dp"/>
+
+        <Button
+            android:id="@+id/Ranking"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ranking"
+            android:layout_gravity="end"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="65dp"/>
+    </FrameLayout>
+
 </FrameLayout>

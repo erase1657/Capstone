@@ -120,7 +120,7 @@ public class CreateActivity extends AppCompatActivity {
                 }
 
                 // 이름과 성별 모두 확인되면 이동할 액티비티  Intent를 생성합니다.  // 수정해야함
-                Intent intent = new Intent(CreateActivity.this, LoginActivity.class);
+                Intent intent = new Intent(CreateActivity.this, MainActivity.class);
 
                 // 다음 액티비티로 전달할 데이터를 Intent에 담습니다.
                 intent.putExtra("profile_image_res_id", profileImages[currentProfileIndex]); // 선택된 프로필 이미지 리소스 ID
