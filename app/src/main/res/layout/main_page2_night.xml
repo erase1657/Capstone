@@ -20,7 +20,7 @@
         android:layout_height="141dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="84dp"
-        android:src="@drawable/cat" />
+        android:src="@drawable/cat_sleeping" />
 
     <Button
         android:id="@+id/ivSettings"
