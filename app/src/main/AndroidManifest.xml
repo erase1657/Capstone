@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Authentication.RegisterActivity" />
+        <activity android:name=".MyInfromActivity"/>
         <activity android:name=".CreateActivity"/>
     </application>
 

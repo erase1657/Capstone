@@ -18,12 +18,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.alramapp.Database.DataAccess;
 import com.example.alramapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
@@ -34,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth; //Firebase 인증 객체 선언
-
+    private DataAccess database;
     //인증 상태 확인
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_page);
 
         mAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
+        database= new DataAccess();
 
         Backbtn = findViewById(R.id.backbtn);
 
@@ -97,12 +100,20 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if (task.isSuccessful()) {
+
+                            FirebaseUser user = task.getResult().getUser();
+                            if(user != null){
+                                database.RegisterUserUpadate(user); //가입회원 정보 데이터베이스에 업데이트
+                            } else {
+                                Log.w(TAG, "FirebaseUser is null after sign up");
+                            }
 
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(RegisterActivity.this, "계정 생성 성공! 로그인 해주세요.",
                                     Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
+
                             updateUI(user);
 
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
