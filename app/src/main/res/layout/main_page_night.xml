@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dark"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <!--뒤로가기 버튼, 도움말 버튼-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/backbtn"
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_back"
+            android:fitsSystemWindows="true"
+            android:backgroundTint="@color/white"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_advice"
+            android:backgroundTint="@color/white"
+            />
+
+    </LinearLayout>
+
+    <!--캐릭터 이미지-->
+    <ImageView
+        android:id="@+id/cat"
+        android:layout_width="141dp"
+        android:layout_height="141dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/img_cat" />
+
+    <!--설정과 밥시간-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/ivSettings"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_setting"
+            android:backgroundTint="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="318dp"
+            android:layout_height="74dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fork"/>
+
+            <View
+                android:layout_width="22dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="36dp"
+                android:textColor="@color/black"
+                android:text="00:00"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="314dp"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="34dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyview"
+        android:layout_width="318dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:fitsSystemWindows="true"
+        >
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_alramadd"
+            android:layout_marginBottom="47dp"
+            android:layout_gravity="center_horizontal|top"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navbar"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|center_horizontal">
+
+                <Button
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/ic_human"/>
+                <View
+                    android:layout_width="209dp"
+                    android:layout_height="match_parent"/>
+                <Button
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_ranking"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
