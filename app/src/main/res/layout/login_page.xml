@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/bg_light"
     >
 
     <!--최상단 캐릭터 아이콘-->
@@ -16,7 +16,7 @@
         android:layout_marginTop="84dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside"
-        android:src="@drawable/cat" />
+        android:src="@drawable/img_cat" />
 
     <!--입력칸-->
 
@@ -39,7 +39,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="top|left"
                 android:scaleType="centerInside"
-                android:src="@drawable/mdi_account" />
+                android:src="@drawable/ic_human" />
 
             <EditText
                 android:id="@+id/editemail"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|left"
                 android:scaleType="centerInside"
-                android:src="@drawable/material_symbols_lock_outline" />
+                android:src="@drawable/ic_password" />
 
             <EditText
                 android:id="@+id/editpassword"
@@ -104,7 +104,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="right"
-                android:background="@drawable/fi_rr_eye"/>
+                android:background="@drawable/ic_eye"/>
         </FrameLayout>
         <!--로그인 버튼-->
         <Button

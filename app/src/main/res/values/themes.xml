@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.AlramApp" parent="Base.Theme.AlramApp" />
+
 </resources>

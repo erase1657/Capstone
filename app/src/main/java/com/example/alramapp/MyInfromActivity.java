@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.willy.ratingbar.BaseRatingBar;
-import com.willy.ratingbar.ScaleRatingBar;
 
 
 public class MyInfromActivity extends AppCompatActivity {
@@ -107,9 +106,9 @@ public class MyInfromActivity extends AppCompatActivity {
 
                     // 성별 이미지 설정
                     if ("f".equalsIgnoreCase(gender)) {
-                        GenderImage.setImageResource(R.drawable.f_btn); // 성별 이미지 리소스 예
+                        GenderImage.setImageResource(R.drawable.btn_c); // 성별 이미지 리소스 예
                     } else if ("m".equalsIgnoreCase(gender)) {
-                        GenderImage.setImageResource(R.drawable.m_btn);
+                        GenderImage.setImageResource(R.drawable.btn_m);
                     }
 
 

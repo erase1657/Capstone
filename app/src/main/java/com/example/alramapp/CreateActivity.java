@@ -12,7 +12,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.Database.UserInform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -40,11 +39,11 @@ public class CreateActivity extends AppCompatActivity {
     private int currentProfileIndex = 0; // 현재 표시 중인 프로필 이미지의 인덱스입니다.
     private String selectedGender = null; // 선택된 성별 값 (null, "f", "m")
 
-    private int fButtonSelectedDrawable = R.drawable.f_btn_c; // 암컷 버튼 이미지(활성)
-    private int fButtonNormalDrawable = R.drawable.f_btn;     // 암컷 버튼 이미지(기본)
+    private int fButtonSelectedDrawable = R.drawable.btn_f_c; // 암컷 버튼 이미지(활성)
+    private int fButtonNormalDrawable = R.drawable.btn_c;     // 암컷 버튼 이미지(기본)
 
-    private int mButtonSelectedDrawable = R.drawable.m_btn_c; // 수컷 버튼 이미지(활성)
-    private int mButtonNormalDrawable = R.drawable.m_btn;     // 수컷 버튼 이미지(기본)
+    private int mButtonSelectedDrawable = R.drawable.btn_m_c; // 수컷 버튼 이미지(활성)
+    private int mButtonNormalDrawable = R.drawable.btn_m;     // 수컷 버튼 이미지(기본)
 
 
 

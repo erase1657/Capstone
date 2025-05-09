@@ -7,7 +7,7 @@
     android:id="@+id/container_create_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/bg_light">
 
     <Button
         android:id="@+id/backbtn"
@@ -16,7 +16,7 @@
         android:layout_marginLeft="10dp"
         android:layout_gravity="left"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/back"
+        android:background="@drawable/ic_back"
         android:fitsSystemWindows="true" />
 
     <LinearLayout
@@ -32,9 +32,10 @@
             android:layout_width="21dp"
             android:layout_height="21.5dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/arrow_left"
-            android:scaleType="centerInside" />
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_prev"
+            android:scaleType="centerInside"
+            />
 
         <ImageView
             android:id="@+id/profile_cat"
@@ -48,8 +49,8 @@
             android:layout_width="21dp"
             android:layout_height="21.5dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/arrow_right"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_next"
             android:scaleType="centerInside" />
 
     </LinearLayout>
@@ -64,7 +65,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:padding="16dp">
@@ -73,41 +73,33 @@
                 android:id="@+id/f_button"
                 android:layout_width="56dp"
                 android:layout_height="57dp"
-                android:background="@drawable/f_btn" />
+                android:background="@drawable/btn_c" />
 
             <Button
                 android:id="@+id/m_button"
                 android:layout_width="56dp"
                 android:layout_height="57dp"
-                android:background="@drawable/m_btn" />
+                android:background="@drawable/btn_m" />
         </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
 
             <EditText
                 android:id="@+id/editname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="top|center"
-                android:background="@android:color/transparent"
                 android:textAlignment="center"
                 android:hint="이름을 설정해 주세요."
                 android:includeFontPadding="false"
                 android:maxLines="1"
                 android:textSize="12dp" />
 
-            <ImageView
-                android:layout_width="266dp"
-                android:layout_height="1dp"
-                android:layout_gravity="top|left"
-                android:layout_marginTop="30dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/underline" />
-        </FrameLayout>
+        </LinearLayout>
 
 
         <Button
