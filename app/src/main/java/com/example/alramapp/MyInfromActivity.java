@@ -43,6 +43,7 @@ public class MyInfromActivity extends AppCompatActivity {
         QuestionBtn = findViewById(R.id.questionbtn);
         LogoutBtn = findViewById(R.id.logoutbtn);
 
+
         //이미지
         ProfileImage = findViewById(R.id.profileimage);
         GenderImage = findViewById(R.id.genderimage);
@@ -146,6 +147,9 @@ public class MyInfromActivity extends AppCompatActivity {
         Log.d("MyInfromActivity", "showinform() 호출됨");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+// 테스트
+        Intent intent = new Intent(MyInfromActivity.this, RankActivity.class);
+        startActivity(intent);
 
         if (user != null) {
             String email = user.getEmail();
