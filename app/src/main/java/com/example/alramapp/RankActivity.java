@@ -82,37 +82,38 @@ public class RankActivity extends AppCompatActivity {
 
                     // 펫 이미지 설정
                     switch (user.userPet) {
-                        case "고양이":
+                        case "profile_cat":
                             userPet.setImageResource(R.drawable.cat);
                             break;
-                        case "강아지":
+                        case "profile_dog":
                             userPet.setImageResource(R.drawable.dog);
                             break;
-                        case "물고기":
+                        case "profile_fish":
                             userPet.setImageResource(R.drawable.fish);
                             break;
-                        case "새":
+                        case "profile_bird":
                             userPet.setImageResource(R.drawable.bird);
                             break;
                         default:
                             userPet.setImageResource(R.drawable.default_pet); // 기본 이미지
                     }
-
+                    /*
                     // 1위, 2위, 3위에 맞는 이미지 설정
-                    //switch (i) {
-                        //case 0:
-                         //   containerEmpty1.setImageResource(R.drawable.first); // 1위
-                        //    break;
-                       // case 1:
-                       //     containerEmpty1.setImageResource(R.drawable.second); // 2위
-                       //     break;
-                      //  case 2:
-                       //     containerEmpty1.setImageResource(R.drawable.third); // 3위
-                       //     break;
-                      //  default:
-                       //     containerEmpty1.setImageResource(R.drawable.back); // 나머지 순위는 기본 이미지
-                       //     break;
-                   // }
+                    switch (i) {
+                        case 0:
+                            containerEmpty1.setImageResource(R.drawable.first); // 1위
+                            break;
+                        case 1:
+                            containerEmpty1.setImageResource(R.drawable.second); // 2위
+                            break;
+                        case 2:
+                            containerEmpty1.setImageResource(R.drawable.third); // 3위
+                            break;
+                        default:
+                            containerEmpty1.setImageResource(R.drawable.back); // 나머지 순위는 기본 이미지
+                            break;
+                    }
+                    */
 
                     rankFrame.addView(userView);
                 }
