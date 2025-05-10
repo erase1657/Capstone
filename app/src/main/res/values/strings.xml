@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">test</string>
 
+    <string name="title1">먹이 시간</string>
+    <string name="description1">주황색으로 설정 된 시간은 펫에게 먹이를 줘야하는 시간이에요. 이건 특정시간 되면 매일 울리도록 설정되어 있어요.</string>
+
+
+    <string name="title2">일반 알람</string>
+    <string name="description2">흰색으로 설정 된 시간은 먹이 시간과 다르게 일반적으로 사용하는 알람시간이에요</string>
+
+
+    <string name="title3">알람 설정</string>
+    <string name="description3">앞서 설명해드린 알람은 알람 수정/추가에서 설정하실 수 있어요</string>
+
+
+
+    <string name="title4">펫 관리</string>
+    <string name="description4">펫에게 먹이를 주는 시간을 자주 놓친다면 펫은 사망하게 됩니다. 내 정보 페이지에서 자신의 펫의 라이프를 확인하세요</string>
+
+
+
+    <string name="title5">랭킹</string>
+    <string name="description5">먹이 제공 횟수와 생존기간에 따라 점수를 부여 받습니다. 랭킹페이지에서 사람들의 점수를 확인할 수 있어요</string>
+
+
+
+
 </resources>
