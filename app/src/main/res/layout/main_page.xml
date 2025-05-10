@@ -30,6 +30,7 @@
             android:layout_weight="1"/>
 
         <Button
+            android:id="@+id/guidebtn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_advice"
@@ -126,6 +127,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/infrombtn"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="@drawable/ic_human" />
@@ -135,6 +137,7 @@
                     android:layout_height="match_parent" />
 
                 <Button
+                    android:id="@+id/rankingbtn"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="@drawable/ic_ranking" />
