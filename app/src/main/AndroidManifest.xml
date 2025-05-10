@@ -31,7 +31,7 @@
         <activity android:name=".Authentication.RegisterActivity" />
         <activity android:name=".MyInfromActivity" />
         <activity android:name=".CreateActivity" />
-
+        <activity android:name=".RankActivity"/>
     </application>
 
 </manifest>

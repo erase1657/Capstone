@@ -45,7 +45,7 @@
         android:layout_width="141dp"
         android:layout_height="141dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/img_cat" />
+        android:src="@drawable/profile_cat" />
 
     <!--설정과 밥시간-->
     <LinearLayout

@@ -2,17 +2,14 @@ package com.example.alramapp;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,18 +28,28 @@ public class RankActivity extends AppCompatActivity {
     private DatabaseReference usersRef; // Realtime Database
     private FirebaseFirestore firestore; // Firestore 사용 시
 
+    private Button backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rank);
+        setContentView(R.layout.ranking_page);
 
         rankFrame = findViewById(R.id.rank_frame);
+        backButton = findViewById(R.id.backbtn);
 
         // Firebase 초기화
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("users"); // "users" 경로로 저장된 데이터 불러옴
 
         loadUserRanking();
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void loadUserRanking() {
@@ -72,7 +79,7 @@ public class RankActivity extends AppCompatActivity {
                     ImageView userPet = userView.findViewById(R.id.user_pet);
                     TextView userName = userView.findViewById(R.id.user_name);
                     TextView rankScore = userView.findViewById(R.id.rank_score);
-                   // ImageView containerEmpty1 = userView.findViewById(R.id.container_empty1); // 이미지 변경 대상
+
 
                     User user = userList.get(i);
 
@@ -83,37 +90,36 @@ public class RankActivity extends AppCompatActivity {
                     // 펫 이미지 설정
                     switch (user.userPet) {
                         case "profile_cat":
-                            userPet.setImageResource(R.drawable.cat);
+                            userPet.setImageResource(R.drawable.img_cat_nobg);
                             break;
                         case "profile_dog":
-                            userPet.setImageResource(R.drawable.dog);
+                            userPet.setImageResource(R.drawable.img_dog_nobg);
                             break;
                         case "profile_fish":
-                            userPet.setImageResource(R.drawable.fish);
+                            userPet.setImageResource(R.drawable.img_fish_nobg);
                             break;
                         case "profile_bird":
-                            userPet.setImageResource(R.drawable.bird);
+                            userPet.setImageResource(R.drawable.img_bird_nobg);
                             break;
                         default:
                             userPet.setImageResource(R.drawable.default_pet); // 기본 이미지
                     }
-                    /*
+
                     // 1위, 2위, 3위에 맞는 이미지 설정
                     switch (i) {
                         case 0:
-                            containerEmpty1.setImageResource(R.drawable.first); // 1위
+                            textRank.setBackgroundResource(R.drawable.rank_first);
                             break;
                         case 1:
-                            containerEmpty1.setImageResource(R.drawable.second); // 2위
+                            textRank.setBackgroundResource(R.drawable.rank_second); // 2위
                             break;
                         case 2:
-                            containerEmpty1.setImageResource(R.drawable.third); // 3위
+                            textRank.setBackgroundResource(R.drawable.rank_third); // 3위
                             break;
                         default:
-                            containerEmpty1.setImageResource(R.drawable.back); // 나머지 순위는 기본 이미지
-                            break;
+                            textRank.setBackgroundResource(0);
                     }
-                    */
+
 
                     rankFrame.addView(userView);
                 }
