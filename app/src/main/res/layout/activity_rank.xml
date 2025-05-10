@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_ranking_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center|top"
+    android:background="@drawable/background">
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/back"
+        android:fitsSystemWindows="true" />
+
+    <LinearLayout
+        android:id="@+id/container_frame1"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:clipToPadding="false"
+        android:gravity="left|center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:text="순위"
+            android:textColor="#FF7F7A7A"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/text_survival_score"
+            android:layout_width="69dp"
+            android:layout_height="20dp"
+            android:gravity="right|center_vertical"
+            android:text="생존 점수"
+            android:textColor="#FF83899F"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="4dp">
+
+    <LinearLayout
+        android:id="@+id/rank_frame"
+        android:layout_width="307dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rank_back"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
