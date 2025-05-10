@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.alramapp.CreateActivity;
 import com.example.alramapp.Database.DataAccess;
 import com.example.alramapp.Database.UserInform;
+import com.example.alramapp.MainActivity;
 import com.example.alramapp.MyInfromActivity;
 import com.example.alramapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {// 정보가 충분하면 메인 액티비티 또는 홈 화면으로 이동
-                            Intent intent = new Intent(LoginActivity.this, MyInfromActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         }

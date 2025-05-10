@@ -26,11 +26,16 @@ public class MyInfromActivity extends AppCompatActivity {
 
     private DataAccess database;
     private FirebaseUser user;
-    private Button ModifyBtn, InformBtn, QuestionBtn, LogoutBtn;
+    private Button ModifyBtn, InformBtn, QuestionBtn, LogoutBtn, BackButton;
     private ImageView ProfileImage, GenderImage;
     private TextView NameValue, ScoreValue;
     private BaseRatingBar LifeValue;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePage();  // 항상 최신 데이터로 갱신
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class MyInfromActivity extends AppCompatActivity {
         InformBtn = findViewById(R.id.logininformbtn);
         QuestionBtn = findViewById(R.id.questionbtn);
         LogoutBtn = findViewById(R.id.logoutbtn);
+        BackButton = findViewById(R.id.backbtn);
 
         //이미지
         ProfileImage = findViewById(R.id.profileimage);
@@ -55,7 +61,12 @@ public class MyInfromActivity extends AppCompatActivity {
 
         updatePage();
 
-
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         ModifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
