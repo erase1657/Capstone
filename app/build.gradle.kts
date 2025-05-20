@@ -41,6 +41,9 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
 
+    //gif 사용
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
     //구글 로그인 라이브러리 추가
     // Also add the dependencies for the Credential Manager libraries and specify their versions

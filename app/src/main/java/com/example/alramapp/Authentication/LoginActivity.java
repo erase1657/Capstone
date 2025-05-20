@@ -94,7 +94,8 @@ public class LoginActivity extends AppCompatActivity {
         //현재 사용자가 로그인되어 있는지 확인
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            reload();
+            updateUI(currentUser); // 자동 로그인 시 바로 메인 화면으로
+
         }
 
     }
