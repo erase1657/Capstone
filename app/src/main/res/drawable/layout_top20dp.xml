@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--좀 더 둥근 사각형-->
+
+    <item>
+        <shape>
+            <solid android:color="#676767"/>
+
+            <corners android:topRightRadius="20dp" android:topLeftRadius="20dp"/>
+
+        </shape>
+    </item>
+
+</layer-list>

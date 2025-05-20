@@ -1,0 +1,96 @@
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{0}: checkout: moving from test to mainP
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{1}: checkout: moving from mainP to test
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{2}: checkout: moving from Splash to mainP
+[33m03b574f[m[33m ([m[1;31morigin/Splash[m[33m)[m HEAD@{3}: checkout: moving from test to Splash
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{4}: checkout: moving from Splash to test
+[33m03b574f[m[33m ([m[1;31morigin/Splash[m[33m)[m HEAD@{5}: checkout: moving from test to Splash
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{6}: pull --no-stat -v --progress origin Splash: updating HEAD
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{7}: checkout: moving from mainP to test
+[33m7f6fd35[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmainP[m[33m)[m HEAD@{8}: commit: 세팅버튼 제거
+[33m2c6e36e[m[33m ([m[1;31morigin/mainP[m[33m)[m HEAD@{9}: checkout: moving from Alarm to mainP
+[33m2c6e36e[m[33m ([m[1;31morigin/mainP[m[33m)[m HEAD@{10}: checkout: moving from mainP to Alarm
+[33m2c6e36e[m[33m ([m[1;31morigin/mainP[m[33m)[m HEAD@{11}: checkout: moving from Alarm to mainP
+[33m2c6e36e[m[33m ([m[1;31morigin/mainP[m[33m)[m HEAD@{12}: checkout: moving from mainP to Alarm
+[33m2c6e36e[m[33m ([m[1;31morigin/mainP[m[33m)[m HEAD@{13}: commit: 메인페이지 사용자 펫 이미지 실시간 업데이트
+[33m485a17e[m HEAD@{14}: commit: 구현 수정
+[33m1dfc752[m HEAD@{15}: commit: 정현씨 작업물 연결 및 랭킹페이지 마무리
+[33m1d5279d[m HEAD@{16}: commit: 이름(파일) 정리
+[33m555d963[m HEAD@{17}: commit (merge): Merge branch 'rank' of https://github.com/erase1657/Capstone into mainP
+[33m9a0d474[m HEAD@{18}: commit: 알람 리스트 디자인
+[33m1082efa[m HEAD@{19}: pull --no-stat -v --progress origin rank: updating HEAD
+[33m1082efa[m HEAD@{20}: checkout: moving from rank to mainP
+[33mf136d6a[m[33m ([m[1;32mrank[m[33m)[m HEAD@{21}: checkout: moving from mainP to rank
+[33m1082efa[m HEAD@{22}: commit: 다이얼로그 추가, 버튼 상호작용
+[33m8915da0[m HEAD@{23}: commit: 외부 라이브러리 사용
+[33mc373444[m HEAD@{24}: commit: 로그인 후 메인페이지로 이동,버그수정
+[33mf692ba0[m HEAD@{25}: commit: 가이드 제목,설명 추가
+[33m344c035[m HEAD@{26}: commit: 가이드 다이얼로그 추가
+[33maaca23e[m HEAD@{27}: commit: 가이드 다이얼로그 사진 추가
+[33m46a7fbe[m HEAD@{28}: checkout: moving from test to mainP
+[33m17bb655[m HEAD@{29}: checkout: moving from mainP to test
+[33m46a7fbe[m HEAD@{30}: checkout: moving from test to mainP
+[33m17bb655[m HEAD@{31}: checkout: moving from mainP to test
+[33m46a7fbe[m HEAD@{32}: checkout: moving from test to mainP
+[33m17bb655[m HEAD@{33}: commit (merge): Merge branch 'rank' of https://github.com/erase1657/Capstone into test
+[33m46a7fbe[m HEAD@{34}: checkout: moving from mainP to test
+[33m46a7fbe[m HEAD@{35}: checkout: moving from saeyun to mainP
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{36}: checkout: moving from alarm to saeyun
+[33m46a7fbe[m HEAD@{37}: pull --no-stat -v --progress origin alarm: Fast-forward
+[33mc79e106[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{38}: reset: moving to c79e1069c28d0fc3afcd98c997321e5281cb9ae1
+[33m46a7fbe[m HEAD@{39}: checkout: moving from mainP to alarm
+[33m46a7fbe[m HEAD@{40}: commit: 메인 페이지 xml, 리사이클러 뷰
+[33m509bade[m HEAD@{41}: commit: 정리
+[33mdc68193[m HEAD@{42}: pull --no-stat -v --progress origin master: Merge made by the 'ort' strategy.
+[33m8ab207e[m HEAD@{43}: checkout: moving from 8ab207ec4d40dc7ade4690251a40c219acffee6d to mainP
+[33m8ab207e[m HEAD@{44}: reset: moving to 8ab207ec4d40dc7ade4690251a40c219acffee6d
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{45}: checkout: moving from saeyun to 50346a02e988efe8aa4640c4e6e78fee34bc969a
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{46}: checkout: moving from master to saeyun
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{47}: checkout: moving from saeyun to master
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{48}: reset: moving to 50346a02e988efe8aa4640c4e6e78fee34bc969a
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{49}: checkout: moving from master to saeyun
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{50}: checkout: moving from saeyun to master
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{51}: reset: moving to 50346a02e988efe8aa4640c4e6e78fee34bc969a
+[33m50346a0[m[33m ([m[1;31morigin/saeyun[m[33m)[m HEAD@{52}: checkout: moving from infrom to saeyun
+[33m6099db4[m HEAD@{53}: commit: 버그 수정
+[33mfedd9bd[m HEAD@{54}: reset: moving to fedd9bdf42b9802c174e12d01f4c659b0ab3179c
+[33m863a9be[m HEAD@{55}: checkout: moving from fedd9bdf42b9802c174e12d01f4c659b0ab3179c to infrom
+[33mfedd9bd[m HEAD@{56}: checkout: moving from infrom to fedd9bdf42b9802c174e12d01f4c659b0ab3179c
+[33m863a9be[m HEAD@{57}: rebase (abort): returning to refs/heads/infrom
+[33mbab04ce[m HEAD@{58}: rebase (pick): 메인페이지(낮) 1차 완성본
+[33m4ccb561[m HEAD@{59}: rebase (pick): 메인페이지 2차 수정
+[33m14f9466[m HEAD@{60}: rebase (pick): 메인페이지 1차
+[33mfedd9bd[m HEAD@{61}: rebase (start): checkout origin/infrom
+[33m863a9be[m HEAD@{62}: commit (merge): Merge branch 'saeyun' of https://github.com/erase1657/Capstone into infrom
+[33mfedd9bd[m HEAD@{63}: commit: 약간 수정
+[33m6e42cbb[m HEAD@{64}: commit: 회원탈퇴 추가
+[33m58f2962[m HEAD@{65}: commit: 뒤로가기 추가
+[33mfb43993[m HEAD@{66}: commit: 캐릭터 수정, 가입시 필수 프로필 설정
+[33m3ea5acc[m HEAD@{67}: commit: 에러 수정
+[33m4dd8261[m HEAD@{68}: commit: 신규회원 가입시 데이터베이스에 정보 저장
+[33m440f682[m HEAD@{69}: commit: 버튼 기능 추가
+[33md5f7f78[m HEAD@{70}: commit: 회원 정보페이지 생성
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{71}: reset: moving to ORIG_HEAD
+[33m4809e10[m HEAD@{72}: reset: moving to ORIG_HEAD
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{73}: reset: moving to ORIG_HEAD
+[33m4809e10[m HEAD@{74}: pull --no-stat -v --progress origin saeyun: Merge made by the 'ort' strategy.
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{75}: checkout: moving from infrom to infrom
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{76}: branch: Reset to origin/infrom
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{77}: reset: moving to ORIG_HEAD
+[33m58c26ee[m HEAD@{78}: reset: moving to ORIG_HEAD
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{79}: reset: moving to c46d5a2a8bf3071ecdc75837a2c8155eed95b218
+[33m58c26ee[m HEAD@{80}: pull --no-stat -v --progress origin saeyun: Merge made by the 'ort' strategy.
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{81}: checkout: moving from master to infrom
+[33mc46d5a2[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{82}: commit: 약간 수정
+[33m3834d78[m HEAD@{83}: checkout: moving from master to master
+[33m3834d78[m HEAD@{84}: branch: Reset to origin/master
+[33m3834d78[m HEAD@{85}: checkout: moving from master to master
+[33m3834d78[m HEAD@{86}: branch: Reset to origin/master
+[33m3834d78[m HEAD@{87}: checkout: moving from modifi to master
+[33m3834d78[m HEAD@{88}: checkout: moving from master to modifi
+[33m3834d78[m HEAD@{89}: checkout: moving from master to master
+[33m3834d78[m HEAD@{90}: branch: Reset to origin/master
+[33m3834d78[m HEAD@{91}: checkout: moving from master to master
+[33m3834d78[m HEAD@{92}: branch: Reset to origin/master
+[33m9477354[m HEAD@{93}: checkout: moving from master to master
+[33m9477354[m HEAD@{94}: branch: Reset to origin/master
+[33m9477354[m HEAD@{95}: checkout: moving fro

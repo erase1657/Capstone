@@ -100,6 +100,7 @@
         android:fitsSystemWindows="true"
         >
         <Button
+            android:id="@+id/btn_add"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/btn_alramadd"

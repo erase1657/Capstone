@@ -1,21 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="322dp"
-    android:layout_height="73dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/layout_20dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/layout_20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="11dp"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -41,7 +44,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvdow"
+                android:id="@+id/tvname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="알람 이름"/>
+
+            <TextView
+                android:id="@+id/tvrepeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="일 월 화 수 목 금 토"
@@ -51,13 +60,9 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="112dp"
-            android:layout_height="match_parent" />
-
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/scischeck"
+            android:id="@+id/switch_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
