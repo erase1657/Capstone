@@ -17,6 +17,9 @@ public class AlarmData implements Serializable {
     private boolean isEnabled;
     private String userUid;
 
+    public AlarmData() {
+        this.name = "알람";
+    }
     public long getId() {
         return id;
     }

@@ -1,9 +1,11 @@
 package com.example.alramapp.Alarm.RecyclerView;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,8 +22,8 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
 
     private List<AlarmData> items;
     private OnItemClickListener itemClickListener;
+    LinearLayout alramBackground;
 
-    // AlarmAdapter.java 내에
     public interface OnItemClickListener {
         void onItemClick(AlarmData alarm);
     }
@@ -72,7 +74,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             tvName   = itemView.findViewById(R.id.tvname);
             tvRepeat = itemView.findViewById(R.id.tvrepeat);
             swEnable = itemView.findViewById(R.id.switch_alarm);
-
+            alramBackground = itemView.findViewById(R.id.alarmitem);
             itemView.setOnClickListener(v -> {
                 if (itemClickListener != null && currentAlarmData != null) {
                     itemClickListener.onItemClick(currentAlarmData);
@@ -80,6 +82,10 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             });
 
         }
+
+        /**
+         * 리사이클러 뷰에 표시할 아이템에 데이터를 바인딩하는 메서드
+         */
         public void bind(AlarmData alarmData) {
             currentAlarmData = alarmData;
 
@@ -87,14 +93,18 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             int minute = alarmData.getMinute();
             boolean isPM = hour >= 12;
             boolean mis_on = alarmData.getMisOn();
-
             tvTime.setText(String.format(Locale.getDefault(),"%02d:%02d", hour, minute));
             tvAmp.setText(isPM ? "PM" : "AM");
             tvName.setText(alarmData.getName());
-            tvRepeat.setText(alarmData.getRepeat()); // getRepeatString() 가 있다고 가정
+            tvRepeat.setText(alarmData.getRepeat());
             swEnable.setChecked(alarmData.getIsEnabled());
 
-            // 스위치 변경 리스너 등 추가 가능
+            if (mis_on) {
+                alramBackground.getBackground().mutate().setTint(Color.parseColor("#FFCA75"));
+            }else{
+                alramBackground.getBackground().mutate().setTint(Color.parseColor("#FFFFFF"));
+
+            }
         }
 
 

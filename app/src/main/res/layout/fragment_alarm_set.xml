@@ -21,6 +21,7 @@
 
 
         <Button
+            android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center"
@@ -110,7 +111,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/day"
+                android:id="@+id/tv_repeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -120,7 +121,7 @@
 
 
             <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
-                android:id="@+id/tags"
+                android:id="@+id/grouprepeat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

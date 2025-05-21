@@ -55,7 +55,6 @@ dependencies {
     implementation("com.github.ome450901:SimpleRatingBar:1.5.1")
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation("nl.bryanderidder:themed-toggle-button-group:1.4.1")
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

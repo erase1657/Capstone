@@ -14,6 +14,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.alramapp.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -39,7 +40,6 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
     private AlarmSetView alarmSetView;
     private AlarmSoundView alarmSoundView;
     private AlarmMissionView alarmMissionView;
-    private TextView tvSound, tvMission;
     private SwitchCompat switch_mis, switch_sound;
 
     private static final String ARG_ALARM = "alarm_arg";
@@ -83,12 +83,18 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
         soundView = inflater.inflate(R.layout.fragment_alarm_sound, this.container, false);
         missionView = inflater.inflate(R.layout.fragment_alarm_mission, this.container, false);
 
+
         Button deleteButton = setView.findViewById(R.id.btn_delete);
         Button btnSave = setView.findViewById(R.id.btn_save);
+        switch_mis = setView.findViewById(R.id.switch_mis);
+        switch_sound = setView.findViewById(R.id.switch_sound);
 
+
+        //수정때만 삭제 버튼이 보이게 설정
         deleteButton.setVisibility(alarmData.getId() != 0 ? View.VISIBLE : View.GONE);
 
-
+        //취소 버튼 클릭시 다이얼로그 닫음
+        setView.findViewById(R.id.btn_close).setOnClickListener(v-> dismiss());
 
         //뒤로가기 버튼 클릭시 해당 페이지로 전환(alarm_set.xml)
         soundView.findViewById(R.id.btn_back).setOnClickListener(v -> switchView(setView,-1));
@@ -97,16 +103,13 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
 
         alarmSetView = new AlarmSetView(setView, alarmData);
         alarmSoundView = new AlarmSoundView(soundView, alarmData);
-        alarmMissionView = new AlarmMissionView(missionView, alarmData);
+        alarmMissionView = new AlarmMissionView(missionView, alarmData,requireContext());
+
 
 
         // 최초엔 메인화면(alarm_set.xml)
         switchView(setView,0);
 
-        switch_sound = setView.findViewById(R.id.switch_sound);
-        switch_mis = setView.findViewById(R.id.switch_mis);
-        tvSound      = setView.findViewById(R.id.tv_sound);
-        tvMission    = setView.findViewById(R.id.tv_mission);
 
 
         alarmSetView.setOnAlarmSaveListener(data -> {
@@ -114,43 +117,7 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
             dismiss();
         });
 
-        switch_mis.setChecked(false);
-        switch_sound.setChecked(false);
 
-        tvMission.setText("없음");
-        tvSound.setText("사운드 미설정");
-        View missionLabel = setView.findViewById(R.id.mission_rable);
-        View soundLabel   = setView.findViewById(R.id.sound_rable);
-        missionLabel.setEnabled(false);
-        missionLabel.setAlpha(0.5f);
-        soundLabel.setEnabled(false);
-        soundLabel.setAlpha(0.5f);
-
-
-        //사운드 스위치
-        switch_sound.setOnCheckedChangeListener((btn, isOn) -> {
-            alarmData.setSoundOn(isOn);
-            if (isOn) {
-                alarmSetView.updateSoundInfo();
-            } else {
-                tvSound.setText("없음, 진동");
-            }
-            // 시각적 상태도 함께
-            setView.findViewById(R.id.sound_rable).setAlpha(isOn ? 1f : 0.5f);
-            setView.findViewById(R.id.sound_rable).setEnabled(isOn);
-        });
-
-        //미션 스위치
-        switch_mis.setOnCheckedChangeListener((btn, isOn) -> {   // isOn이 false라면 작동하지않음
-            alarmData.setMisOn(isOn);                                                   // isOn에 true값을 넘겨줌
-            if (isOn) {
-                alarmSetView.updateMissionInfo();
-            } else {
-                tvMission.setText("없음");
-            }
-            setView.findViewById(R.id.mission_rable).setAlpha(isOn ? 1f : 0.5f);
-            setView.findViewById(R.id.mission_rable).setEnabled(isOn);
-        });
 
         // 스위치가 켜졌을때 각 레이블 클릭시 해당 페이지로 전환(alarm_mission.xml, alarm_sound.xml)
         setView.findViewById(R.id.mission_rable)
@@ -171,18 +138,11 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
 
 
 
-
-
-
-
-
         //미션 페이지에서 확인버튼 클릭시 값을 저장하고 set페이지로 이동
         missionView.findViewById(R.id.btn_save_mis).setOnClickListener(v -> {
-
             alarmMissionView.saveMissionData();
             alarmSetView.updateMissionInfo();
             switchView(setView, -1);
-
         });
 
 
@@ -201,16 +161,16 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
         btnSave.setOnClickListener(v -> {
 
             alarmSetView.updateAlarmDataFromUI();
+
             if (alarmData.getId() == 0) {
                 listener.onSave(alarmData); // 새 알람 삽입
             } else {
-                System.out.println("알람 수정 호출");
                 listener.onUpdate(alarmData); // 수정
             }
             dismiss();
 
         });
-
+        //삭제 버튼
         deleteButton.setOnClickListener(v -> {
             if (listener != null && alarmData.getId() != 0) {
                 listener.onDelete(alarmData);
@@ -222,6 +182,8 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
 
         return root;
     }
+
+
 
 
 

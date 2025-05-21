@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         alarmList.add(data);
         adapter.notifyItemInserted(alarmList.size() - 1);
         rv.scrollToPosition(alarmList.size() - 1);
+
     }
     @Override
     public void onUpdate(AlarmData data) {

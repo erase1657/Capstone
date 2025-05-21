@@ -43,6 +43,7 @@
 
         <!--미션 가이드 버튼-->
         <Button
+            android:id="@+id/btn_guide"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_advice"
@@ -112,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="###"
+                            android:text="10"
                             android:textSize="14dp"
                             android:textColor="@color/white"
                             android:textStyle="bold"
@@ -196,7 +197,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="###"
+                            android:text="10"
                             android:textSize="14dp"
                             android:textColor="@color/white"
                             android:textStyle="bold"
@@ -280,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="###"
+                            android:text="10"
                             android:textSize="14dp"
                             android:textColor="@color/white"
                             android:textStyle="bold"
@@ -364,7 +365,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="###"
+                            android:text="10"
                             android:textSize="14dp"
                             android:textColor="@color/white"
                             android:textStyle="bold"

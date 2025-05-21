@@ -21,8 +21,6 @@ public class AlarmSoundView {
         this.alarmData = alarmData;
 
 
-
-
         soundListView = root.findViewById(R.id.soundlist);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(), R.layout.item_soundlist,R.id.sound_name, soundList);
         soundListView.setAdapter(adapter);
