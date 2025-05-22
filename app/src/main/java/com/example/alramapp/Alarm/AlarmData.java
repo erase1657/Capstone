@@ -120,6 +120,8 @@ public class AlarmData implements Serializable {
         this.name = other.name;
         this.isEnabled = other.isEnabled;
         this.repeat = other.repeat;
+        this.sound = other.sound;
+        this.id = other.id;
         // 기타 필드도 모두 복사
     }
 }

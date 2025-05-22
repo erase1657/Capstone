@@ -7,23 +7,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_light"
-    android:fitsSystemWindows="true"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginBottom="?attr/actionBarSize"
     tools:context=".MainActivity">
     
     <!--뒤로가기 버튼, 도움말 버튼-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="horizontal"
         >
         <Button
             android:id="@+id/backbtn"
             android:layout_width="24dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/ic_back"
-            android:fitsSystemWindows="true" />
+            />
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -31,6 +31,7 @@
 
         <Button
             android:id="@+id/guidebtn"
+            android:layout_marginEnd="10dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_advice"
@@ -97,7 +98,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:fitsSystemWindows="true"
         >
         <Button
             android:id="@+id/btn_add"

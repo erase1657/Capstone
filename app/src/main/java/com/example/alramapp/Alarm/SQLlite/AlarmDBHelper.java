@@ -23,27 +23,31 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         super(ctx, DB_NAME, null, DB_VER);
     }
 
-    //클래스 객체 생성시 alarms라는 테이블 생성
+    /**
+     * 객체 생성시 테이블 생성
+     * @param db The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "CREATE TABLE alarms (" +
-                        "id           INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "name         TEXT," +
-                        "hour         INTEGER," +
-                        "minute       INTEGER," +
-                        "repeat       TEXT," +
-                        "mission_num  INTEGER," +
-                        "mission_cnt  INTEGER," +
-                        "sound        TEXT," +
-                        "volume       INTEGER," +
-                        "mis_on       INTEGER," +
-                        "sound_on     INTEGER," +
-                        "is_enabled   INTEGER," +
-                        "user_uid     TEXT NOT NULL" +
+                        "id           INTEGER PRIMARY KEY AUTOINCREMENT," +     //알람 아이디(각 알람의 고유 번호)
+                        "name         TEXT," +                                  //알람 이름
+                        "hour         INTEGER," +                               //시간
+                        "minute       INTEGER," +                               //분
+                        "repeat       TEXT," +                                  //반복 주기
+                        "mission_num  INTEGER," +                               //미션 번호
+                        "mission_cnt  INTEGER," +                               //미션 조건
+                        "sound        TEXT," +                                  //사운드 이름
+                        "volume       INTEGER," +                               //사운드 볼륨 크기
+                        "mis_on       INTEGER," +                               //미션 on/off
+                        "sound_on     INTEGER," +                               //사운드 on/off(사운드없을 시 기본 진동알람)
+                        "is_enabled   INTEGER," +                               //알람 on/off
+                        "user_uid     TEXT NOT NULL" +                          //사용자 uid(이 값 기반으로 사용자를 분리)
                         ");"
         );
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
@@ -51,7 +55,11 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //테이블에 데이터 삽입
+    /**
+     * 테이블 데이터 삽입
+     * @param data
+     * @return
+     */
     public long insertAlarm(AlarmData data) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -72,7 +80,12 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         db.close();
         return newId;
     }
-    //테이블 데이터 가져옴
+
+    /**
+     * 사용자 uid를 기반으로 모든 알람 아이템 가져오기
+     * @param userUid 사용자 계정 uid
+     * @return list 알람 아이템 리스트
+     */
     public List<AlarmData> getAllAlarms(String userUid) {
         List<AlarmData> list = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -100,7 +113,11 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    //테이블 데이터 수정
+    /**
+     * 테이블 데이터 수정
+     * @param data  수정할 데이터. AlarmData객체
+     * @return  row 알람 id값에 따른 수정이 진행될 행 번호
+     */
     public int updateAlarm(AlarmData data) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -122,11 +139,49 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         return rows;
     }
 
-    //테이블 데이터 삭제
+    /**
+     * 테이블 데이터 삭제
+     * @param id
+     * @return
+     */
     public int deleteAlarm(long id) {
         SQLiteDatabase db = getWritableDatabase();
         int rows = db.delete(TABLE, "id = ?", new String[]{String.valueOf(id)});
         db.close();
         return rows;
+    }
+
+    /**
+     * 알람 ID로 하나의 AlarmData 객체 조회
+     * @param id 알람 아이디
+     * @return AlarmData 객체 또는 null (없는 경우)
+     */
+    public AlarmData getAlarmById(long id) {
+        SQLiteDatabase db = getReadableDatabase();
+        AlarmData alarmData = null;
+
+        Cursor c = db.query(TABLE, null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
+                alarmData = new AlarmData();
+                alarmData.setId(c.getLong(c.getColumnIndexOrThrow("id")));
+                alarmData.setName(c.getString(c.getColumnIndexOrThrow("name")));
+                alarmData.setHour(c.getInt(c.getColumnIndexOrThrow("hour")));
+                alarmData.setMinute(c.getInt(c.getColumnIndexOrThrow("minute")));
+                alarmData.setRepeat(c.getString(c.getColumnIndexOrThrow("repeat")));
+                alarmData.setSound(c.getString(c.getColumnIndexOrThrow("sound")));
+                alarmData.setVolume(c.getInt(c.getColumnIndexOrThrow("volume")));
+                alarmData.setMis_num(c.getInt(c.getColumnIndexOrThrow("mission_num")));
+                alarmData.setMis_count(c.getInt(c.getColumnIndexOrThrow("mission_cnt")));
+                alarmData.setMisOn(c.getInt(c.getColumnIndexOrThrow("mis_on")) == 1);
+                alarmData.setSoundOn(c.getInt(c.getColumnIndexOrThrow("sound_on")) == 1);
+                alarmData.setIsEnabled(c.getInt(c.getColumnIndexOrThrow("is_enabled")) == 1);
+                alarmData.setUserUid(c.getString(c.getColumnIndexOrThrow("user_uid")));
+            }
+            c.close();
+        }
+        db.close();
+
+        return alarmData;
     }
 }

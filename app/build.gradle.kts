@@ -18,6 +18,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -50,11 +54,14 @@ dependencies {
     implementation("androidx.credentials:credentials:1.3.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
-
     implementation("com.facebook.android:facebook-android-sdk:18.0.3")
+
+    //디자인, 애니메이션 추가를 위해 깃헙에서 라이브러리 가져옴
     implementation("com.github.ome450901:SimpleRatingBar:1.5.1")
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation("nl.bryanderidder:themed-toggle-button-group:1.4.1")
+    implementation("com.github.mhdmoh:swipe-button:1.0.3")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
