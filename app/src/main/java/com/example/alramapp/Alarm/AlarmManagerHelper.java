@@ -183,16 +183,16 @@ public class AlarmManagerHelper {
      */
     private static PendingIntent createPendingIntent(Context context, AlarmData alarmData, int repeatDayOfWeek) {
         Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra("alarmId", alarmData.getId());
-        intent.putExtra("mis_on", alarmData.getMisOn());
-        intent.putExtra("sound_on", alarmData.getSoundOn());
-        intent.putExtra("alarmName", alarmData.getName());
-        intent.putExtra("hour", alarmData.getHour());
-        intent.putExtra("minute", alarmData.getMinute());
-        intent.putExtra("mis_num", alarmData.getMis_num());
-        intent.putExtra("mis_cnt", alarmData.getMis_count());
-        intent.putExtra("sound", alarmData.getSound());
-        intent.putExtra("user_uid", alarmData.getUserUid());
+        intent.putExtra("alarmId",      alarmData.getId());
+        intent.putExtra("alarmName",    alarmData.getName());
+        intent.putExtra("hour",         alarmData.getHour());
+        intent.putExtra("minute",       alarmData.getMinute());
+        intent.putExtra("mis_on",       alarmData.getMisOn());
+        intent.putExtra("mis_num",      alarmData.getMis_num());
+        intent.putExtra("mis_cnt",      alarmData.getMis_count());
+        intent.putExtra("sound_on",     alarmData.getSoundOn());
+        intent.putExtra("sound",        alarmData.getSound());
+        intent.putExtra("user_uid",     alarmData.getUserUid());
 
         if (repeatDayOfWeek != -1) {
             intent.putExtra("repeat_day", repeatDayOfWeek);

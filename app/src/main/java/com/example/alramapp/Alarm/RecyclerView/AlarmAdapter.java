@@ -26,7 +26,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
 
     private List<AlarmData> items;
     private OnItemClickListener itemClickListener;
-    LinearLayout alramBackground;
+
 
     public interface OnItemClickListener {
         void onItemClick(AlarmData alarm);
@@ -71,8 +71,8 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
         TextView tvTime, tvAmp, tvName, tvRepeat;
         SwitchCompat swEnable;
         private AlarmData currentAlarmData;
+        LinearLayout alramBackground;
         private boolean isBinding = false;  // 바인딩 상태 변수
-
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -142,7 +142,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             tvAmp.setText(isPM ? "PM" : "AM");
             tvName.setText(alarmData.getName());
             tvRepeat.setText(alarmData.getRepeat());
-
             swEnable.setChecked(alarmData.getIsEnabled());
 
             if (mis_on) {

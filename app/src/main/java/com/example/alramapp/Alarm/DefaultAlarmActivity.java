@@ -55,6 +55,16 @@ public class DefaultAlarmActivity extends AppCompatActivity {
         boolean misOn = intent.getBooleanExtra("mis_on", false);
         String e = intent.getStringExtra("sound");
         String f = intent.getStringExtra("user_uid");
+        int repeatDay = intent.getIntExtra("repeat_day", -1);
+
+        String display;
+        if (repeatDay == -1) {
+            display = "매일";
+        } else {
+            String[] weekdays = {"", "일", "월", "화", "수", "목", "금", "토"};
+            display = weekdays[repeatDay];
+        }
+        repeat.setText(display);
 
         alarmName.setText(a != null ? a : "이름없음");
         alarmId.setText(String.valueOf(b));
