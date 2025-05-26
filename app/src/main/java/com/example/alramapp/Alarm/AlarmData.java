@@ -7,8 +7,8 @@ public class AlarmData implements Serializable {
     private String name;      //알람 이름
     private int hour;         //시간
     private int minute;       //분
-    private String repeat;       //반복 요일
-    private String sound;        //알람 음원
+    private String repeat;    //반복 요일
+    private String sound;     //알람 음원
     private int volume;          //알람 소리
     private int mis_num;      //미션 선택
     private int mis_count;       //미션 조건

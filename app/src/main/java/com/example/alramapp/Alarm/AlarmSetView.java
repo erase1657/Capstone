@@ -81,7 +81,6 @@ public class AlarmSetView {
 
         // 초기 요일 UI 세팅
         updateRepeatUIFromData(alarmData.getRepeat());
-        // 스위치 초기화
 
         if (alarmData.getMisOn() && alarmData.getMis_num() == 0) {
             switch_mis.setChecked(false); // 스위치 끔
@@ -96,9 +95,20 @@ public class AlarmSetView {
             updateMissionInfo();
         }
 
-        /*switch_mis.setChecked(alarmData.getMisOn());
-        switch_sound.setChecked(alarmData.getSoundOn());
-*/
+        if(!alarmData.getSoundOn()){
+            switch_sound.setChecked(false);
+            alarmData.setSoundOn(false);
+            lable_Sound.setAlpha(0.5f);
+            lable_Sound.setEnabled(false);
+            tv_sound.setText("사운드 미설정 (진동 알람)");
+        }else{
+            switch_sound.setChecked(alarmData.getSoundOn());
+            lable_Sound.setAlpha(1f);
+            lable_Sound.setEnabled(true);
+            updateSoundInfo();
+        }
+
+
         lable_Mis.setAlpha(alarmData.getMisOn() ? 1f : 0.5f);
         lable_Mis.setEnabled(alarmData.getMisOn());
         lable_Sound.setAlpha(alarmData.getSoundOn() ? 1f : 0.5f);
@@ -115,6 +125,7 @@ public class AlarmSetView {
         else
             tv_sound.setText("사운드 미설정 (진동 알람)");
 
+        Log.d("AlarmSetView", "sound value: [" + alarmData.getSound() + "]");
         // 선택된 요일 변경 시 동작
         repeat.setOnSelectListener(btn -> {
             String joinedDays = getRepeatStringFromSelection();
@@ -129,7 +140,7 @@ public class AlarmSetView {
             if (isOn) {
                 updateSoundInfo();
             } else {
-                tv_sound.setText("사운드 미설정 (진동 알람)");
+                tv_sound.setText("사운드 미설정(진동 알람)");
             }
             lable_Sound.setAlpha(isOn ? 1f : 0.5f);
             lable_Sound.setEnabled(isOn);
@@ -148,6 +159,8 @@ public class AlarmSetView {
             lable_Mis.setEnabled(isOn);
         });
 
+
+        //저장 버튼
         btn_save.setOnClickListener(v -> {
 
             updateAlarmDataFromUI();
@@ -186,7 +199,7 @@ public class AlarmSetView {
         if (selectedSound != null && !selectedSound.isEmpty()) {
             tv_sound.setText(selectedSound);  // soundLabel은 사운드를 표시할 TextView
         }else{
-            tv_sound.setText("사운드 미설정 (진동 알람)");
+            tv_sound.setText("사운드 미설정(진동 알람)");
         }
     }
 
@@ -195,6 +208,7 @@ public class AlarmSetView {
      * 다이얼로그에서 받은 값들을 alarmData객체에 세팅(setter)
      */
     public void updateAlarmDataFromUI() {
+        //사운드나 미션 설정 데이터는 이미 set되어 있음
         alarmData.setName(tv_name.getText().toString());
         alarmData.setHour(timePicker.getHour());
         alarmData.setMinute(timePicker.getMinute());
@@ -239,7 +253,7 @@ public class AlarmSetView {
         // 텍스트뷰 갱신
         List<String> ordered = getSelectedDaysInOrder();
         String text = ordered.isEmpty()
-                ? "없음"
+                ? "반복 없음"
                 : (ordered.size() == RepeatList.size() ? "매일" : TextUtils.join(", ", ordered));
         tv_repeat.setText(text);
     }
@@ -271,7 +285,7 @@ public class AlarmSetView {
     public String getRepeatStringFromSelection() {
         List<String> selectedDays = getSelectedDaysInOrder();
         if (selectedDays.isEmpty()) {
-            return "없음";
+            return "반복 없음";
         }
         if (selectedDays.size() == RepeatList.size()) {
             return "매일";
@@ -284,7 +298,7 @@ public class AlarmSetView {
      * "없음" 또는 null은 빈 Set 으로 처리
      */
     private Set<String> parseRepeatStringToSet(String repeatStr) {
-        if (repeatStr == null || repeatStr.equals("없음")) {
+        if (repeatStr == null || repeatStr.equals("반복 없음")) {
             return new HashSet<>();
         }
         String[] days = repeatStr.split(",\\s*");

@@ -151,7 +151,7 @@ public class CreateActivity extends AppCompatActivity {
                 userRef.get().addOnSuccessListener(dataSnapshot -> {
                     boolean isCreating = !dataSnapshot.exists();  //신규 회원 프로필 생성인지, 기존 회원 프로필 변경인지 판단.
 
-                    int currentLife = 5;
+                    int currentLife = 3;
                     int currentScore = 0;
 
                     if (dataSnapshot.exists()) {

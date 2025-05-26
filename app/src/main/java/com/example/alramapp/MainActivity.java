@@ -232,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
                 break;
             }
         }
+        Log.d("MainActivity", "Alarm updated: " + data.toString());
     }
 
     // ----------------------------------------------------
@@ -258,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
                 break;
             }
         }
+
     }
 
     // ----------------------------------------------------

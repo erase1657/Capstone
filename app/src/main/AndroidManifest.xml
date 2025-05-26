@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!--<uses-permission android:name="android.permission.VIBRATE" />-->
 
     <application
         android:allowBackup="true"
@@ -24,9 +25,20 @@
         <activity
             android:name=".Alarm.DefaultAlarmActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Authentication.LoginActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,6 +50,7 @@
         <activity android:name=".Authentication.RegisterActivity" />
         <activity android:name=".MyInfromActivity" />
         <activity android:name=".CreateActivity" />
+
     </application>
 
 </manifest>

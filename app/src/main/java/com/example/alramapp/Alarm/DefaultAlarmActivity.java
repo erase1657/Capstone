@@ -1,6 +1,7 @@
 package com.example.alramapp.Alarm;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.example.swipebutton_library.SwipeButton;
 public class DefaultAlarmActivity extends AppCompatActivity {
     private SwipeButton swipeButton;
     private TextView alarmName, alarmId, time, repeat, mission, sound, user_uid;
+    private MediaPlayer mediaPlayer;
     private long Id;
 
 
@@ -75,9 +77,13 @@ public class DefaultAlarmActivity extends AppCompatActivity {
 
         android.util.Log.d("DefaultAlarmActivity", "Alarm Activity started with alarmId=" + b);
 
+        initAndStartAlarmSound(e);
+
         swipeButton.setOnActiveListener(new OnActiveListener() {
             @Override
             public void onActive() {
+
+
                 // 단발성일 때만 꺼주기
                 if ("없음".equals(repeat)) {
                     AlarmDBHelper dbHelper = new AlarmDBHelper(DefaultAlarmActivity.this);
@@ -85,10 +91,44 @@ public class DefaultAlarmActivity extends AppCompatActivity {
                     if (data != null) {
                         data.setIsEnabled(false);
                         dbHelper.updateAlarm(data);
+
                     }
                 }
+                mediaPlayer.stop();
                 finish();
             }
         });
+
+
+
     }
+
+    // 알람 소리 초기화, 재생
+    private void initAndStartAlarmSound(String soundName) {
+        // 기본 사운드 파일 리소스 지정, 실제 soundName에 따라 변경 가능
+        int soundResId = 0; // res/raw/alarm_sound.mp3 파일 필요
+
+        // soundName에 따른 사운드 재생 분기 처리 (필요시)
+        if (soundName != null) {
+            switch (soundName) {
+                case "샘플 알람음1":
+                    soundResId = R.raw.sample1;
+                    break;
+                case "샘플 알람음2":
+                    soundResId = R.raw.sample2;
+                    break;
+                case "샘플 알람음3":
+                    soundResId = R.raw.sample3;
+                    break;
+                case "사운드 미설정(진동 알람)":
+                    // 사운드 없음, 진동 처리 필요 시 추가
+                    return;
+            }
+        }
+
+        mediaPlayer = MediaPlayer.create(this, soundResId);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+    }
+
 }

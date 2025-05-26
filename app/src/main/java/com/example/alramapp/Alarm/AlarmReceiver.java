@@ -20,6 +20,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d("AlarmReceiver", "onReceive called!! alarmId=" + intent.getLongExtra("alarmId", -1));
         long alarmId = intent.getLongExtra("alarmId", -1);
         if (alarmId == -1) {
             Log.d(TAG, "Invalid alarmId received");

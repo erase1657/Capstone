@@ -96,15 +96,18 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
         //취소 버튼 클릭시 다이얼로그 닫음
         setView.findViewById(R.id.btn_close).setOnClickListener(v-> dismiss());
 
-        //뒤로가기 버튼 클릭시 해당 페이지로 전환(alarm_set.xml)
-        soundView.findViewById(R.id.btn_back).setOnClickListener(v -> switchView(setView,-1));
-        missionView.findViewById(R.id.btn_back).setOnClickListener(v -> switchView(setView,-1));
 
 
         alarmSetView = new AlarmSetView(setView, alarmData);
         alarmSoundView = new AlarmSoundView(soundView, alarmData);
         alarmMissionView = new AlarmMissionView(missionView, alarmData,requireContext());
 
+        //뒤로가기 버튼 클릭시 해당 페이지로 전환(alarm_set.xml)
+        soundView.findViewById(R.id.btn_back).setOnClickListener(v ->{
+            alarmSoundView.stopSound();
+            switchView(setView,-1);
+        });
+        missionView.findViewById(R.id.btn_back).setOnClickListener(v -> switchView(setView,-1));
 
 
         // 최초엔 메인화면(alarm_set.xml)
@@ -151,7 +154,9 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
         soundView.findViewById(R.id.save_sound).setOnClickListener(v -> {
 
             alarmSoundView.saveSoundData();
+            alarmSoundView.stopSound();
             alarmSetView.updateSoundInfo();
+
             switchView(setView, -1);
 
         });
