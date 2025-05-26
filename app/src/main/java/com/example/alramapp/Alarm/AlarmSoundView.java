@@ -28,7 +28,7 @@ public class AlarmSoundView {
     private static final String PREFS_NAME = "AlarmPrefs";
     private static final String PREF_KEY_SELECTED_SOUND = "selected_sound";
     private String currentSelectedSoundName = null;
-
+    private static final String DEFAULT_SOUND = "사운드 미설정(진동 알람)";
     public AlarmSoundView(View root, AlarmData alarmData) {
         this.root = root;
         this.alarmData = alarmData;
@@ -139,12 +139,21 @@ public class AlarmSoundView {
     public void loadSoundData() {
         SharedPreferences prefs = root.getContext()
                 .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        String savedSound = prefs.getString(PREF_KEY_SELECTED_SOUND, null);
+        String savedSound = prefs.getString(PREF_KEY_SELECTED_SOUND, "DEFAULT_SOUND");
 
         if (savedSound != null) {
             alarmData.setSound(savedSound);
             currentSelectedSoundName = savedSound;
             soundAdapter.setSelectedSound(savedSound);
+        }
+    }
+    // 알람이 처음 생성될 때 기본값을 설정하는 메서드 추가
+    public void initializeDefaultSound() {
+        if (alarmData.getSound() == null) {
+            alarmData.setSound(DEFAULT_SOUND);
+            currentSelectedSoundName = DEFAULT_SOUND;
+            soundAdapter.setSelectedSound(DEFAULT_SOUND);
+            saveSoundData();
         }
     }
 

@@ -82,7 +82,11 @@ public class AlarmSetView {
         // 초기 요일 UI 세팅
         updateRepeatUIFromData(alarmData.getRepeat());
 
-        if (alarmData.getMisOn() && alarmData.getMis_num() == 0) {
+
+
+
+        if (alarmData.getMisOn() || alarmData.getMis_num() == 0) {
+            Log.d("AlarmSetView", "mis:" + alarmData.getMis_num() + ", " + alarmData.getMis_count());
             switch_mis.setChecked(false); // 스위치 끔
             alarmData.setMisOn(false);    // 데이터도 반영
             lable_Mis.setAlpha(0.5f);
@@ -95,7 +99,8 @@ public class AlarmSetView {
             updateMissionInfo();
         }
 
-        if(!alarmData.getSoundOn()){
+        if(!alarmData.getSoundOn() || alarmData.getSound() == null || "사운드 미설정(진동 알람)".equals(alarmData.getSound()) ){
+            Log.d("AlarmSetView", "sound: "+ alarmData.getSound());
             switch_sound.setChecked(false);
             alarmData.setSoundOn(false);
             lable_Sound.setAlpha(0.5f);
@@ -109,21 +114,7 @@ public class AlarmSetView {
         }
 
 
-        lable_Mis.setAlpha(alarmData.getMisOn() ? 1f : 0.5f);
-        lable_Mis.setEnabled(alarmData.getMisOn());
-        lable_Sound.setAlpha(alarmData.getSoundOn() ? 1f : 0.5f);
-        lable_Sound.setEnabled(alarmData.getSoundOn());
 
-        // 미션, 사운드 텍스트뷰 초기화
-        if(alarmData.getMisOn())
-            updateMissionInfo();
-        else
-            tv_mission.setText("없음");
-
-        if(alarmData.getSoundOn())
-            updateSoundInfo();
-        else
-            tv_sound.setText("사운드 미설정 (진동 알람)");
 
         Log.d("AlarmSetView", "sound value: [" + alarmData.getSound() + "]");
         // 선택된 요일 변경 시 동작
@@ -279,7 +270,7 @@ public class AlarmSetView {
     }
     /**
      * 현재 선택된 요일 리스트를 문자열로 반환
-     * 선택된 것이 없으면 "없음" 반환
+     * 선택된 것이 없으면 "반복 없음" 반환
      * 모든 요일이 선택이라면 "매일" 반환
      */
     public String getRepeatStringFromSelection() {

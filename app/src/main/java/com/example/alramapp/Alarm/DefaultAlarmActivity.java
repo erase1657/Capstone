@@ -85,7 +85,7 @@ public class DefaultAlarmActivity extends AppCompatActivity {
 
 
                 // 단발성일 때만 꺼주기
-                if ("없음".equals(repeat)) {
+                if ("반복 없음".equals(repeat)) {
                     AlarmDBHelper dbHelper = new AlarmDBHelper(DefaultAlarmActivity.this);
                     AlarmData data = dbHelper.getAlarmById(Id);
                     if (data != null) {

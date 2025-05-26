@@ -85,6 +85,6 @@ public class AlarmReceiver extends BroadcastReceiver {
      */
     private boolean isRepeatingAlarm(AlarmData data) {
         String rep = data.getRepeat();
-        return rep != null && !rep.trim().isEmpty() && !"없음".equals(rep.trim());
+        return rep != null && !rep.trim().isEmpty() && !"반복 없음".equals(rep.trim());
     }
 }

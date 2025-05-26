@@ -22,9 +22,6 @@
             android:exported="true"
              />
 
-        <activity
-            android:name=".Alarm.DefaultAlarmActivity"
-            android:exported="true" />
 
         <activity
             android:name=".SplashActivity"
@@ -36,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".Authentication.LoginActivity"
+            android:name=".MissionActivity"
             android:exported="true">
 
             <intent-filter>
@@ -45,6 +42,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Alarm.DefaultAlarmActivity"
+            android:exported="true" />
+
         <activity android:name=".RankActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Authentication.RegisterActivity" />
