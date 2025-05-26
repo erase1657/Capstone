@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_light"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/ic_back"
+        android:fitsSystemWindows="true" />
+
+    <ImageView
+        android:id="@+id/img_pet"
+        android:layout_width="141dp"
+        android:layout_height="141dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/profile_cat"
+        android:layout_marginTop="120dp"/>
+
+    <ImageView
+        android:id="@+id/Bowl"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/bowl" />
+
+    <ImageView
+        android:id="@+id/Missionbg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:src="@drawable/missionbg" />
+
+
+</LinearLayout>
