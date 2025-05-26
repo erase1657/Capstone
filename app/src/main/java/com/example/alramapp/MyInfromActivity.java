@@ -20,18 +20,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.willy.ratingbar.BaseRatingBar;
-import com.willy.ratingbar.ScaleRatingBar;
 
 
 public class MyInfromActivity extends AppCompatActivity {
 
     private DataAccess database;
     private FirebaseUser user;
-    private Button ModifyBtn, InformBtn, QuestionBtn, LogoutBtn;
+    private Button ModifyBtn, InformBtn, QuestionBtn, LogoutBtn, BackButton;
     private ImageView ProfileImage, GenderImage;
     private TextView NameValue, ScoreValue;
     private BaseRatingBar LifeValue;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePage();  // 항상 최신 데이터로 갱신
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,8 @@ public class MyInfromActivity extends AppCompatActivity {
         InformBtn = findViewById(R.id.logininformbtn);
         QuestionBtn = findViewById(R.id.questionbtn);
         LogoutBtn = findViewById(R.id.logoutbtn);
+        BackButton = findViewById(R.id.backbtn);
+
 
         //이미지
         ProfileImage = findViewById(R.id.profileimage);
@@ -56,7 +62,12 @@ public class MyInfromActivity extends AppCompatActivity {
 
         updatePage();
 
-
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         ModifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,9 +118,9 @@ public class MyInfromActivity extends AppCompatActivity {
 
                     // 성별 이미지 설정
                     if ("f".equalsIgnoreCase(gender)) {
-                        GenderImage.setImageResource(R.drawable.f_btn); // 성별 이미지 리소스 예
+                        GenderImage.setImageResource(R.drawable.btn_c); // 성별 이미지 리소스 예
                     } else if ("m".equalsIgnoreCase(gender)) {
-                        GenderImage.setImageResource(R.drawable.m_btn);
+                        GenderImage.setImageResource(R.drawable.btn_m);
                     }
 
 
@@ -146,6 +157,7 @@ public class MyInfromActivity extends AppCompatActivity {
         Log.d("MyInfromActivity", "showinform() 호출됨");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         if (user != null) {
             String email = user.getEmail();

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal|top"
-    android:background="@drawable/background"
+    android:background="@drawable/bg_light"
     android:orientation="vertical">
 
     <Button
@@ -16,7 +16,7 @@
         android:layout_marginLeft="10dp"
         android:layout_gravity="left"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/back"
+        android:background="@drawable/ic_back"
         android:fitsSystemWindows="true" />
 
     <FrameLayout
@@ -48,7 +48,7 @@
 
         android:layout_height="111dp"
         android:layout_marginTop="31dp"
-        android:background="@drawable/layout_base"
+        android:background="@drawable/layout_20dp"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -63,7 +63,7 @@
                 android:id="@+id/genderimage"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/m_btn"/>
+                android:src="@drawable/btn_m"/>
 
             <!--사용자 이름-->
             <TextView
@@ -102,13 +102,14 @@
         android:layout_width="261dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/layout_base"
+        android:background="@drawable/layout_20dp"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
        >
 
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/rank_go"
             android:layout_height="16dp"
             android:text="체력"
             android:textColor="@color/black"
@@ -124,9 +125,10 @@
             android:id="@+id/liferating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srb_drawableEmpty="@drawable/ic_health_empty"
-            app:srb_drawableFilled="@drawable/ic_health_fill"
-            app:srb_numStars="5"
+            app:srb_clickable="false"
+            app:srb_drawableEmpty="@drawable/ic_life_empty"
+            app:srb_drawableFilled="@drawable/ic_life_fill"
+            app:srb_numStars="3"
             app:srb_stepSize="1"
             app:srb_rating="1"
             app:srb_starPadding="5dp"/>
@@ -148,7 +150,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="계정 정보"
-            android:background="@drawable/layout_button"
+            android:background="@drawable/layout_10dp"
             android:scaleType="centerCrop" />
 
         <View
@@ -160,7 +162,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="문의"
-            android:background="@drawable/layout_button"
+            android:background="@drawable/layout_10dp"
             android:scaleType="centerCrop" />
 
         <View
@@ -172,7 +174,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="로그아웃"
-            android:background="@drawable/layout_button"
+            android:background="@drawable/layout_10dp"
             android:scaleType="centerCrop" />
 
     </LinearLayout>

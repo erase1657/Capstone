@@ -46,6 +46,9 @@ public class DataAccess {
     public interface UserLoadCallback {
         void onUserLoaded(UserInform user);
     }
+
+
+    //한번만 호출되는 메서드(잘 사용되지 않는 데이터를 읽을때)
     public void readUserByUid(String uid, final UserLoadCallback callback){
         if(uid == null || uid.isEmpty()) {
             callback.onUserLoaded(null);
@@ -62,6 +65,23 @@ public class DataAccess {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w("DataAccess", "Failed to read user data.", error.toException());
+                callback.onUserLoaded(null);
+            }
+        });
+    }
+
+    //데이터가 변경될때마다 실시간 호출되는 메서드
+    public void observeUserByUid(String uid, final UserLoadCallback callback) {
+        dataref.child("users").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserInform userInfo = snapshot.getValue(UserInform.class);
+                callback.onUserLoaded(userInfo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("DataAccess", "Failed to observe user data.", error.toException());
                 callback.onUserLoaded(null);
             }
         });

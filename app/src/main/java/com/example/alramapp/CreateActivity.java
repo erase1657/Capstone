@@ -12,7 +12,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.Database.UserInform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -40,11 +39,11 @@ public class CreateActivity extends AppCompatActivity {
     private int currentProfileIndex = 0; // 현재 표시 중인 프로필 이미지의 인덱스입니다.
     private String selectedGender = null; // 선택된 성별 값 (null, "f", "m")
 
-    private int fButtonSelectedDrawable = R.drawable.f_btn_c; // 암컷 버튼 이미지(활성)
-    private int fButtonNormalDrawable = R.drawable.f_btn;     // 암컷 버튼 이미지(기본)
+    private int fButtonSelectedDrawable = R.drawable.btn_f_c; // 암컷 버튼 이미지(활성)
+    private int fButtonNormalDrawable = R.drawable.btn_c;     // 암컷 버튼 이미지(기본)
 
-    private int mButtonSelectedDrawable = R.drawable.m_btn_c; // 수컷 버튼 이미지(활성)
-    private int mButtonNormalDrawable = R.drawable.m_btn;     // 수컷 버튼 이미지(기본)
+    private int mButtonSelectedDrawable = R.drawable.btn_m_c; // 수컷 버튼 이미지(활성)
+    private int mButtonNormalDrawable = R.drawable.btn_m;     // 수컷 버튼 이미지(기본)
 
 
 
@@ -67,10 +66,11 @@ public class CreateActivity extends AppCompatActivity {
         // 초기 캐릭터 설정(cat인 상태)
         profileIcon.setImageResource(profileImages[currentProfileIndex]);
 
+        // 뒤로가기
         BackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
 
@@ -129,44 +129,66 @@ public class CreateActivity extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // EditText에서 입력된 이름을 가져와서 앞뒤 공백을 제거합니다.
                 String profileName = editName.getText().toString().trim();
 
-
-                if (profileName.isEmpty()) { // 이름이 입력되었는지 확인합니다.
+                if (profileName.isEmpty()) {
                     Toast.makeText(CreateActivity.this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (selectedGender == null) { // 성별이 선택되었는지 확인합니다.
+                if (selectedGender == null) {
                     Toast.makeText(CreateActivity.this, "성별을 선택해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // 프로필 이미지 이름(키)를 문자열로 저장하는 예시
+
                 String[] profileImageNames = {"profile_cat", "profile_fish", "profile_bird", "profile_dog"};
                 String selectedProfileImageName = profileImageNames[currentProfileIndex];
 
                 String uid = currentUser.getUid();
                 DatabaseReference userRef = database.dataref.child("users").child(uid);
 
-                //업데이트할 객체
-                Map<String, Object> updates = new HashMap<>();
-                updates.put("name", profileName);
-                updates.put("gender", selectedGender);
-                updates.put("image", selectedProfileImageName);
-                updates.put("life", 5);
-                updates.put("score", 0);
+                // 기존 값을 먼저 읽어옴
+                userRef.get().addOnSuccessListener(dataSnapshot -> {
+                    boolean isCreating = !dataSnapshot.exists();  //신규 회원 프로필 생성인지, 기존 회원 프로필 변경인지 판단.
 
+                    int currentLife = 3;
+                    int currentScore = 0;
 
-                userRef.updateChildren(updates)
-                        .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(CreateActivity.this, "프로필이 성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(CreateActivity.this, MyInfromActivity.class);
-                            startActivity(intent);
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(CreateActivity.this, "프로필 저장에 실패했습니다. 다시 시도하세요.", Toast.LENGTH_SHORT).show();
-                        });
+                    if (dataSnapshot.exists()) {
+                        // 기존 값이 존재하면 유지
+                        Long lifeVal = dataSnapshot.child("life").getValue(Long.class);
+                        Long scoreVal = dataSnapshot.child("score").getValue(Long.class);
+                        if (lifeVal != null) currentLife = lifeVal.intValue();
+                        if (scoreVal != null) currentScore = scoreVal.intValue();
+                    }
+
+                    // 변경할 값만 업데이트
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("name", profileName);
+                    updates.put("gender", selectedGender);
+                    updates.put("image", selectedProfileImageName);
+                    updates.put("life", currentLife);
+                    updates.put("score", currentScore);
+
+                    userRef.updateChildren(updates)
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(CreateActivity.this, "프로필이 성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                                if (isCreating) {
+                                    // 새 프로필 생성 시
+                                    Intent intent = new Intent(CreateActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    // 기존 프로필 수정 시
+                                    finish();  // 이전 액티비티로 돌아감
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(CreateActivity.this, "프로필 저장에 실패했습니다. 다시 시도하세요.", Toast.LENGTH_SHORT).show();
+                            });
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(CreateActivity.this, "데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+                });
             }
         });
     }

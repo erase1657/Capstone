@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left|center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="2dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="2dp">
+
+
+        <FrameLayout
+            android:id="@+id/container_empty1"
+            android:layout_width="24dp"
+            android:layout_height="24dp">
+
+            <TextView
+                android:id="@+id/text_rank"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="0.5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="1"
+                android:textColor="#000"
+                android:textSize="12dp"
+                android:background="@drawable/rank_first"
+                />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/user_pet"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/profile_cat" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="홍길동"
+            android:textColor="#FF0A1B39"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/rank_score"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="8dp"
+            android:maxLines="1"
+            android:text="0"
+            android:textColor="#FF000000"
+            android:textSize="12dp" />
+</LinearLayout>

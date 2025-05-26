@@ -1,0 +1,12 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--좀 더 둥근 사각형-->
+
+    <item android:bottom="3dp" android:right="3dp">
+        <shape>
+            <solid android:color="#FFFFFF"/>
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+
+</layer-list>

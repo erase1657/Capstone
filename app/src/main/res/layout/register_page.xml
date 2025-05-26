@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/background"
+    android:background="@drawable/bg_light"
 
     >
 
-    <!--최상단 캐릭터 아이콘-->
+
 
     <Button
         android:id="@+id/backbtn"
@@ -18,7 +18,7 @@
         android:layout_height="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/back"
+        android:background="@drawable/ic_back"
         android:fitsSystemWindows="true" />
 
     <ImageView
@@ -28,7 +28,7 @@
         android:layout_marginTop="84dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerInside"
-        android:src="@drawable/cat" />
+        android:src="@drawable/profile_cat" />
 
     <!--액션-->
     <LinearLayout
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="14dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/fi_rr_check"
+                    android:src="@drawable/ic_check"
                     android:visibility="invisible"
                     />
                 <FrameLayout
@@ -71,13 +71,12 @@
                         android:layout_height="24dp"
                         android:layout_gravity="top|left"
                         android:scaleType="centerInside"
-                        android:src="@drawable/mdi_account" />
+                        android:src="@drawable/ic_human" />
 
                     <EditText
                         android:id="@+id/register_email_input"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|left"
                         android:layout_marginLeft="38dp"
                         android:gravity="left|center_vertical"
                         android:hint="이메일을 입력하세요"
@@ -114,7 +113,7 @@
                         android:layout_height="10dp"
                         android:layout_marginRight="14dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/fi_rr_check"
+                        android:src="@drawable/ic_check"
                         android:visibility="invisible"/>
 
 
@@ -128,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|left"
                             android:scaleType="centerInside"
-                            android:src="@drawable/material_symbols_lock_outline" />
+                            android:src="@drawable/ic_password" />
 
                         <EditText
                             android:id="@+id/register_password_input"
@@ -159,7 +158,7 @@
                             android:layout_width="24dp"
                             android:layout_height="25dp"
                             android:layout_gravity="right"
-                            android:background="@drawable/fi_rr_eye" />
+                            android:background="@drawable/ic_eye" />
                     </FrameLayout>
                 </LinearLayout>
 
@@ -187,7 +186,7 @@
                     android:layout_height="10dp"
                     android:layout_marginRight="14dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/fi_rr_check"
+                    android:src="@drawable/ic_check"
                     android:visibility="invisible"/>
 
 
@@ -201,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="top|left"
                         android:scaleType="centerInside"
-                        android:src="@drawable/material_symbols_lock_outline" />
+                        android:src="@drawable/ic_password" />
 
                     <EditText
                         android:id="@+id/register_password_check"
@@ -232,7 +231,7 @@
                         android:layout_width="24dp"
                         android:layout_height="25dp"
                         android:layout_gravity="right"
-                        android:background="@drawable/fi_rr_eye" />
+                        android:background="@drawable/ic_eye" />
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
