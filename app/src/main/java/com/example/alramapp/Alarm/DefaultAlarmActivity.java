@@ -16,10 +16,12 @@ import com.example.alramapp.R;
 import com.example.swipebutton_library.OnActiveListener;
 import com.example.swipebutton_library.SwipeButton;
 
+/*
+    TODO:
+ */
 
 /**
- * default_alarm_page.xml와 연동
- * 기본 알람 화면 UI 로직 구현
+ * 기본 알람 화면 구현
  */
 public class DefaultAlarmActivity extends AppCompatActivity {
     private SwipeButton swipeButton;

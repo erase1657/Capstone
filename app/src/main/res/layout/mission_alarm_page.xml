@@ -59,15 +59,14 @@
 
         <Button
             android:id="@+id/backbtn"
-            android:layout_width="100dp"
+            android:layout_width="128dp"
             android:layout_height="30dp"
             android:text="포기"
             android:layout_gravity="center"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:background="@drawable/layout_20dp"/>
-
-
+            android:background="@drawable/layout_20dp"
+            android:backgroundTint="#FFAD48"/>
 
 
     </LinearLayout>

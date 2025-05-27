@@ -18,6 +18,12 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Map;
+/*
+    TODO: 1. 기존 캐릭터가 사망했을 때, 재 생성 구현(프로필, 파이어베이스 데이터베이스 업데이트)
+          2. 캐릭터 생성 후, 밥 시간 설정 페이지로 이동
+
+ */
+
 
 
 public class CreateActivity extends AppCompatActivity {

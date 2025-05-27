@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.alramapp.Alarm.MissionAlarmActivity;
 import com.example.alramapp.Authentication.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -71,7 +72,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Intent intent;
         if (user != null) {
-            intent = new Intent(this, MissionActivity.class);
+            intent = new Intent(this, MissionAlarmActivity.class);
         } else {
             intent = new Intent(this, LoginActivity.class);
         }

@@ -1,16 +1,26 @@
-package com.example.alramapp;
+package com.example.alramapp.Alarm;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MissionActivity extends AppCompatActivity {
+import com.example.alramapp.R;
+
+/*
+TODO: 1. 미션 완료 시, 진행 바 부분이 사라지고(visibility  = gone 세팅하면 될듯)
+          알람 종료 버튼이 나타나게 해야함(swipe 버튼)
+      2. 미션 완료 시, 캐릭터가 웃는 모습, 밥이 채워진 이미지로 변해야 함
+      3. 피그에는 있지만 "OO이 밥 주기 미션"이라는 타이틀 빠져있음
+      4. xml에 보이는것과 달리 앱 실행시 하단 부분 다 잘림(사진을 줄이거나 따로 다이얼로그를 띄우게 하던지 수정)
+      5. 흔들기 미션도 구현 -> 앞으로 미션이 추가된다면 따로 클래스를 분리하는것도 고려
+*/
+
+public class MissionAlarmActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView touchCountText;
@@ -20,7 +30,7 @@ public class MissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mission); // XML 파일 이름이 activity_mission.xml이면 이대로 사용
+        setContentView(R.layout.mission_alarm_page); // XML 파일 이름이 activity_mission.xml이면 이대로 사용
 
         // UI 요소 연결
         progressBar = findViewById(R.id.missionProgressBar);
