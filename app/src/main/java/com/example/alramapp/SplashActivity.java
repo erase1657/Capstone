@@ -14,6 +14,11 @@ import com.example.alramapp.Authentication.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * 앱 스플래시 화면
+ * 앱 첫 실행시 뜨도록 구현
+ */
+
 public class SplashActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
@@ -66,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Intent intent;
         if (user != null) {
-            intent = new Intent(this, MyInfromActivity.class);
+            intent = new Intent(this, MissionActivity.class);
         } else {
             intent = new Intent(this, LoginActivity.class);
         }

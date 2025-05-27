@@ -55,10 +55,10 @@
     
     
     <!--음원 리스트-->
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/soundlist"
-        android:layout_width="wrap_content"
-        android:layout_height="496dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
 
         />

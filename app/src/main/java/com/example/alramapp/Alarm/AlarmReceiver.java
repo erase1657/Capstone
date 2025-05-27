@@ -20,6 +20,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d("AlarmReceiver", "onReceive called!! alarmId=" + intent.getLongExtra("alarmId", -1));
         long alarmId = intent.getLongExtra("alarmId", -1);
         if (alarmId == -1) {
             Log.d(TAG, "Invalid alarmId received");
@@ -84,6 +85,6 @@ public class AlarmReceiver extends BroadcastReceiver {
      */
     private boolean isRepeatingAlarm(AlarmData data) {
         String rep = data.getRepeat();
-        return rep != null && !rep.trim().isEmpty() && !"없음".equals(rep.trim());
+        return rep != null && !rep.trim().isEmpty() && !"반복 없음".equals(rep.trim());
     }
 }

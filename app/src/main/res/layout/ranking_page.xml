@@ -7,6 +7,7 @@
     android:id="@+id/container_ranking_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     android:gravity="center|top"
     android:background="@drawable/bg_light">
@@ -52,20 +53,25 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="4dp">
 
-    <LinearLayout
-        android:id="@+id/rank_frame"
-        android:layout_width="307dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rank_back"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
+        <LinearLayout
+            android:id="@+id/rank_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rank_back"
+            android:orientation="vertical">
+        </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:text="인터넷의 연결 상황에 따라 점수가 다르게 표시될 수 있어요."
+        />
 </LinearLayout>

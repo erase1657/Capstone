@@ -23,7 +23,7 @@ public class AlarmManagerHelper {
      */
     public static void register(Context context, AlarmData alarmData) {
         String repeatStr = alarmData.getRepeat();
-        if (repeatStr == null || repeatStr.trim().isEmpty() || repeatStr.equals("없음")) {
+        if (repeatStr == null || repeatStr.trim().isEmpty() || repeatStr.equals("반복 없음")) {
             registerAlarm(context, alarmData);
         } else if (repeatStr.equals("매일")) {
             registerDailyAlarms(context, alarmData);

@@ -1,52 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-    <vector
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:aapt="http://schemas.android.com/aapt"
-        android:width="360dp"
-        android:height="800dp"
-        android:viewportWidth="360"
-        android:viewportHeight="800"
-        >
-        <group>
-
-            <clip-path
-                android:pathData="M0 0H360V800H0V0Z"
-                />
-            <group
-                android:translateX="1"
-                android:translateY="0"
-                android:pivotX="180"
-                android:pivotY="400"
-                android:scaleX="2"
-                android:scaleY="2"
-                android:rotation="90"
-                >
-                <path
-                    android:pathData="M0 0V800H360V0"
-                    >
-                    <aapt:attr name="android:fillColor">
-                        <gradient
-                            android:type="linear"
-                            android:startX="90"
-                            android:startY="400"
-                            android:endX="270"
-                            android:endY="400"
-                            >
-                            <item
-                                android:color="#FFFAF4"
-                                android:offset="0.106"
-                                />
-                            <item
-                                android:color="#FFDCB0"
-                                android:offset="1"
-                                />
-                        </gradient>
-                    </aapt:attr>
-                </path>
-            </group>
-        </group>
-
-    </vector>
-
-
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="360dp"
+    android:height="800dp"
+    android:viewportWidth="360"
+    android:viewportHeight="800">
+  <path
+      android:pathData="M0,0h360v800h-360z">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:startX="180"
+          android:startY="0"
+          android:endX="180"
+          android:endY="800"
+          android:type="linear">
+        <item android:offset="0.11" android:color="#FFFFFAF4"/>
+        <item android:offset="1" android:color="#FFFFDCB0"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+</vector>
