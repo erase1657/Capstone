@@ -8,6 +8,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,6 +47,7 @@ public class SplashActivity extends AppCompatActivity {
         Glide.with(this)
                 .asGif()
                 .load(R.drawable.loading_image)
+                .priority(Priority.IMMEDIATE)
                 .placeholder(R.drawable.default_pet) //
                 .into(loadingImage);
 
