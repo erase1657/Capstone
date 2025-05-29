@@ -44,6 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         Glide.with(this)
                 .asGif()
                 .load(R.drawable.loading_image)
+                .placeholder(R.drawable.default_pet) //
                 .into(loadingImage);
 
         startProgressBar();
