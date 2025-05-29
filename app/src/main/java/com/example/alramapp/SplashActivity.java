@@ -6,19 +6,23 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.alramapp.Alarm.MissionAlarmActivity;
 import com.example.alramapp.Authentication.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-/**
- * 앱 스플래시 화면
- * 앱 첫 실행시 뜨도록 구현
- */
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -26,7 +30,10 @@ public class SplashActivity extends AppCompatActivity {
     private TextView percentText;
     private ImageView loadingImage;
 
-    private final int LOADING_DURATION = 500; // 총 0.5초
+    private final int DEFAULT_LIFE = 3;
+    private Handler handler = new Handler();
+    private Runnable progressRunnable;
+    private boolean isNextScreenStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,47 +44,83 @@ public class SplashActivity extends AppCompatActivity {
         percentText = findViewById(R.id.percentText);
         loadingImage = findViewById(R.id.loadingImage);
 
-        // Glide를 사용하여 GIF 표시
         Glide.with(this)
                 .asGif()
                 .load(R.drawable.loading_image)
+                .priority(Priority.IMMEDIATE)
+                .placeholder(R.drawable.default_pet) //
                 .into(loadingImage);
 
-        animateProgressBar();
+        startProgressBar();
+        checkLoginAndLifeStatus(); // 병렬로 실행
     }
 
-    private void animateProgressBar() {
-        Handler handler = new Handler();
+    private void startProgressBar() {
         int[] progress = {0};
 
-        Runnable runnable = new Runnable() {
+        progressRunnable = new Runnable() {
             @Override
             public void run() {
-                if (progress[0] <= 100) {
+                if (progress[0] <= 100 && !isNextScreenStarted) {
                     progressBar.setProgress(progress[0]);
                     percentText.setText(progress[0] + "%");
-                    progress[0] += 2;
-                    handler.postDelayed(this, 40); // 점점 자연스럽게
-                } else {
-                    checkLoginStatus();
+                    progress[0] += 4;
+                    handler.postDelayed(this, 10);
                 }
             }
         };
 
-        handler.post(runnable);
+        handler.post(progressRunnable);
     }
 
-    private void checkLoginStatus() {
+    private void checkLoginAndLifeStatus() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        Intent intent;
-        if (user != null) {
-            intent = new Intent(this, MissionAlarmActivity.class);
+        if (user == null) {
+            goToNextActivity(LoginActivity.class);
         } else {
-            intent = new Intent(this, LoginActivity.class);
-        }
+            String uid = user.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
 
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Long lifeVal = snapshot.child("life").getValue(Long.class);
+                    int life = (lifeVal != null) ? lifeVal.intValue() : DEFAULT_LIFE;
+
+                    if (life <= 0) {
+                        goToNextActivity(PetRestartActivity.class);
+                    } else {
+                        goToNextActivity(MainActivity.class);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(SplashActivity.this, "네트워크 오류", Toast.LENGTH_SHORT).show();
+                    goToNextActivity(LoginActivity.class);
+                }
+            });
+        }
+    }
+
+    private void goToNextActivity(Class<?> targetActivity) {
+        if (isNextScreenStarted) return;
+
+        isNextScreenStarted = true;
+        handler.removeCallbacks(progressRunnable); // 진행 막기
+
+        Intent intent = new Intent(SplashActivity.this, targetActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler != null && progressRunnable != null) {
+            handler.removeCallbacks(progressRunnable);
+        }
     }
 }
