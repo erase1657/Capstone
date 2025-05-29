@@ -9,6 +9,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_light">
 
+    <TextView
+        android:id="@+id/create_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="펫 생성"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"/>
     <Button
         android:id="@+id/backbtn"
         android:layout_width="24dp"
@@ -92,7 +101,7 @@
             <EditText
                 android:id="@+id/editname"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:hint="이름을 설정해 주세요."
                 android:includeFontPadding="false"

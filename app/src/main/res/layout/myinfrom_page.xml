@@ -128,7 +128,7 @@
             app:srb_clickable="false"
             app:srb_drawableEmpty="@drawable/ic_life_empty"
             app:srb_drawableFilled="@drawable/ic_life_fill"
-            app:srb_numStars="5"
+            app:srb_numStars="3"
             app:srb_stepSize="1"
             app:srb_rating="1"
             app:srb_starPadding="5dp"/>
