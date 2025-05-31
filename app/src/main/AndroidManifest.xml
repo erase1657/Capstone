@@ -47,6 +47,10 @@
             android:name=".Alarm.DefaultAlarmActivity"
             android:exported="true" />
 
+        <activity android:name=".Alarm.WakeUpActivity"
+            android:exported="true"/>
+
+
         <activity android:name=".RankActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Authentication.RegisterActivity" />
