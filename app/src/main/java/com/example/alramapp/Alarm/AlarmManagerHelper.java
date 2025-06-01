@@ -33,7 +33,7 @@ public class AlarmManagerHelper {
     }
 
     /**
-     * 단일 알람 등록
+     * 단발성 알람 등록
      */
     public static void registerAlarm(Context context, AlarmData alarmData) {
         AlarmManager alarmManager = getAlarmManager(context);
@@ -66,6 +66,7 @@ public class AlarmManagerHelper {
         for (int dayOfWeek = Calendar.SUNDAY; dayOfWeek <= Calendar.SATURDAY; dayOfWeek++) {
             registerWeeklyAlarmForDay(context, alarmData, dayOfWeek);
         }
+        Log.d("AlarmManagerHelper", "매일 알람:" + alarmData.getId());
     }
 
     /**

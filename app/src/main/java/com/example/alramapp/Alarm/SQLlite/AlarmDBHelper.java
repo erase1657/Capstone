@@ -32,6 +32,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "CREATE TABLE alarms (" +
                         "id           INTEGER PRIMARY KEY AUTOINCREMENT," +     //알람 아이디(각 알람의 고유 번호)
+                        "isfood       INTEGER," +                               //밥시간 알람, 일반 알람 구분
                         "name         TEXT," +                                  //알람 이름
                         "hour         INTEGER," +                               //시간
                         "minute       INTEGER," +                               //분
@@ -63,6 +64,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
     public long insertAlarm(AlarmData data) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put("isfood",    data.getIsFood());
         cv.put("name",      data.getName());
         cv.put("hour",      data.getHour());
         cv.put("minute",    data.getMinute());
@@ -90,10 +92,20 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         List<AlarmData> list = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor c = db.query(TABLE, null, "user_uid = ?", new String[]{userUid}, null, null, "id ASC");
+        /*Cursor c = db.query(TABLE, null, "user_uid = ?", new String[]{userUid}, null, null, "id ASC");*/
+        Cursor c = db.query(
+                TABLE,
+                null,
+                "user_uid = ? AND isfood = 0",   // <- isfood가 0인 애들만 선택!
+                new String[]{ userUid },
+                null, null,
+                "id ASC"
+        );
         while (c.moveToNext()) {
             AlarmData a = new AlarmData();
+
             a.setId(        c.getLong(c.getColumnIndexOrThrow("id")));
+            a.setIsFood(c.getInt(c.getColumnIndexOrThrow("isfood")));
             a.setName(      c.getString(c.getColumnIndexOrThrow("name")));
             a.setHour(      c.getInt(   c.getColumnIndexOrThrow("hour")));
             a.setMinute(    c.getInt(   c.getColumnIndexOrThrow("minute")));
@@ -106,11 +118,47 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
             a.setSoundOn(   c.getInt(   c.getColumnIndexOrThrow("sound_on")) == 1);
             a.setIsEnabled( c.getInt(   c.getColumnIndexOrThrow("is_enabled")) == 1);
             a.setUserUid(   c.getString(c.getColumnIndexOrThrow("user_uid")));
+
             list.add(a);
         }
         c.close();
         db.close();
         return list;
+    }
+    /**
+     * 사용자별 "밥 시간 알람"(isfood == 1) 하나만 가져오기
+     */
+    public AlarmData getFoodAlarm(String userUid) {
+        SQLiteDatabase db = getReadableDatabase();
+        AlarmData a = null;
+        Cursor c = db.query(
+                TABLE,
+                null,
+                "user_uid = ? AND isfood = 1",
+                new String[]{userUid},
+                null, null, null
+        );
+        if (c.moveToFirst()) {
+            a = new AlarmData();
+            a.setId(        c.getLong(c.getColumnIndexOrThrow("id")));
+            a.setIsFood(c.getInt(c.getColumnIndexOrThrow("isfood")));
+            a.setName(      c.getString(c.getColumnIndexOrThrow("name")));
+            a.setHour(      c.getInt(   c.getColumnIndexOrThrow("hour")));
+            a.setMinute(    c.getInt(   c.getColumnIndexOrThrow("minute")));
+            a.setRepeat(    c.getString(c.getColumnIndexOrThrow("repeat")));
+            a.setSound(     c.getString(c.getColumnIndexOrThrow("sound")));
+            a.setVolume(    c.getInt(   c.getColumnIndexOrThrow("volume")));
+            a.setMis_num(   c.getInt(   c.getColumnIndexOrThrow("mission_num")));
+            a.setMis_count( c.getInt(   c.getColumnIndexOrThrow("mission_cnt")));
+            a.setMisOn(     c.getInt(   c.getColumnIndexOrThrow("mis_on")) == 1);
+            a.setSoundOn(   c.getInt(   c.getColumnIndexOrThrow("sound_on")) == 1);
+            a.setIsEnabled( c.getInt(   c.getColumnIndexOrThrow("is_enabled")) == 1);
+            a.setUserUid(   c.getString(c.getColumnIndexOrThrow("user_uid")));
+
+        }
+        c.close();
+        db.close();
+        return a;
     }
 
     /**
@@ -165,6 +213,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
             if (c.moveToFirst()) {
                 alarmData = new AlarmData();
                 alarmData.setId(c.getLong(c.getColumnIndexOrThrow("id")));
+                alarmData.setIsFood(c.getInt(c.getColumnIndexOrThrow("isfood")));
                 alarmData.setName(c.getString(c.getColumnIndexOrThrow("name")));
                 alarmData.setHour(c.getInt(c.getColumnIndexOrThrow("hour")));
                 alarmData.setMinute(c.getInt(c.getColumnIndexOrThrow("minute")));

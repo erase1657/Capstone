@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MyBottomSheetDialog.OnSaveListener {
 
     private Button showDialogButton, backButton, infromButton, rankingButton, addAlramButton;
+    private LinearLayout lable_foodtime;
     private ArrayList<AlarmData> alarmList;
     private AlarmAdapter adapter;
     private AlarmDBHelper dbHelper;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         rv.setAdapter(adapter);
 
         // UI 초기화
+        updateFoodTimeTextView();
         loadUserProfileImage();
         loadAlarmsFromDb();
 
@@ -78,8 +81,26 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         addAlramButton.setOnClickListener(v -> {
             AlarmData newAlarm = new AlarmData();
             MyBottomSheetDialog dialog = MyBottomSheetDialog.newInstance(newAlarm);
-            dialog.show(getSupportFragmentManager(), "BS");
+            dialog.show(getSupportFragmentManager(), "AddAlarm");
         });
+
+        //밥 시간 알람 수정 레이블
+        lable_foodtime = findViewById(R.id.lable_foodtime);
+        lable_foodtime.setOnClickListener(v -> {
+            // 항상 DB에서 읽어오게!
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) return;
+            AlarmData foodAlarm = dbHelper.getFoodAlarm(user.getUid());
+
+            if (foodAlarm == null) {
+                Toast.makeText(this, "식사 알람 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            MyBottomSheetDialog dialog = MyBottomSheetDialog.newInstance(foodAlarm);
+            dialog.show(getSupportFragmentManager(), "FoodTime");
+        });
+
 
         // 뒤로가기 버튼
         backButton = findViewById(R.id.backbtn);
@@ -193,12 +214,14 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         data.setUserUid(user.getUid());
 
         long newId = dbHelper.insertAlarm(data);
+
         if (newId == -1) {
-            Toast.makeText(this, "알람 저장 실패", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "알람 저장 실패" + newId, Toast.LENGTH_SHORT).show();
             return;
         }
         data.setId(newId);
         AlarmManagerHelper.register(this, data);
+
 
         alarmList.add(data);
         adapter.notifyItemInserted(alarmList.size() - 1);
@@ -232,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
                 break;
             }
         }
+        if (data.getIsFood() == 1) updateFoodTimeTextView();
         Log.d("MainActivity", "Alarm updated: " + data.toString());
     }
 
@@ -260,6 +284,22 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
             }
         }
 
+    }
+    private void updateFoodTimeTextView() {
+        TextView tvFoodTime = findViewById(R.id.tv_foodtime);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            tvFoodTime.setText("--:--");
+            return;
+        }
+        AlarmData foodAlarm = dbHelper.getFoodAlarm(user.getUid());
+        if (foodAlarm == null) {
+            tvFoodTime.setText("--:--");
+            return;
+        }
+        int hour = foodAlarm.getHour();
+        int minute = foodAlarm.getMinute();
+        tvFoodTime.setText(String.format("%02d:%02d", hour, minute));
     }
 
     // ----------------------------------------------------

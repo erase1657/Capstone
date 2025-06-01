@@ -91,7 +91,10 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
 
 
         //수정때만 삭제 버튼이 보이게 설정
-        deleteButton.setVisibility(alarmData.getId() != 0 ? View.VISIBLE : View.GONE);
+        deleteButton.setVisibility((alarmData.getId() != 0 && alarmData.getIsFood() != 1) ? View.VISIBLE : View.GONE);
+
+
+
 
         //취소 버튼 클릭시 다이얼로그 닫음
         setView.findViewById(R.id.btn_close).setOnClickListener(v-> dismiss());

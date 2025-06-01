@@ -168,16 +168,21 @@ public class CreateActivity extends AppCompatActivity {
                         .addOnSuccessListener(aVoid -> {
                             if (isRestart) {
                                 Toast.makeText(CreateActivity.this, "펫을 다시 만들었습니다!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(CreateActivity.this, MainActivity.class));
+                                Intent foodTimeIntent = new Intent(CreateActivity.this, SetFoodTimeActivity.class);
+                                foodTimeIntent.putExtra("finalGender", finalGender);
+                                foodTimeIntent.putExtra("name", profileName);
+                                startActivity(foodTimeIntent);
                                 finish();
-                            } else {
+                            } else if(isCreating){
                                 Toast.makeText(CreateActivity.this, "프로필이 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                                if (isCreating) {
-                                    startActivity(new Intent(CreateActivity.this, MainActivity.class));
-                                    finish();
-                                } else {
-                                    finish();  // 수정 완료 후 복귀
-                                }
+                                Intent foodTimeIntent = new Intent(CreateActivity.this, SetFoodTimeActivity.class);
+                                foodTimeIntent.putExtra("finalGender", finalGender);
+                                foodTimeIntent.putExtra("name", profileName);
+                                startActivity(foodTimeIntent);
+                                finish();
+                            }else {
+                                Toast.makeText(CreateActivity.this, "프로필이 수정 되었습니다.", Toast.LENGTH_SHORT).show();
+                                finish();  // 수정 완료 후 복귀
                             }
                         })
                         .addOnFailureListener(e ->

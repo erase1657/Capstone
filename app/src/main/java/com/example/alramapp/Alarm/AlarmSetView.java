@@ -50,11 +50,12 @@ public class AlarmSetView {
 
     private ThemedToggleButtonGroup repeat;
     private List<String> RepeatList = Arrays.asList("월", "화", "수", "목", "금", "토", "일");
-
+    private boolean isBinding = false;
 
     public AlarmSetView(View root, AlarmData alarmData){
         this.root = root;
         this.alarmData = alarmData;
+        isBinding = true;
 
         switch_sound = root.findViewById(R.id.switch_sound);
         switch_mis = root.findViewById(R.id.switch_mis);
@@ -68,7 +69,13 @@ public class AlarmSetView {
         tv_mission = root.findViewById(R.id.tv_mission);
         tv_sound = root.findViewById(R.id.tv_sound);
 
-
+        Log.d("AlarmSetView", alarmData.getIsFood()+"");
+        Log.d("AlarmSetView", alarmData.getId()+"");
+        Log.d("AlarmSetView", alarmData.getRepeat());
+        Log.d("AlarmSetView", alarmData.getSound());
+        Log.d("AlarmSetView", alarmData.getMis_count()+"");
+        Log.d("AlarmSetView", alarmData.getMis_num()+"");
+        Log.d("AlarmSetView", alarmData.getSoundOn()+"");
 
 
         //알람 이름 세팅
@@ -83,36 +90,33 @@ public class AlarmSetView {
         updateRepeatUIFromData(alarmData.getRepeat());
 
 
+        if(alarmData.getIsFood() == 1) {
+            repeat.setVisibility(View.GONE);
+            repeat.setVisibility(View.GONE);
+            tv_repeat.setText("매일");
+            alarmData.setRepeat("매일");
+        } else {
+            switch_mis.setVisibility(View.VISIBLE);
+        }
 
-
-        if (alarmData.getMisOn() || alarmData.getMis_num() == 0) {
-            Log.d("AlarmSetView", "mis:" + alarmData.getMis_num() + ", " + alarmData.getMis_count());
-            switch_mis.setChecked(false); // 스위치 끔
-            alarmData.setMisOn(false);    // 데이터도 반영
-            lable_Mis.setAlpha(0.5f);
-            lable_Mis.setEnabled(false);
-            tv_mission.setText("없음");
-        }else{
-            switch_mis.setChecked(alarmData.getMisOn());
-            lable_Mis.setAlpha(1f);
-            lable_Mis.setEnabled(true);
+        switch_mis.setChecked(alarmData.getMisOn());
+        lable_Mis.setAlpha(alarmData.getMisOn() ? 1f : 0.5f);
+        lable_Mis.setEnabled(alarmData.getMisOn());
+        if (alarmData.getMisOn())
             updateMissionInfo();
-        }
+        else
+            tv_mission.setText("없음");
 
-        if(!alarmData.getSoundOn() || alarmData.getSound() == null || "사운드 미설정(진동 알람)".equals(alarmData.getSound()) ){
-            Log.d("AlarmSetView", "sound: "+ alarmData.getSound());
-            switch_sound.setChecked(false);
-            alarmData.setSoundOn(false);
-            lable_Sound.setAlpha(0.5f);
-            lable_Sound.setEnabled(false);
-            tv_sound.setText("사운드 미설정 (진동 알람)");
-        }else{
-            switch_sound.setChecked(alarmData.getSoundOn());
-            lable_Sound.setAlpha(1f);
-            lable_Sound.setEnabled(true);
+        // 사운드
+        switch_sound.setChecked(alarmData.getSoundOn());
+        lable_Sound.setAlpha(alarmData.getSoundOn() ? 1f : 0.5f);
+        lable_Sound.setEnabled(alarmData.getSoundOn());
+        if (alarmData.getSoundOn())
             updateSoundInfo();
-        }
+        else
+            tv_sound.setText("사운드 미설정(진동 알람)");
 
+        isBinding = false;
 
 
 
@@ -203,7 +207,11 @@ public class AlarmSetView {
         alarmData.setName(tv_name.getText().toString());
         alarmData.setHour(timePicker.getHour());
         alarmData.setMinute(timePicker.getMinute());
-        alarmData.setRepeat(getRepeatStringFromSelection());
+        if (alarmData.getIsFood() == 1) {
+            alarmData.setRepeat("매일"); // 무조건!
+        } else {
+            alarmData.setRepeat(getRepeatStringFromSelection());
+        }
         alarmData.setIsEnabled(true);  // 기본값
         alarmData.setUserUid(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         alarmData.setMisOn(switch_mis.isChecked());
@@ -294,6 +302,12 @@ public class AlarmSetView {
         }
         String[] days = repeatStr.split(",\\s*");
         return new HashSet<>(Arrays.asList(days));
+    }
+
+
+
+    private void init_foodDialog(){
+
     }
 }
 

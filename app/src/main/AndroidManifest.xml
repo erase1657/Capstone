@@ -16,13 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".PetRestartActivity"
-            android:exported="false" />
-
         <receiver
             android:name=".Alarm.AlarmReceiver"
             android:exported="true" />
+
 
         <activity
             android:name=".SplashActivity"
@@ -35,8 +32,7 @@
         </activity>
         <activity
             android:name=".Authentication.LoginActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".Alarm.DefaultAlarmActivity"
             android:exported="true" />
@@ -44,10 +40,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Authentication.RegisterActivity" />
         <activity android:name=".MyInfromActivity" />
-        <activity android:name=".CreateActivity" />
-        <activity
-            android:name=".PetRestartActivity"
-            android:exported="false" />
+        <activity android:name=".CreateActivity"/>
+        <activity android:name=".SetFoodTimeActivity"/>
+        <activity android:name=".PetRestartActivity"/>
     </application>
 
 </manifest>
