@@ -33,12 +33,10 @@
         </activity>
 
         <activity
-            android:name=".MissionActivity"
+            android:name=".AlarmActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,10 +44,6 @@
         <activity
             android:name=".Alarm.DefaultAlarmActivity"
             android:exported="true" />
-
-        <activity android:name=".Alarm.WakeUpActivity"
-            android:exported="true"/>
-
 
         <activity android:name=".RankActivity" />
         <activity android:name=".MainActivity" />

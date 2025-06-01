@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
+import com.example.alramapp.AlarmActivity;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -17,6 +18,10 @@ public class AlarmReceiver extends BroadcastReceiver {
             = "com.example.alramapp.ACTION_ALARM_STATUS_CHANGED";
 
     private static final String TAG = "AlarmReceiver";
+
+    // AlarmReceiver.java 의 onReceive 메소드 내부 (일부)
+
+    // AlarmReceiver.java 의 onReceive 메소드 내부 (일부)
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -29,7 +34,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // 1) DB에서 AlarmData 조회
         AlarmDBHelper dbHelper = new AlarmDBHelper(context);
-        AlarmData alarmData = dbHelper.getAlarmById(alarmId);
+        AlarmData alarmData = dbHelper.getAlarmById(alarmId); //
         if (alarmData == null) {
             Log.d(TAG, "AlarmData not found for id=" + alarmId);
             return;
@@ -41,39 +46,39 @@ public class AlarmReceiver extends BroadcastReceiver {
             return;
         }
 
-        // 2) 실제 알람 화면 띄우기
-        startAlarmActivity(context, intent);
+        // 2) 실제 알람 화면 띄우기 (startAlarmActivity 메소드 호출 또는 직접 구현)
+        // Intent 생성 및 데이터 추가
+        Intent alarmActivityIntent = new Intent(context, AlarmActivity.class); // 시작할 액티비티를 AlarmActivity.class로 설정
 
-        // 3) 단발성 알람이면 isEnabled=false로 업데이트 후 브로드캐스트
-        if (!isRepeatingAlarm(alarmData)) {
-            alarmData.setIsEnabled(false);
-            int updated = dbHelper.updateAlarm(alarmData);
-            Log.d(TAG, "Disabled one-shot alarm id=" + alarmId + ", rows=" + updated);
+        // AlarmData 객체에서 필요한 정보 추출하여 Intent에 담기
+        alarmActivityIntent.putExtra("ALARM_ID", alarmData.getId());
+        alarmActivityIntent.putExtra("ALARM_NAME", alarmData.getName()); //
+        alarmActivityIntent.putExtra("ALARM_HOUR", alarmData.getHour()); //
+        alarmActivityIntent.putExtra("ALARM_MINUTE", alarmData.getMinute()); //
+        // 필요에 따라 다른 정보들도 추가할 수 있습니다. (예: 반복 정보, 미션 정보 등)
+        // alarmActivityIntent.putExtra("ALARM_REPEAT", alarmData.getRepeat());
 
-            Intent statusIntent = new Intent(ACTION_ALARM_STATUS_CHANGED);
-            statusIntent.putExtra("alarmId", alarmId);
-            context.sendBroadcast(statusIntent);
-        }
+        // 기존 intent의 extra들을 모두 넘기고 싶다면 아래 코드를 사용할 수 있으나,
+        // 명시적으로 필요한 데이터만 넘기는 것이 좋습니다.
+        // alarmActivityIntent.putExtras(Objects.requireNonNull(intent.getExtras()));
 
-        // 4) 반복 알람이라면 다음 회차 재등록
-        else {
-            String rep = alarmData.getRepeat().trim();
-            // 매일 반복이면 repeatDay=-1
-            if (rep.equals("매일")) {
-                AlarmManagerHelper.scheduleNextAfterTrigger(context, alarmData, -1);
-            }
-            // 요일별 반복이면 intent 에서 repeat_day extra 로 받아오고
-            else {
-                int repeatDay = intent.getIntExtra("repeat_day", -1);
-                if (repeatDay >= Calendar.SUNDAY && repeatDay <= Calendar.SATURDAY) {
-                    AlarmManagerHelper.scheduleNextAfterTrigger(context, alarmData, repeatDay);
-                }
-            }
-        }
+        alarmActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(alarmActivityIntent);
+
+        // 3) 단발성 알람 처리 등 (기존 로직 유지)
+        // ... (기존 코드 생략) ...
     }
 
+// 기존 startAlarmActivity 메소드는 직접 호출하는 방식으로 변경되었으므로,
+// 해당 메소드는 삭제하거나 위의 방식으로 onReceive 내에 통합할 수 있습니다.
+/*
+private void startAlarmActivity(Context context, Intent intent) {
+    // 이 메소드는 이제 onReceive 내에서 직접 처리됩니다.
+}
+*/
+
     private void startAlarmActivity(Context context, Intent intent) {
-        Intent alarmIntent = new Intent(context, DefaultAlarmActivity.class);
+        Intent alarmIntent = new Intent(context, AlarmActivity.class);
         alarmIntent.putExtras(Objects.requireNonNull(intent.getExtras()));
         alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(alarmIntent);

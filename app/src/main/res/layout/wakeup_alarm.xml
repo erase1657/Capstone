@@ -8,6 +8,7 @@
     android:layout_marginTop="130dp">
 
     <TextView
+        android:id="@+id/tv_wakeup_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="알람 이름"
@@ -16,6 +17,7 @@
         android:layout_gravity="center"/>
 
     <TextClock
+        android:id="@+id/tv_wakeup_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
