@@ -41,15 +41,12 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".Alarm.DefaultAlarmActivity"
-            android:exported="true" />
-
         <activity android:name=".RankActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Authentication.RegisterActivity" />
         <activity android:name=".MyInfromActivity" />
         <activity android:name=".CreateActivity" />
+        <activity android:name=".AlarmActivity" />
 
 
     </application>
