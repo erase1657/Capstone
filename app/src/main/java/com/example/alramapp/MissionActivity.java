@@ -16,6 +16,10 @@ public class MissionActivity extends AppCompatActivity {
     private TextView touchCountText;
     private int touchCount = 0;
     private int totalCount = 50; // 총 터치 횟수
+    private ImageView petImageView;
+    private ImageView bowlImageView;
+    private boolean missionCompleted = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,8 @@ public class MissionActivity extends AppCompatActivity {
         // UI 요소 연결
         progressBar = findViewById(R.id.missionProgressBar);
         touchCountText = findViewById(R.id.touchCountText);
+        petImageView = findViewById(R.id.img_pet);       // mission.xml 에 정의된 고양이 ImageView ID
+        bowlImageView = findViewById(R.id.img_bowl);
 
         progressBar.setMax(totalCount);
         progressBar.setProgress(0);
@@ -43,7 +49,15 @@ public class MissionActivity extends AppCompatActivity {
 
                         if (touchCount == totalCount) {
                             touchCountText.setText("미션 완료!");
+                            // 이미지 변경
+                            if (petImageView != null) {
+                                petImageView.setImageResource(R.drawable.happy_cat); // 준비된 '행복한 고양이' 이미지 리소스명으로 변경
+                            }
+                            if (bowlImageView != null) {
+                                bowlImageView.setImageResource(R.drawable.full_bowl);    // 준비된 '밥이 채워진 밥그릇' 이미지 리소스명으로 변경
+                            }
                         }
+
                     }
                     return true;
                 }

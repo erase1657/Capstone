@@ -14,6 +14,7 @@
         android:layout_marginTop="150dp"/>
 
     <ImageView
+        android:id="@+id/img_bowl"
         android:layout_width="wrap_content"
         android:layout_height="213dp"
         android:layout_gravity="center"
