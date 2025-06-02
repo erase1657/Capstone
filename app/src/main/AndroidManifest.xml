@@ -51,6 +51,7 @@
         <activity android:name=".MyInfromActivity" />
         <activity android:name=".CreateActivity" />
 
+
     </application>
 
 </manifest>

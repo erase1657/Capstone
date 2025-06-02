@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.swipebutton_library.SwipeButton;
+
 public class MissionActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
@@ -18,8 +20,8 @@ public class MissionActivity extends AppCompatActivity {
     private int totalCount = 50; // 총 터치 횟수
     private ImageView petImageView;
     private ImageView bowlImageView;
-    private boolean missionCompleted = false;
-
+    private Button giveUpButton; // "포기" 버튼
+    private SwipeButton completeSwipeButton; // 미션 완료 후 나타날 스와이프 버튼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +33,18 @@ public class MissionActivity extends AppCompatActivity {
         touchCountText = findViewById(R.id.touchCountText);
         petImageView = findViewById(R.id.img_pet);       // mission.xml 에 정의된 고양이 ImageView ID
         bowlImageView = findViewById(R.id.img_bowl);
+        giveUpButton = findViewById(R.id.backbtn); // "포기" 버튼 ID
+        completeSwipeButton = findViewById(R.id.swipbutton_mission_complete); // XML에 추가한 스와이프 버튼 ID
 
-        progressBar.setMax(totalCount);
-        progressBar.setProgress(0);
+        if (progressBar != null) {
+            progressBar.setMax(totalCount);
+            progressBar.setProgress(0);
+        }
         updateTouchText();
+
+        if (completeSwipeButton != null) {
+            completeSwipeButton.setVisibility(View.GONE);
+        }
 
         // 전체 화면 터치 이벤트 감지
         View rootView = findViewById(android.R.id.content);
@@ -55,6 +65,20 @@ public class MissionActivity extends AppCompatActivity {
                             }
                             if (bowlImageView != null) {
                                 bowlImageView.setImageResource(R.drawable.full_bowl);    // 준비된 '밥이 채워진 밥그릇' 이미지 리소스명으로 변경
+                            }
+                            // 버튼 상태 변경
+                            if (giveUpButton != null) {
+                                giveUpButton.setVisibility(View.GONE); // "포기" 버튼 숨기기
+                            }
+                            if (completeSwipeButton != null) {
+                                completeSwipeButton.setVisibility(View.VISIBLE); // 스와이프 버튼 보이기
+                            }
+                            // 버튼 상태 변경
+                            if (giveUpButton != null) {
+                                giveUpButton.setVisibility(View.GONE); // "포기" 버튼 숨기기
+                            }
+                            if (completeSwipeButton != null) {
+                                completeSwipeButton.setVisibility(View.VISIBLE); // 스와이프 버튼 보이기
                             }
                         }
 
