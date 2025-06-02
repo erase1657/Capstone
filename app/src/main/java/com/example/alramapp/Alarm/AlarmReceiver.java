@@ -59,6 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         alarmActivityIntent.putExtra("ALARM_NAME", alarmData.getName());
         alarmActivityIntent.putExtra("ALARM_HOUR", alarmData.getHour());
         alarmActivityIntent.putExtra("ALARM_MINUTE", alarmData.getMinute());
+        alarmActivityIntent.putExtra("ALARM_SOUND_NAME", alarmData.getSound()); // 알람 사운드 이름 추가
         // 필요하다면 다른 정보도 추가 (예: 사운드, 미션 정보 등)
         // alarmActivityIntent.putExtra("ALARM_SOUND", alarmData.getSound());
 
