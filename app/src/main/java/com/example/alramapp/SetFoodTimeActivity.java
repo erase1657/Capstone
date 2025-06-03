@@ -52,12 +52,13 @@ public class SetFoodTimeActivity extends AppCompatActivity {
         String gender = getIntent.getStringExtra("finalGender");
 
         btn_back.setOnClickListener(v -> finish());
+        alarmData = new AlarmData();
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                alarmData = new AlarmData();
+
                 alarmData.setHour(timePicker.getHour());
                 alarmData.setMinute(timePicker.getMinute());
                 alarmData.setRepeat("매일");

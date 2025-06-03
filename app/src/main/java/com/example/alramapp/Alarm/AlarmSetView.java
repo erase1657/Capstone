@@ -69,14 +69,6 @@ public class AlarmSetView {
         tv_mission = root.findViewById(R.id.tv_mission);
         tv_sound = root.findViewById(R.id.tv_sound);
 
-        Log.d("AlarmSetView", alarmData.getIsFood()+"");
-        Log.d("AlarmSetView", alarmData.getId()+"");
-        Log.d("AlarmSetView", alarmData.getRepeat());
-        Log.d("AlarmSetView", alarmData.getSound());
-        Log.d("AlarmSetView", alarmData.getMis_count()+"");
-        Log.d("AlarmSetView", alarmData.getMis_num()+"");
-        Log.d("AlarmSetView", alarmData.getSoundOn()+"");
-
 
         //알람 이름 세팅
         tv_name.setText(alarmData.getName());
@@ -297,14 +289,18 @@ public class AlarmSetView {
      * "없음" 또는 null은 빈 Set 으로 처리
      */
     private Set<String> parseRepeatStringToSet(String repeatStr) {
-        if (repeatStr == null || repeatStr.equals("반복 없음")) {
+        if (repeatStr == null || repeatStr.equals("반복 없음") || repeatStr.equals("없음")) {
+            // 빈 세트 = 아무 버튼도 선택 안 함
             return new HashSet<>();
         }
+        if (repeatStr.equals("매일")) {
+            // RepeatList 에 정의된 요일 7개(월~일) 전부 선택
+            return new HashSet<>(RepeatList);
+        }
+        // "월, 화, 수" 등 일반 요일 목록
         String[] days = repeatStr.split(",\\s*");
         return new HashSet<>(Arrays.asList(days));
     }
-
-
 
     private void init_foodDialog(){
 

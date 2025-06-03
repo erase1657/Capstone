@@ -7,14 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_light"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:layout_marginBottom="?attr/actionBarSize"
     tools:context=".MainActivity">
     
     <!--뒤로가기 버튼, 도움말 버튼-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="horizontal"
         >
         <Button
@@ -79,7 +78,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="36dp"
                 android:textColor="@color/black"
-                android:text="dsfew"
                 android:textStyle="bold"/>
         </LinearLayout>
 
