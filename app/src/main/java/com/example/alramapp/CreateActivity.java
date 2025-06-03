@@ -143,7 +143,16 @@ public class CreateActivity extends AppCompatActivity {
             DatabaseReference userRef = database.dataref.child("users").child(uid);
 
             userRef.get().addOnSuccessListener(dataSnapshot -> {
-                boolean isCreating = !dataSnapshot.exists();
+                String name = dataSnapshot.child("name").getValue(String.class);
+                String gender = dataSnapshot.child("gender").getValue(String.class);
+                String image = dataSnapshot.child("image").getValue(String.class);
+
+                // 값이 null이거나, 아예 공백 문자열("")이면 미완성 가입자로 판단 (즉, CreateActivity 분기시킴)
+                boolean isCreating = (name == null || name.trim().isEmpty()) ||
+                        (gender == null || gender.trim().isEmpty()) ||
+                        (image == null || image.trim().isEmpty());
+
+
                 int currentLife = 3;
                 int currentScore = 0;
 
@@ -154,8 +163,9 @@ public class CreateActivity extends AppCompatActivity {
                     if (scoreVal != null) currentScore = scoreVal.intValue();
                 }
 
-                if (isRestart) currentLife = 3;
-                if (isRestart) currentScore = 0;
+
+                if (isCreating || isRestart) currentLife = 3;
+                if (isCreating || isRestart) currentScore = 0;
 
                 Map<String, Object> updates = new HashMap<>();
                 updates.put("name", profileName);

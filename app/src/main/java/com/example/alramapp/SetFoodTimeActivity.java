@@ -17,8 +17,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.alramapp.Alarm.AlarmData;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
+import com.example.alramapp.Database.DataAccess;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 /*
     TODO:  알람 객체를 AlarmManager에 등록, AlarmReceiver로 전달
@@ -32,10 +34,13 @@ public class SetFoodTimeActivity extends AppCompatActivity {
 
 
     private static final String TAG = "SetFoodTimeActivity";
-
+    private DataAccess database;
+    private FirebaseUser currentUser;
     private AlarmData alarmData;
     private Button btn_save, btn_back;
     private TimePicker timePicker;
+    private String name;
+    private String gender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +52,21 @@ public class SetFoodTimeActivity extends AppCompatActivity {
         btn_save = findViewById(R.id.btn_save);
         btn_back = findViewById(R.id.btn_back);
         timePicker = findViewById(R.id.timePicker);
-        Intent getIntent = getIntent();
-        String name = getIntent.getStringExtra("name");
-        String gender = getIntent.getStringExtra("finalGender");
+
+        database = new DataAccess();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        assert currentUser != null;
+        String uid = currentUser.getUid();
+        DatabaseReference userRef = database.dataref.child("users").child(uid);
+
+
+
+        userRef.get().addOnSuccessListener(dataSnapshot ->{
+            name = dataSnapshot.child("name").getValue(String.class);
+            gender = dataSnapshot.child("gender").getValue(String.class);
+
+        });
 
         btn_back.setOnClickListener(v -> finish());
         alarmData = new AlarmData();

@@ -233,4 +233,21 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
 
         return alarmData;
     }
+    public boolean hasFoodAlarm(String userUid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(*) FROM alarms WHERE isfood=1 AND user_uid=?",
+                new String[]{userUid}
+        );
+        boolean exists = false;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                exists = cursor.getInt(0) > 0;
+            }
+            cursor.close();
+        }
+        db.close();
+        return exists;
+    }
+
 }

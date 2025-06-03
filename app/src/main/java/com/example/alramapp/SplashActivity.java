@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
 import com.example.alramapp.Authentication.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +36,8 @@ public class SplashActivity extends AppCompatActivity {
     private Runnable progressRunnable;
     private boolean isNextScreenStarted = false;
 
+    private AlarmDBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                 .priority(Priority.IMMEDIATE)
                 .placeholder(R.drawable.default_pet) //
                 .into(loadingImage);
+
 
         startProgressBar();
         checkLoginAndLifeStatus(); // 병렬로 실행
@@ -76,11 +80,15 @@ public class SplashActivity extends AppCompatActivity {
     private void checkLoginAndLifeStatus() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
         if (user == null) {
             goToNextActivity(LoginActivity.class);
         } else {
             String uid = user.getUid();
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+            dbHelper = new AlarmDBHelper(this);
+            boolean foodcheck = dbHelper.hasFoodAlarm(uid);
 
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -90,6 +98,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     if (life <= 0) {
                         goToNextActivity(PetRestartActivity.class);
+                    } else if (!foodcheck ) {
+                        goToNextActivity(SetFoodTimeActivity.class);
                     } else {
                         goToNextActivity(MainActivity.class);
                     }
@@ -106,7 +116,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void goToNextActivity(Class<?> targetActivity) {
         if (isNextScreenStarted) return;
-
         isNextScreenStarted = true;
         handler.removeCallbacks(progressRunnable); // 진행 막기
 

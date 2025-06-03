@@ -18,6 +18,7 @@ import com.example.alramapp.Database.UserInform;
 import com.example.alramapp.MainActivity;
 import com.example.alramapp.MyInfromActivity;
 import com.example.alramapp.R;
+import com.example.alramapp.SplashActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -87,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+/*
     @Override
     public void onStart() {
         super.onStart();
@@ -99,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+*/
 
 
 
@@ -151,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                         boolean isGenderEmpty = (gender == null || gender.trim().isEmpty());
                         boolean isImageEmpty = (image == null || image.trim().isEmpty());
 
-                        if (isNameEmpty || isGenderEmpty || isImageEmpty) { // 세 개 모두 공백일 경우 CreateActivity로 이동
+                       /* if (isNameEmpty || isGenderEmpty || isImageEmpty) { // 세 개 모두 공백일 경우 CreateActivity로 이동
                             Intent intent = new Intent(LoginActivity.this, CreateActivity.class);
                             startActivity(intent);
                             finish();
@@ -159,7 +162,13 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-                        }
+                        }*/
+                        // 반드시 SplashActivity로 이동해서, Splash에서 모든 유효성 분기 체크를 하게 한다.
+                        Intent intent = new Intent(LoginActivity.this, SplashActivity.class);
+                        // 새로 Task를 시작해 이전 Activity를 스택에서 날리고(CLEAR_TASK), Splash 이후로만 분기
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
                     } else {
                         // 사용자 정보가 없는 경우(에러 처리 또는 새 가입자 처리 등)
                         Toast.makeText(LoginActivity.this, "사용자 정보를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
