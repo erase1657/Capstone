@@ -17,7 +17,6 @@ import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
 import com.example.alramapp.R;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public static final String ACTION_ALARM_STATUS_CHANGED
@@ -37,6 +36,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         AlarmDBHelper dbHelper = new AlarmDBHelper(context);
         AlarmData alarmData = dbHelper.getAlarmById(alarmId);
+
         if (alarmData == null) {
             Log.w(TAG, "No AlarmData for id=" + alarmId);
             return;
@@ -46,8 +46,16 @@ public class AlarmReceiver extends BroadcastReceiver {
             return;
         }
 
-        // 1) 알람 화면 띄우기
-        showAlarmNotification(context, alarmData);
+        // ------ [수정] 알람사운드+알림+액티비티 Service로 실행 ---------
+        Intent svcIntent = new Intent(context, AlarmSoundService.class);
+        svcIntent.putExtra("alarmId", alarmId);
+        // 추가 필요한 값(예: repeatDay, 소리 등) 있으면 여기에 putExtra로 전달
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            context.startForegroundService(svcIntent);
+        } else {
+            context.startService(svcIntent);
+        }
 
         // 2) 반복성 여부
         boolean isRepeat = isRepeatingAlarm(alarmData);
@@ -83,13 +91,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
-    private void startAlarmActivity(Context context, Intent intent) {
-        Intent i = new Intent(context, DefaultAlarmActivity.class);
-        i.putExtras(Objects.requireNonNull(intent.getExtras()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(i);
-    }
-
     /** "없음"/null/빈 → 단발, 그 외는 반복 */
     private boolean isRepeatingAlarm(AlarmData data) {
         String rep = data.getRepeat();
@@ -98,52 +99,5 @@ public class AlarmReceiver extends BroadcastReceiver {
                 && !rep.trim().equals("없음")
                 && !rep.trim().equals("반복 없음");
     }
-    private void showAlarmNotification(Context ctx, AlarmData data) {
-        String channelId = "alarm_channel";
-        NotificationManager nm =
-                (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // 1) 채널 생성
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel ch = nm.getNotificationChannel(channelId);
-            if (ch == null) {
-                ch = new NotificationChannel(
-                        channelId,
-                        "Alarm Channel",
-                        NotificationManager.IMPORTANCE_HIGH
-                );
-                ch.setDescription("알람용 채널");
-                ch.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-                nm.createNotificationChannel(ch);
-            }
-        }
-
-        // 2) 풀스크린 인텐트 PendingIntent
-        Intent fullIntent = new Intent(ctx, DefaultAlarmActivity.class);
-        fullIntent.putExtra("alarmId", data.getId());
-        fullIntent.putExtra("repeat_day", data.getRepeat());
-        fullIntent.addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK |
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP
-        );
-        PendingIntent fullPI = PendingIntent.getActivity(
-                ctx,
-                (int)data.getId(),
-                fullIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-
-        // 3) Notification 빌드
-        NotificationCompat.Builder b = new NotificationCompat.Builder(ctx, channelId)
-                .setSmallIcon(R.drawable.cat_sleeping)
-                .setContentTitle(data.getName())
-                .setContentText("⏰ 알람 시간이 되었습니다.")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_ALARM)
-                .setAutoCancel(true)
-                .setFullScreenIntent(fullPI, true);
-
-        // 4) 알림 표시
-        nm.notify((int)data.getId(), b.build());
-    }
 }

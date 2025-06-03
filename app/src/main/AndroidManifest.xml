@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,7 +21,10 @@
         <receiver
             android:name=".Alarm.AlarmReceiver"
             android:exported="true" />
-
+        <service
+            android:name=".Alarm.AlarmSoundService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback"/>
 
         <activity
             android:name=".SplashActivity"
@@ -34,9 +38,11 @@
         <activity
             android:name=".Authentication.LoginActivity"
             android:exported="true"/>
-        <activity
-            android:name=".Alarm.DefaultAlarmActivity"
-            android:exported="true" />
+        <activity android:name=".Alarm.AlarmActivity"
+            android:exported="true"
+            android:showOnLockScreen="true"
+            android:launchMode="singleTop"
+            android:turnScreenOn="true"/>
         <activity android:name=".RankActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Authentication.RegisterActivity" />
