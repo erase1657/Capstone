@@ -1,44 +1,50 @@
-package com.example.alramapp.Alarm;
+package com.example.alramapp;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.alramapp.R;
+import com.example.swipebutton_library.SwipeButton;
 
-/*
-TODO: 1. 미션 완료 시, 진행 바 부분이 사라지고(visibility  = gone 세팅하면 될듯)
-          알람 종료 버튼이 나타나게 해야함(swipe 버튼)
-      2. 미션 완료 시, 캐릭터가 웃는 모습, 밥이 채워진 이미지로 변해야 함
-      3. 피그에는 있지만 "OO이 밥 주기 미션"이라는 타이틀 빠져있음
-      4. xml에 보이는것과 달리 앱 실행시 하단 부분 다 잘림(사진을 줄이거나 따로 다이얼로그를 띄우게 하던지 수정)
-      5. 흔들기 미션도 구현 -> 앞으로 미션이 추가된다면 따로 클래스를 분리하는것도 고려
-*/
-
-public class MissionAlarmActivity extends AppCompatActivity {
+public class MissionActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView touchCountText;
     private int touchCount = 0;
     private int totalCount = 50; // 총 터치 횟수
+    private ImageView petImageView;
+    private ImageView bowlImageView;
+    private Button giveUpButton; // "포기" 버튼
+    private SwipeButton completeSwipeButton; // 미션 완료 후 나타날 스와이프 버튼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mission_alarm_page); // XML 파일 이름이 activity_mission.xml이면 이대로 사용
+        setContentView(R.layout.mission); // XML 파일 이름이 activity_mission.xml이면 이대로 사용
 
         // UI 요소 연결
         progressBar = findViewById(R.id.missionProgressBar);
         touchCountText = findViewById(R.id.touchCountText);
+        petImageView = findViewById(R.id.img_pet);       // mission.xml 에 정의된 고양이 ImageView ID
+        bowlImageView = findViewById(R.id.img_bowl);
+        giveUpButton = findViewById(R.id.backbtn); // "포기" 버튼 ID
+        completeSwipeButton = findViewById(R.id.swipbutton_mission_complete); // XML에 추가한 스와이프 버튼 ID
 
-        progressBar.setMax(totalCount);
-        progressBar.setProgress(0);
+        if (progressBar != null) {
+            progressBar.setMax(totalCount);
+            progressBar.setProgress(0);
+        }
         updateTouchText();
+
+        if (completeSwipeButton != null) {
+            completeSwipeButton.setVisibility(View.GONE);
+        }
 
         // 전체 화면 터치 이벤트 감지
         View rootView = findViewById(android.R.id.content);
@@ -53,7 +59,29 @@ public class MissionAlarmActivity extends AppCompatActivity {
 
                         if (touchCount == totalCount) {
                             touchCountText.setText("미션 완료!");
+                            // 이미지 변경
+                            if (petImageView != null) {
+                                petImageView.setImageResource(R.drawable.happy_cat); // 준비된 '행복한 고양이' 이미지 리소스명으로 변경
+                            }
+                            if (bowlImageView != null) {
+                                bowlImageView.setImageResource(R.drawable.full_bowl);    // 준비된 '밥이 채워진 밥그릇' 이미지 리소스명으로 변경
+                            }
+                            // 버튼 상태 변경
+                            if (giveUpButton != null) {
+                                giveUpButton.setVisibility(View.GONE); // "포기" 버튼 숨기기
+                            }
+                            if (completeSwipeButton != null) {
+                                completeSwipeButton.setVisibility(View.VISIBLE); // 스와이프 버튼 보이기
+                            }
+                            // 버튼 상태 변경
+                            if (giveUpButton != null) {
+                                giveUpButton.setVisibility(View.GONE); // "포기" 버튼 숨기기
+                            }
+                            if (completeSwipeButton != null) {
+                                completeSwipeButton.setVisibility(View.VISIBLE); // 스와이프 버튼 보이기
+                            }
                         }
+
                     }
                     return true;
                 }

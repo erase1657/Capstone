@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_light"
     android:orientation="vertical">
 
@@ -14,6 +15,7 @@
         android:layout_marginTop="150dp"/>
 
     <ImageView
+        android:id="@+id/img_bowl"
         android:layout_width="wrap_content"
         android:layout_height="213dp"
         android:layout_gravity="center"
@@ -59,15 +61,23 @@
 
         <Button
             android:id="@+id/backbtn"
-            android:layout_width="128dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:text="포기"
             android:layout_gravity="center"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:background="@drawable/layout_20dp"
-            android:backgroundTint="#FFAD48"/>
+            android:background="@drawable/layout_20dp"/>
 
+        <com.example.swipebutton_library.SwipeButton
+            android:id="@+id/swipbutton_mission_complete"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:inner_text="알람 종료"
+            app:has_active_status="true"
+            />
 
     </LinearLayout>
 

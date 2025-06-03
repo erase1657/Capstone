@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_light"
+    android:layout_marginTop="130dp">
+
+    <TextView
+        android:id="@+id/tv_wakeup_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알람 이름"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_wakeup_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="90dp"
+        android:text="00:00"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/cat_wakeup"
+        android:layout_gravity="center"
+        android:layout_marginBottom="150dp"/>
+
+    <com.example.swipebutton_library.SwipeButton
+        android:id="@+id/swipbutton"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        app:inner_text="알람 종료"
+        app:has_active_status="true"
+        />
+
+</LinearLayout>
