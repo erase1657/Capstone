@@ -1,4 +1,4 @@
-package com.example.alramapp;
+package com.example.alramapp.Alarm;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.alramapp.R;
 import com.example.swipebutton_library.SwipeButton;
 
-public class MissionActivity extends AppCompatActivity {
+public class MissionAlarmActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView touchCountText;
@@ -26,7 +27,7 @@ public class MissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mission); // XML 파일 이름이 activity_mission.xml이면 이대로 사용
+        setContentView(R.layout.mission_alarm_page); // XML 파일 이름이 activity_mission.xml이면 이대로 사용
 
         // UI 요소 연결
         progressBar = findViewById(R.id.missionProgressBar);
