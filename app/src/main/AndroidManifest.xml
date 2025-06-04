@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".Authentication.LoginActivity"
+            android:name=".Mission2Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

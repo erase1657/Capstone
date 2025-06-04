@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_light"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_pet"
+        android:layout_width="141dp"
+        android:layout_height="141dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/missioncat"
+        android:layout_marginTop="150dp"/>
+
+    <ImageView
+        android:id="@+id/img_bowl"
+        android:layout_width="wrap_content"
+        android:layout_height="213dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/bowl" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="흔들어서 먹이를 주세요!"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:layout_marginTop="90dp"
+            android:textStyle="bold"
+            android:textColor="#7B4E4E"/>
+
+        <ProgressBar
+            android:layout_gravity="center"
+            android:id="@+id/missionProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:progress="0"
+            android:max="50"
+            android:progressDrawable="@drawable/progress_drawable"/>
+
+        <TextView
+            android:id="@+id/shakeCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/50 개 남았어요!"
+            android:textSize="20sp"
+            android:textColor="#7B4E4E"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/backbtn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="포기"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_20dp"/>
+
+        <com.example.swipebutton_library.SwipeButton
+            android:id="@+id/swipbutton_mission_complete"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:inner_text="알람 종료"
+            app:has_active_status="true"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
