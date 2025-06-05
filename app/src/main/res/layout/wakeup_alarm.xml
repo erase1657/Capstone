@@ -5,12 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/bg_light"
-    android:layout_marginTop="130dp">
+    >
 
     <TextView
         android:id="@+id/tv_wakeup_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
         android:text="알람 이름"
         android:textStyle="bold"
         android:textSize="30dp"
