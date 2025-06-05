@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -50,6 +51,11 @@
         <activity android:name=".CreateActivity"/>
         <activity android:name=".SetFoodTimeActivity"/>
         <activity android:name=".PetRestartActivity"/>
+        <activity
+            android:name=".Alarm.Mission.MissionAlarmActivity"
+            android:exported="true" />
+        <activity android:name=".Alarm.Mission.MissionShakeActivity"/>
+        <activity android:name=".Alarm.Mission.MissionTouchActivity"/>
     </application>
 
 </manifest>
