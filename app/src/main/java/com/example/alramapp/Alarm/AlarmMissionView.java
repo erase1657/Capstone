@@ -45,29 +45,25 @@ public class AlarmMissionView {
         missionList = new View[] {
                 root.findViewById(R.id.mission1),
                 root.findViewById(R.id.mission2),
-                root.findViewById(R.id.mission3),
-                root.findViewById(R.id.mission4)
+
         };
 
         increaseBtn = new Button[] {
                 root.findViewById(R.id.upbtn_mission1),
                 root.findViewById(R.id.upbtn_mission2),
-                root.findViewById(R.id.upbtn_mission3),
-                root.findViewById(R.id.upbtn_mission4)
+
         };
 
         decreaseBtn = new Button[] {
                 root.findViewById(R.id.downbtn_mission1),
                 root.findViewById(R.id.downbtn_mission2),
-                root.findViewById(R.id.downbtn_mission3),
-                root.findViewById(R.id.downbtn_mission4)
+
         };
 
         countEditText = new EditText[] {
                 root.findViewById(R.id.et_mission1),
                 root.findViewById(R.id.et_mission2),
-                root.findViewById(R.id.et_mission3),
-                root.findViewById(R.id.et_mission4)
+
         };
         saveBtn = root.findViewById(R.id.btn_save_mis);
         showDialog = root.findViewById(R.id.btn_guide);
@@ -126,7 +122,7 @@ public class AlarmMissionView {
         });
 
         // 카운트 값을 배열로 초기화
-        counts = new int[]{10, 10, 10, 10};  // 원하는 초기값으로 변경
+        counts = new int[]{10, 10};  // 원하는 초기값으로 변경
         initListeners();
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
