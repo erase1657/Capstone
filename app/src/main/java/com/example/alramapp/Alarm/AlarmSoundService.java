@@ -14,6 +14,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.example.alramapp.Alarm.Mission.MissionAlarmActivity;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
 import com.example.alramapp.R;
 
@@ -29,6 +30,7 @@ public class AlarmSoundService extends Service {
 
         AlarmDBHelper dbHelper = new AlarmDBHelper(this);
         AlarmData alarmData = dbHelper.getAlarmById(alarmId);
+        boolean alarmType = alarmData.getMisOn();
 
         String soundName = alarmData.getSound();
         int soundResId = 0;
@@ -50,9 +52,17 @@ public class AlarmSoundService extends Service {
         // ==== Notification (필수, 고정!) =====
         createNotificationChannel();
 
-        // 알람끄기 액티비티 풀스크린Intent
-        Intent alarmIntent = new Intent(this, AlarmActivity.class);
+        Intent alarmIntent;
+        if (alarmType) {
+            //미션 알람 실행
+            alarmIntent = new Intent(this, MissionAlarmActivity.class);
+        } else {
+            // 일반 알람 실행
+            alarmIntent = new Intent(this, AlarmActivity.class);
+        }
+
         alarmIntent.putExtra("alarmId", alarmId);
+
         alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingActivity = PendingIntent.getActivity(
@@ -91,7 +101,10 @@ public class AlarmSoundService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d("AlarmSoundService","Ondestroy호출");
         super.onDestroy();
+        stopForeground(true);
+
         if(mediaPlayer!=null){
             mediaPlayer.stop();
             mediaPlayer.release();

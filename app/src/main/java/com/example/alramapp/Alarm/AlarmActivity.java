@@ -26,7 +26,6 @@ public class AlarmActivity extends AppCompatActivity {
     private TextView tvAlarmName;
     private TextView tvAlarmTime;
     private SwipeButton swipeButton; // 스와이프 버튼 변수
-    private MediaPlayer mediaPlayer; // MediaPlayer 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +56,11 @@ public class AlarmActivity extends AppCompatActivity {
         String alarmName = alarmData.getName();     //알람 이름
         int alarmHour = alarmData.getHour();        //시
         int alarmMinute = alarmData.getMinute();    //분
-        String soundName = alarmData.getSound();    //소리
         String rep = alarmData.getRepeat();         //반복 주기
 
         //UI에 값 설정
         tvAlarmName.setText(alarmName);
         tvAlarmTime.setText(String.format(Locale.getDefault(), "%02d:%02d", alarmHour, alarmMinute));
-
 
 
 
