@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.example.alramapp.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -79,9 +77,9 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
         this.container = root.findViewById(R.id.container);
 
         // 페이지별 레이아웃 inflate(최초 한 번만)
-        setView = inflater.inflate(R.layout.fragment_alarm_set, this.container, false);
-        soundView = inflater.inflate(R.layout.fragment_alarm_sound, this.container, false);
-        missionView = inflater.inflate(R.layout.fragment_alarm_mission, this.container, false);
+        setView = inflater.inflate(R.layout.setalarm_page, this.container, false);
+        soundView = inflater.inflate(R.layout.set_sound, this.container, false);
+        missionView = inflater.inflate(R.layout.set_mission, this.container, false);
 
 
         Button deleteButton = setView.findViewById(R.id.btn_delete);
