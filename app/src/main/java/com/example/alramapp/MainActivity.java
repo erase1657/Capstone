@@ -8,16 +8,22 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -50,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
     private AlarmAdapter adapter;
     private AlarmDBHelper dbHelper;
     private RecyclerView rv;
+    private FrameLayout navbar;
+    private LinearLayout rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +127,27 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         rankingButton.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, RankActivity.class))
         );
+
+        rootView = findViewById(R.id.main);
+        navbar = findViewById(R.id.navbar);
+
+
+        //사용자 규격 하단바 위치 자동 맞춤
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, new OnApplyWindowInsetsListener() {
+            @NonNull
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                // 네비게이션바의 바닥 영역 값 구하기
+                int insetBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+
+                // 기존 LayoutParams를 불러온 뒤 하단마진 조정
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) navbar.getLayoutParams();
+                params.bottomMargin = insetBottom;
+                navbar.setLayoutParams(params);
+
+                return insets;
+            }
+        });
     }
 
     // ----------------------------------------------------
