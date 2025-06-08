@@ -87,14 +87,14 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_shake"
+                        android:src="@drawable/ic_touch"
                         android:layout_marginBottom="11dp"/>
 
                     <!--미션 제목-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="흔들기"
+                        android:text="터치 하기"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         android:textStyle="bold"
@@ -171,14 +171,14 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_balance"
+                        android:src="@drawable/ic_shake"
                         android:layout_marginBottom="11dp"/>
 
                     <!--미션 제목-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="균형 맞추기"
+                        android:text="흔들기"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         android:textStyle="bold"
@@ -237,172 +237,10 @@
                 <!--미션 2 종료-->
 
 
-                <!--미션 3-->
-                <LinearLayout
-                    android:id="@+id/mission3"
-                    android:layout_width="164dp"
-                    android:layout_height="196dp"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/layout_20dp"
-                    android:backgroundTint="#2A2828"
-                    android:padding="16dp"
-                    >
-                    <!--미션 아이콘-->
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_touch"
-                        android:layout_marginBottom="11dp"/>
-
-                    <!--미션 제목-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="터치"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="60dp"/>
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <!--카운팅 횟수-->
-                        <EditText
-                            android:id="@+id/et_mission3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:text="10"
-                            android:textSize="14dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:background="@android:color/transparent"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="회"
-                            android:textSize="14dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-                            <!--증가 버튼-->
-                            <Button
-                                android:id="@+id/upbtn_mission3"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:background="@drawable/ic_setcount"/>
-                            <!--감소 버튼-->
-                            <Button
-                                android:id="@+id/downbtn_mission3"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:scaleY="-1"
-                                android:background="@drawable/ic_setcount"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-                <!--미션 3 종료-->
 
 
-                <!--미션 4-->
-                <LinearLayout
-                    android:id="@+id/mission4"
-                    android:layout_width="164dp"
-                    android:layout_height="196dp"
-                    android:layout_row="1"
-                    android:layout_column="1"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/layout_20dp"
-                    android:backgroundTint="#2A2828"
-                    android:padding="16dp"
-                    >
-                    <!--미션 아이콘-->
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_speak"
-                        android:layout_marginBottom="11dp"/>
-
-                    <!--미션 제목-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="문장 말하기"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="60dp"/>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <!--카운팅 횟수-->
-                        <EditText
-                            android:id="@+id/et_mission4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:text="10"
-                            android:textSize="14dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:background="@android:color/transparent"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="회"
-                            android:textSize="14dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-                            <!--증가 버튼-->
-                            <Button
-                                android:id="@+id/upbtn_mission4"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:background="@drawable/ic_setcount"/>
-                            <!--감소 버튼-->
-                            <Button
-                                android:id="@+id/downbtn_mission4"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:scaleY="-1"
-                                android:background="@drawable/ic_setcount"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-                <!--미션 4 종료-->
 
             </GridLayout>
             <!--그리드 레이아웃 종료-->
@@ -421,7 +259,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:background="@drawable/layout_20dp"/>
-
 
         </LinearLayout>
     </ScrollView>

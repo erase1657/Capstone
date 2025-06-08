@@ -3,7 +3,6 @@ package com.example.alramapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,14 +12,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.alramapp.Authentication.LoginActivity;
-import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.Database.UserInform;
+import com.example.alramapp.Pet.CreateActivity;
+import com.example.alramapp.RealTimeDatabase.DataAccess;
+import com.example.alramapp.RealTimeDatabase.UserInform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.willy.ratingbar.BaseRatingBar;
-
 
 public class MyInfromActivity extends AppCompatActivity {
 
@@ -36,66 +35,41 @@ public class MyInfromActivity extends AppCompatActivity {
         super.onResume();
         updatePage();  // 항상 최신 데이터로 갱신
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfrom_page);
 
-        //버튼
         ModifyBtn = findViewById(R.id.modifycharacterbtn);
         InformBtn = findViewById(R.id.logininformbtn);
         QuestionBtn = findViewById(R.id.questionbtn);
         LogoutBtn = findViewById(R.id.logoutbtn);
         BackButton = findViewById(R.id.backbtn);
 
-
-        //이미지
         ProfileImage = findViewById(R.id.profileimage);
         GenderImage = findViewById(R.id.genderimage);
 
-        //텍스트
         NameValue = findViewById(R.id.nametextview);
         ScoreValue = findViewById(R.id.socretextview);
 
-        //레이팅 바
         LifeValue = findViewById(R.id.liferating);
 
         updatePage();
 
-        BackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        ModifyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                modifycharacter();
-            }
+        BackButton.setOnClickListener(v -> finish());
+
+        ModifyBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MyInfromActivity.this, CreateActivity.class);
+            intent.putExtra("isModify", true);
+            startActivity(intent);
         });
 
-        InformBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showinform();
-            }
-        });
+        InformBtn.setOnClickListener(v -> showinform());
 
-        QuestionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendquestion();
-            }
-        });
+        QuestionBtn.setOnClickListener(v -> sendquestion());
 
-        LogoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
-
+        LogoutBtn.setOnClickListener(v -> logout());
     }
 
     void updatePage() {
@@ -106,58 +80,36 @@ public class MyInfromActivity extends AppCompatActivity {
             @Override
             public void onUserLoaded(UserInform userInfo) {
                 if (userInfo != null) {
-
                     String name = userInfo.getName();
                     String gender = userInfo.getGender();
                     String image = userInfo.getImage();
                     int score = userInfo.getScore();
                     int life = userInfo.getLife();
 
-                    //이름 설정
                     NameValue.setText(name);
 
-                    // 성별 이미지 설정
                     if ("f".equalsIgnoreCase(gender)) {
-                        GenderImage.setImageResource(R.drawable.btn_c); // 성별 이미지 리소스 예
+                        GenderImage.setImageResource(R.drawable.btn_c);
                     } else if ("m".equalsIgnoreCase(gender)) {
                         GenderImage.setImageResource(R.drawable.btn_m);
                     }
 
-
-
-
-                    //캐릭터 이미지 설정
                     int resId = getProfileImageResId(image);
                     if (resId != 0) {
                         ProfileImage.setImageResource(resId);
                     }
 
-                    //점수 설정
                     ScoreValue.setText("생존 점수: " + score);
-
-                    //생명 설정
-
                     LifeValue.setRating(life);
-
-
                 }
             }
         });
     }
 
-    //캐릭터 정보 변경
-    void modifycharacter() {
-        Intent intent = new Intent(this, CreateActivity.class);
-        intent.putExtra("", true);
-        startActivity(intent);
-    }
-
-    //계정 정보 (다이얼로그)
     void showinform() {
         Log.d("MyInfromActivity", "showinform() 호출됨");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-
 
         if (user != null) {
             String email = user.getEmail();
@@ -180,11 +132,7 @@ public class MyInfromActivity extends AppCompatActivity {
         }
     }
 
-
-
-    //로그아웃
     void logout() {
-
         new AlertDialog.Builder(this)
                 .setMessage("로그아웃 하시겠습니까?")
                 .setPositiveButton("확인", (dialog, which) -> {
@@ -198,10 +146,8 @@ public class MyInfromActivity extends AppCompatActivity {
                 })
                 .create()
                 .show();
-
     }
 
-    //문의
     void sendquestion() {
         String supportEmail = "erase1657@naver.com";
 
@@ -218,7 +164,6 @@ public class MyInfromActivity extends AppCompatActivity {
                 .show();
     }
 
-    //이메일 문의
     private void sendInquiryEmail(String toEmail) {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("message/rfc822");
@@ -234,7 +179,6 @@ public class MyInfromActivity extends AppCompatActivity {
         }
     }
 
-    //회원탈퇴 (재확인 다이얼로그)
     private void confirmDeleteAccount() {
         new AlertDialog.Builder(this)
                 .setTitle("회원 탈퇴")
@@ -248,7 +192,6 @@ public class MyInfromActivity extends AppCompatActivity {
                 .show();
     }
 
-    //회원 탈퇴(파이어베이스 인증 삭제)
     private void deleteAccount() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -258,10 +201,7 @@ public class MyInfromActivity extends AppCompatActivity {
             user.delete()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // 계정 삭제 성공 후 DB 데이터 삭제 실행
                             deleteUserDataFromDatabase(uid);
-
-                            // 로그인 화면으로 이동
                             Intent intent = new Intent(this, LoginActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -274,7 +214,7 @@ public class MyInfromActivity extends AppCompatActivity {
             Toast.makeText(this, "로그인된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
-    //회원탈퇴 (데이터베이스 값 삭제)
+
     private void deleteUserDataFromDatabase(String uid) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
         userRef.removeValue().addOnCompleteListener(task -> {
@@ -286,11 +226,10 @@ public class MyInfromActivity extends AppCompatActivity {
         });
     }
 
-    //프로필 값 찾기
     private int getProfileImageResId(String imageName) {
         if (imageName == null) return 0;
 
-        switch(imageName) {
+        switch (imageName) {
             case "profile_cat":
                 return R.drawable.profile_cat;
             case "profile_fish":

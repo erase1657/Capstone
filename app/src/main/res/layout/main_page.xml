@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_light"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:layout_marginBottom="?attr/actionBarSize"
+
     tools:context=".MainActivity">
     
     <!--뒤로가기 버튼, 도움말 버튼-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="horizontal"
         >
         <Button
@@ -56,10 +56,12 @@
         
 
         <LinearLayout
+            android:id="@+id/lable_foodtime"
             android:layout_width="318dp"
             android:layout_height="74dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/layout_20dp"
+            android:backgroundTint="#FFCA75"
             android:orientation="horizontal"
             android:gravity="center_vertical|center">
             <ImageView
@@ -72,12 +74,14 @@
                 android:layout_height="match_parent"/>
             
             <TextView
+                android:id="@+id/tv_foodtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="36dp"
                 android:textColor="@color/black"
-                android:text="00:00"/>
+                android:textStyle="bold"/>
         </LinearLayout>
+
     </LinearLayout>
     <View
         android:layout_width="314dp"
@@ -96,6 +100,7 @@
         />
         
     <FrameLayout
+        android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         >

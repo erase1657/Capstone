@@ -13,9 +13,8 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -79,9 +78,9 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
         this.container = root.findViewById(R.id.container);
 
         // 페이지별 레이아웃 inflate(최초 한 번만)
-        setView = inflater.inflate(R.layout.fragment_alarm_set, this.container, false);
-        soundView = inflater.inflate(R.layout.fragment_alarm_sound, this.container, false);
-        missionView = inflater.inflate(R.layout.fragment_alarm_mission, this.container, false);
+        setView = inflater.inflate(R.layout.setalarm_page, this.container, false);
+        soundView = inflater.inflate(R.layout.set_sound, this.container, false);
+        missionView = inflater.inflate(R.layout.set_mission, this.container, false);
 
 
         Button deleteButton = setView.findViewById(R.id.btn_delete);
@@ -91,7 +90,10 @@ public class MyBottomSheetDialog extends BottomSheetDialogFragment {
 
 
         //수정때만 삭제 버튼이 보이게 설정
-        deleteButton.setVisibility(alarmData.getId() != 0 ? View.VISIBLE : View.GONE);
+        deleteButton.setVisibility((alarmData.getId() != 0 && alarmData.getIsFood() != 1) ? View.VISIBLE : View.GONE);
+
+
+
 
         //취소 버튼 클릭시 다이얼로그 닫음
         setView.findViewById(R.id.btn_close).setOnClickListener(v-> dismiss());

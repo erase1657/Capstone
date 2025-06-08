@@ -1,7 +1,5 @@
 package com.example.alramapp.Alarm;
 
-import static androidx.core.content.ContextCompat.getString;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -13,9 +11,9 @@ import android.widget.Toast;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.GuideDialog.SlideAdapter;
 import com.example.alramapp.GuideDialog.SlideItem;
-import com.example.alramapp.MainActivity;
 import com.example.alramapp.R;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
@@ -45,29 +43,25 @@ public class AlarmMissionView {
         missionList = new View[] {
                 root.findViewById(R.id.mission1),
                 root.findViewById(R.id.mission2),
-                root.findViewById(R.id.mission3),
-                root.findViewById(R.id.mission4)
+
         };
 
         increaseBtn = new Button[] {
                 root.findViewById(R.id.upbtn_mission1),
                 root.findViewById(R.id.upbtn_mission2),
-                root.findViewById(R.id.upbtn_mission3),
-                root.findViewById(R.id.upbtn_mission4)
+
         };
 
         decreaseBtn = new Button[] {
                 root.findViewById(R.id.downbtn_mission1),
                 root.findViewById(R.id.downbtn_mission2),
-                root.findViewById(R.id.downbtn_mission3),
-                root.findViewById(R.id.downbtn_mission4)
+
         };
 
         countEditText = new EditText[] {
                 root.findViewById(R.id.et_mission1),
                 root.findViewById(R.id.et_mission2),
-                root.findViewById(R.id.et_mission3),
-                root.findViewById(R.id.et_mission4)
+
         };
         saveBtn = root.findViewById(R.id.btn_save_mis);
         showDialog = root.findViewById(R.id.btn_guide);
@@ -90,11 +84,11 @@ public class AlarmMissionView {
                 //다이얼로그별로 이미지, 제목, 설명이 설정된 리스트 slideItems를 만듦
                 //추후 수정 필요함
                 List<SlideItem> slideItems = new ArrayList<>();
-                slideItems.add(new SlideItem(R.drawable.item_guide1, context.getString(R.string.title1), context.getString(R.string.description1)));
-                slideItems.add(new SlideItem(R.drawable.item_guide2, context.getString(R.string.title2), context.getString(R.string.description2)));
-                slideItems.add(new SlideItem(R.drawable.item_guide3, context.getString(R.string.title3), context.getString(R.string.description3)));
-                slideItems.add(new SlideItem(R.drawable.item_guide4, context.getString(R.string.title4), context.getString(R.string.description4)));
-                slideItems.add(new SlideItem(R.drawable.item_guide5, context.getString(R.string.title5), context.getString(R.string.description5)));
+                slideItems.add(new SlideItem(R.drawable.item_guide4, context.getString(R.string.title_mission1), context.getString(R.string.description_mission1)));
+                slideItems.add(new SlideItem(R.drawable.mission_guide2, context.getString(R.string.title_mission2), context.getString(R.string.description_mission2)));
+                slideItems.add(new SlideItem(R.drawable.mission_guide3, context.getString(R.string.title_mission3), context.getString(R.string.description_mission3)));
+                slideItems.add(new SlideItem(R.drawable.mission_guide4, context.getString(R.string.title_mission4), context.getString(R.string.description_mission4)));
+
 
                 SlideAdapter adapter = new SlideAdapter(slideItems);
                 viewPager.setAdapter(adapter);
@@ -126,7 +120,7 @@ public class AlarmMissionView {
         });
 
         // 카운트 값을 배열로 초기화
-        counts = new int[]{10, 10, 10, 10};  // 원하는 초기값으로 변경
+        counts = new int[]{10, 10};  // 원하는 초기값으로 변경
         initListeners();
 
         saveBtn.setOnClickListener(new View.OnClickListener() {

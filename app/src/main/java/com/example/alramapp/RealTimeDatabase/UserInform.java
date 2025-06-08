@@ -1,4 +1,4 @@
-package com.example.alramapp.Database;
+package com.example.alramapp.RealTimeDatabase;
 
 public class UserInform {
     private String Email;

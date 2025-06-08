@@ -1,4 +1,4 @@
-package com.example.alramapp.Alarm.RecyclerView;
+package com.example.alramapp.Alarm.AlarmList;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.alramapp.R;

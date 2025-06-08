@@ -5,29 +5,38 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.Alarm.AlarmManagerHelper;
 import com.example.alramapp.Alarm.AlarmReceiver;
-import com.example.alramapp.Alarm.RecyclerView.AlarmAdapter;
+import com.example.alramapp.Alarm.AlarmList.AlarmAdapter;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
-import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.Database.UserInform;
+import com.example.alramapp.RealTimeDatabase.DataAccess;
+import com.example.alramapp.RealTimeDatabase.UserInform;
 import com.example.alramapp.Alarm.MyBottomSheetDialog;
 import com.example.alramapp.GuideDialog.SlideAdapter;
 import com.example.alramapp.GuideDialog.SlideItem;
@@ -44,16 +53,21 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MyBottomSheetDialog.OnSaveListener {
 
     private Button showDialogButton, backButton, infromButton, rankingButton, addAlramButton;
+    private LinearLayout lable_foodtime;
     private ArrayList<AlarmData> alarmList;
     private AlarmAdapter adapter;
     private AlarmDBHelper dbHelper;
     private RecyclerView rv;
+    private FrameLayout navbar;
+    private LinearLayout rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.main_page);
+
+        RequestPermissions.checkAndRequestPermissions(this);
 
         dbHelper   = new AlarmDBHelper(this);
         alarmList  = new ArrayList<>();
@@ -64,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         rv.setAdapter(adapter);
 
         // UI 초기화
+        updateFoodTimeTextView();
         loadUserProfileImage();
         loadAlarmsFromDb();
 
@@ -78,8 +93,26 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         addAlramButton.setOnClickListener(v -> {
             AlarmData newAlarm = new AlarmData();
             MyBottomSheetDialog dialog = MyBottomSheetDialog.newInstance(newAlarm);
-            dialog.show(getSupportFragmentManager(), "BS");
+            dialog.show(getSupportFragmentManager(), "AddAlarm");
         });
+
+        //밥 시간 알람 수정 레이블
+        lable_foodtime = findViewById(R.id.lable_foodtime);
+        lable_foodtime.setOnClickListener(v -> {
+            // 항상 DB에서 읽어오게!
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) return;
+            AlarmData foodAlarm = dbHelper.getFoodAlarm(user.getUid());
+
+            if (foodAlarm == null) {
+                Toast.makeText(this, "식사 알람 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            MyBottomSheetDialog dialog = MyBottomSheetDialog.newInstance(foodAlarm);
+            dialog.show(getSupportFragmentManager(), "FoodTime");
+        });
+
 
         // 뒤로가기 버튼
         backButton = findViewById(R.id.backbtn);
@@ -98,6 +131,27 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         rankingButton.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, RankActivity.class))
         );
+
+        rootView = findViewById(R.id.main);
+        navbar = findViewById(R.id.navbar);
+
+
+        //사용자 규격 하단바 위치 자동 맞춤
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, new OnApplyWindowInsetsListener() {
+            @NonNull
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                // 네비게이션바의 바닥 영역 값 구하기
+                int insetBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+
+                // 기존 LayoutParams를 불러온 뒤 하단마진 조정
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) navbar.getLayoutParams();
+                params.bottomMargin = insetBottom;
+                navbar.setLayoutParams(params);
+
+                return insets;
+            }
+        });
     }
 
     // ----------------------------------------------------
@@ -120,6 +174,31 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
             }
         }
     };
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == RequestPermissions.REQUEST_CODE_DEFAULT) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "권한 [" + permissions[i] + "] 을 허용하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            // 권한 허용 완료 후 추가 처리도 여기에!
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RequestPermissions.REQUEST_CODE_OVERLAY) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "오버레이 권한을 허용하지 않았습니다.", Toast.LENGTH_SHORT).show();
+            }
+            // 오버레이 권한 허용 후 추가 처리도 여기에!
+        }
+    }
 
     @Override
     protected void onResume() {
@@ -193,12 +272,14 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         data.setUserUid(user.getUid());
 
         long newId = dbHelper.insertAlarm(data);
+
         if (newId == -1) {
-            Toast.makeText(this, "알람 저장 실패", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "알람 저장 실패" + newId, Toast.LENGTH_SHORT).show();
             return;
         }
         data.setId(newId);
         AlarmManagerHelper.register(this, data);
+
 
         alarmList.add(data);
         adapter.notifyItemInserted(alarmList.size() - 1);
@@ -232,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
                 break;
             }
         }
+        if (data.getIsFood() == 1) updateFoodTimeTextView();
         Log.d("MainActivity", "Alarm updated: " + data.toString());
     }
 
@@ -261,6 +343,22 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         }
 
     }
+    private void updateFoodTimeTextView() {
+        TextView tvFoodTime = findViewById(R.id.tv_foodtime);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            tvFoodTime.setText("--:--");
+            return;
+        }
+        AlarmData foodAlarm = dbHelper.getFoodAlarm(user.getUid());
+        if (foodAlarm == null) {
+            tvFoodTime.setText("--:--");
+            return;
+        }
+        int hour = foodAlarm.getHour();
+        int minute = foodAlarm.getMinute();
+        tvFoodTime.setText(String.format("%02d:%02d", hour, minute));
+    }
 
     // ----------------------------------------------------
     // 가이드 다이얼로그 띄우기
@@ -281,7 +379,6 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         slideItems.add(new SlideItem(R.drawable.item_guide2, getString(R.string.title2), getString(R.string.description2)));
         slideItems.add(new SlideItem(R.drawable.item_guide3, getString(R.string.title3), getString(R.string.description3)));
         slideItems.add(new SlideItem(R.drawable.item_guide4, getString(R.string.title4), getString(R.string.description4)));
-        slideItems.add(new SlideItem(R.drawable.item_guide5, getString(R.string.title5), getString(R.string.description5)));
 
         SlideAdapter slideAdapter = new SlideAdapter(slideItems);
         viewPager.setAdapter(slideAdapter);

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_recreate_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dark">
+
+    <ImageView
+        android:id="@+id/img_death"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:layout_gravity="top|center"
+        android:scaleType="centerInside"
+        android:src="@drawable/pet_death" />
+
+
+
+
+    <LinearLayout
+        android:id="@+id/death_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_gravity="top|center"
+        android:background="@drawable/death_notice"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical"
+        android:paddingBottom="13dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingTop="13dp">
+
+        <TextView
+            android:id="@+id/text_death_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="사망 사유"
+            android:textStyle="bold"
+            android:textColor="#FF7B4E4E"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/death_sentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="밥을 제때 먹지 못하여\n배가 너무 고파 하늘나라로\n밥을 찾아 떠나였습니다."
+            android:textColor="#FF524B4B"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <Button
+
+        android:id="@+id/restart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="584dp"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="다시 생성하기"
+        android:background="@drawable/create_btn"
+        />
+
+</FrameLayout>

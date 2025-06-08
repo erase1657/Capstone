@@ -1,4 +1,4 @@
-package com.example.alramapp.Alarm;
+package com.example.alramapp.Alarm.SQLlite;
 
 import java.io.Serializable;
 
@@ -15,10 +15,13 @@ public class AlarmData implements Serializable {
     private boolean mis_On;        //미션 진행 유무
     private boolean soundOn;
     private boolean isEnabled;
+    private int isFood;
     private String userUid;
 
     public AlarmData() {
+
         this.name = "알람";
+        this.isFood = 0;
     }
     public long getId() {
         return id;
@@ -114,6 +117,15 @@ public class AlarmData implements Serializable {
     public void setUserUid(String userUid) {
         this.userUid = userUid;
     }
+
+    public int getIsFood() {
+        return isFood;
+    }
+
+    public void setIsFood(int isFood) {
+        this.isFood = isFood;
+    }
+
     public void copyFrom(AlarmData other) {
         this.hour = other.hour;
         this.minute = other.minute;

@@ -1,4 +1,4 @@
-package com.example.alramapp.Alarm.RecyclerView;
+package com.example.alramapp.Alarm.AlarmList;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.Alarm.AlarmManagerHelper;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
 import com.example.alramapp.R;

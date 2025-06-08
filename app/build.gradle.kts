@@ -37,6 +37,10 @@ android {
 }
 
 dependencies {
+    //gif 사용
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
     //공통 라이브러리 추가
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
@@ -44,10 +48,6 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
-
-    //gif 사용
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
     //구글 로그인 라이브러리 추가
     // Also add the dependencies for the Credential Manager libraries and specify their versions
