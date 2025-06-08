@@ -5,7 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +30,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.Alarm.AlarmManagerHelper;
 import com.example.alramapp.Alarm.AlarmReceiver;
-import com.example.alramapp.Alarm.RecyclerView.AlarmAdapter;
+import com.example.alramapp.Alarm.AlarmList.AlarmAdapter;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
-import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.Database.UserInform;
+import com.example.alramapp.RealTimeDatabase.DataAccess;
+import com.example.alramapp.RealTimeDatabase.UserInform;
 import com.example.alramapp.Alarm.MyBottomSheetDialog;
 import com.example.alramapp.GuideDialog.SlideAdapter;
 import com.example.alramapp.GuideDialog.SlideItem;
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.main_page);
+
+        RequestPermissions.checkAndRequestPermissions(this);
 
         dbHelper   = new AlarmDBHelper(this);
         alarmList  = new ArrayList<>();
@@ -170,6 +174,31 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
             }
         }
     };
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == RequestPermissions.REQUEST_CODE_DEFAULT) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "권한 [" + permissions[i] + "] 을 허용하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            // 권한 허용 완료 후 추가 처리도 여기에!
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RequestPermissions.REQUEST_CODE_OVERLAY) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "오버레이 권한을 허용하지 않았습니다.", Toast.LENGTH_SHORT).show();
+            }
+            // 오버레이 권한 허용 후 추가 처리도 여기에!
+        }
+    }
 
     @Override
     protected void onResume() {
@@ -350,7 +379,6 @@ public class MainActivity extends AppCompatActivity implements MyBottomSheetDial
         slideItems.add(new SlideItem(R.drawable.item_guide2, getString(R.string.title2), getString(R.string.description2)));
         slideItems.add(new SlideItem(R.drawable.item_guide3, getString(R.string.title3), getString(R.string.description3)));
         slideItems.add(new SlideItem(R.drawable.item_guide4, getString(R.string.title4), getString(R.string.description4)));
-        slideItems.add(new SlideItem(R.drawable.item_guide5, getString(R.string.title5), getString(R.string.description5)));
 
         SlideAdapter slideAdapter = new SlideAdapter(slideItems);
         viewPager.setAdapter(slideAdapter);

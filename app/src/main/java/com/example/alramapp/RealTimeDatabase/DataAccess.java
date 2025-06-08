@@ -1,6 +1,4 @@
-package com.example.alramapp.Database;
-
-import static android.content.ContentValues.TAG;
+package com.example.alramapp.RealTimeDatabase;
 
 import android.util.Log;
 

@@ -3,15 +3,14 @@ package com.example.alramapp.Alarm;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.os.Build;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.alramapp.Alarm.RecyclerView.SoundAdapter;
+import com.example.alramapp.Alarm.AlarmList.SoundAdapter;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.R;
 
 import java.util.Arrays;

@@ -1,6 +1,5 @@
-package com.example.alramapp;
+package com.example.alramapp.Pet;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +10,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
-import com.example.alramapp.Database.DataAccess;
+import com.example.alramapp.MainActivity;
+import com.example.alramapp.R;
+import com.example.alramapp.RealTimeDatabase.DataAccess;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

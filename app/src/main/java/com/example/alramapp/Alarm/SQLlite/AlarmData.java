@@ -1,4 +1,4 @@
-package com.example.alramapp.Alarm;
+package com.example.alramapp.Alarm.SQLlite;
 
 import java.io.Serializable;
 

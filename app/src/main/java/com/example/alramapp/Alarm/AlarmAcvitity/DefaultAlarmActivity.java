@@ -1,23 +1,24 @@
 // AlarmActivity.java 전체 코드 (수정본)
 
-package com.example.alramapp.Alarm;
+package com.example.alramapp.Alarm.AlarmAcvitity;
 
 import android.content.Intent;
-import android.media.MediaPlayer; // MediaPlayer import
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.alramapp.Alarm.AlarmSoundService;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.R;
 import com.example.swipebutton_library.SwipeButton; // SwipeButton import
 import com.example.swipebutton_library.OnActiveListener; // OnActiveListener import
 
 import java.util.Locale;
 
-public class AlarmActivity extends AppCompatActivity {
+public class DefaultAlarmActivity extends AppCompatActivity {
 
     private static final String TAG = "AlarmActivity"; // 로그 태그 추가
 

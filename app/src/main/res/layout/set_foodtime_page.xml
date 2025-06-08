@@ -7,7 +7,7 @@
     android:background="@drawable/bg_light"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".SetFoodTimeActivity"
+    tools:context=".Pet.SetFoodTimeActivity"
     >
 
     <Button

@@ -14,8 +14,10 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.example.alramapp.Alarm.Mission.MissionAlarmActivity;
+import com.example.alramapp.Alarm.AlarmAcvitity.DefaultAlarmActivity;
+import com.example.alramapp.Alarm.AlarmAcvitity.MissionAlarmActivity;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.R;
 
 public class AlarmSoundService extends Service {
@@ -33,6 +35,7 @@ public class AlarmSoundService extends Service {
         boolean alarmType = alarmData.getMisOn();
 
         String soundName = alarmData.getSound();
+
         int soundResId = 0;
 
         switch (soundName) {
@@ -58,7 +61,7 @@ public class AlarmSoundService extends Service {
             alarmIntent = new Intent(this, MissionAlarmActivity.class);
         } else {
             // 일반 알람 실행
-            alarmIntent = new Intent(this, AlarmActivity.class);
+            alarmIntent = new Intent(this, DefaultAlarmActivity.class);
         }
 
         alarmIntent.putExtra("alarmId", alarmId);

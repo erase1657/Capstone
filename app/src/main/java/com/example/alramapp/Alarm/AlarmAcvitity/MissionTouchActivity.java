@@ -1,4 +1,4 @@
-package com.example.alramapp.Alarm.Mission;
+package com.example.alramapp.Alarm.AlarmAcvitity;
 
 import static android.content.ContentValues.TAG;
 
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -15,10 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.Alarm.AlarmSoundService;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
 import com.example.alramapp.R;
@@ -33,7 +31,6 @@ import com.google.firebase.database.Transaction;
 
 
 public class MissionTouchActivity extends AppCompatActivity {
-
     private ProgressBar progressBar;
     private TextView touchCountText, tv_mission;
     private AlarmDBHelper dbHelper;
@@ -64,8 +61,12 @@ public class MissionTouchActivity extends AppCompatActivity {
         tv_mission = findViewById(R.id.mission);
         giveUpButton = findViewById(R.id.giveup); // 포기 버튼 아이디 변경 시 여기에 반영
 
+        dbHelper = new AlarmDBHelper(this);
+
         totalCount = getIntent().getIntExtra("condition",15);
         uid = getIntent().getStringExtra("user_uid");
+        rep = getIntent().getStringExtra("repeat");
+        alarmData = (AlarmData) getIntent().getSerializableExtra("alarmData");
 
         //파이어베이스 데이터베이스 점수 값 초기화(연결)
         userScoreRef = FirebaseDatabase.getInstance()
@@ -80,8 +81,8 @@ public class MissionTouchActivity extends AppCompatActivity {
                 .child("life");
 
         //sqlLite 알람 아이디값 초기화(연결)
-        dbHelper = new AlarmDBHelper(this);
-        alarmData = dbHelper.getAlarmById(getIntent().getLongExtra("alarmId", -1));
+
+
 
         //초기화면 세팅(미션 종류, 미션 조건 프로그레시브바,텍스트뷰 세팅)
         showMission();
@@ -109,6 +110,12 @@ public class MissionTouchActivity extends AppCompatActivity {
                                 public void onActive() {
                                     Log.d(TAG, "SwipeButton activated!");
 
+
+                                    //단발성 알림이라면 메인화면의 알람리스트에서 알람스위치를 끔
+                                    if (rep.equals("반복 없음")) {
+                                        alarmData.setIsEnabled(false);
+                                        dbHelper.updateAlarm(alarmData);
+                                    }
 
                                     stopAlarmSound(); //알람 소리 종료
                                     finish(); // 현재 AlarmActivity 종료

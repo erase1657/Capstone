@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/appcion"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -39,7 +39,7 @@
         <activity
             android:name=".Authentication.LoginActivity"
             android:exported="true"/>
-        <activity android:name=".Alarm.AlarmActivity"
+        <activity android:name=".Alarm.AlarmAcvitity.DefaultAlarmActivity"
             android:exported="true"
             android:showOnLockScreen="true"
             android:launchMode="singleTop"
@@ -48,14 +48,14 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Authentication.RegisterActivity" />
         <activity android:name=".MyInfromActivity" />
-        <activity android:name=".CreateActivity"/>
-        <activity android:name=".SetFoodTimeActivity"/>
+        <activity android:name=".Pet.CreateActivity"/>
+        <activity android:name=".Pet.SetFoodTimeActivity"/>
         <activity android:name=".PetRestartActivity"/>
         <activity
-            android:name=".Alarm.Mission.MissionAlarmActivity"
+            android:name=".Alarm.AlarmAcvitity.MissionAlarmActivity"
             android:exported="true" />
-        <activity android:name=".Alarm.Mission.MissionShakeActivity"/>
-        <activity android:name=".Alarm.Mission.MissionTouchActivity"/>
+        <activity android:name=".Alarm.AlarmAcvitity.MissionShakeActivity"/>
+        <activity android:name=".Alarm.AlarmAcvitity.MissionTouchActivity"/>
     </application>
 
 </manifest>

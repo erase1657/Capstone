@@ -1,22 +1,17 @@
 package com.example.alramapp.Alarm;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.widget.SwitchCompat;
 
-import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -8,7 +8,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 
 import java.util.Calendar;
 

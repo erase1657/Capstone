@@ -12,11 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.alramapp.CreateActivity;
-import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.Database.UserInform;
-import com.example.alramapp.MainActivity;
-import com.example.alramapp.MyInfromActivity;
+import com.example.alramapp.RealTimeDatabase.DataAccess;
+import com.example.alramapp.RealTimeDatabase.UserInform;
 import com.example.alramapp.R;
 import com.example.alramapp.SplashActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

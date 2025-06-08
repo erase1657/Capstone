@@ -1,6 +1,4 @@
-package com.example.alramapp.Alarm.Mission;
-
-import static android.content.ContentValues.TAG;
+package com.example.alramapp.Alarm.AlarmAcvitity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +18,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.alramapp.Alarm.AlarmData;
+import com.example.alramapp.Alarm.SQLlite.AlarmData;
 import com.example.alramapp.Alarm.AlarmSoundService;
 import com.example.alramapp.Alarm.SQLlite.AlarmDBHelper;
-import com.example.alramapp.Database.DataAccess;
-import com.example.alramapp.MainActivity;
+import com.example.alramapp.RealTimeDatabase.DataAccess;
 import com.example.alramapp.R;
 import com.example.swipebutton_library.OnActiveListener;
 import com.example.swipebutton_library.SwipeButton;
@@ -35,7 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
-import com.google.firebase.ktx.Firebase;
 
 public class MissionShakeActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -59,12 +55,12 @@ public class MissionShakeActivity extends AppCompatActivity implements SensorEve
     private int shakeCount = 0;
     private int totalCount;
     private boolean missionCompleted = false;
-
     private static final float SHAKE_THRESHOLD_GRAVITY = 2.7F;
     private static final int MIN_TIME_BETWEEN_SHAKES_MS = 500;
     private long lastShakeTime = 0;
     private float lastX, lastY, lastZ;
     private boolean isInitialized = false;
+
 
     // Firebase (체력 감소 기능을 위해)
     // private DataAccess database;
@@ -87,8 +83,13 @@ public class MissionShakeActivity extends AppCompatActivity implements SensorEve
         swipeButton = findViewById(R.id.swipbutton_mission_complete); // SwipeButton ID
         tv_mission = findViewById(R.id.mission);
 
+        dbHelper = new AlarmDBHelper(this);
+
         totalCount = getIntent().getIntExtra("condition",15);
         uid = getIntent().getStringExtra("user_uid");
+        alarmData = (AlarmData) getIntent().getSerializableExtra("alarmData");
+        rep = getIntent().getStringExtra("repeat");
+
         userScoreRef = FirebaseDatabase.getInstance()
                 .getReference("users")
                 .child(uid)
@@ -180,6 +181,12 @@ public class MissionShakeActivity extends AppCompatActivity implements SensorEve
 
 
 
+                                //단발성 알림이라면 메인화면의 알람리스트에서 알람스위치를 끔
+                                if (rep.equals("반복 없음")) {
+
+                                    alarmData.setIsEnabled(false);
+                                    dbHelper.updateAlarm(alarmData);
+                                }
 
                                 stopAlarmSound(); //알람 소리 종료
                                 finish(); // 현재 AlarmActivity 종료
