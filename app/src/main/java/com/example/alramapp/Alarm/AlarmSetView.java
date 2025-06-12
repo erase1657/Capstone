@@ -82,6 +82,8 @@ public class AlarmSetView {
             repeat.setVisibility(View.GONE);
             tv_repeat.setText("매일");
             alarmData.setRepeat("매일");
+            switch_mis.setChecked(true);
+            switch_mis.setVisibility(View.INVISIBLE);
         } else {
             switch_mis.setVisibility(View.VISIBLE);
         }
