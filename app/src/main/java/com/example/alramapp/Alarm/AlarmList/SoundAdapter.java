@@ -1,5 +1,6 @@
 package com.example.alramapp.Alarm.AlarmList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -44,7 +45,7 @@ public class SoundAdapter extends RecyclerView.Adapter<SoundAdapter.SoundViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SoundViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SoundViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String soundName = soundList.get(position);
         holder.textSoundName.setText(soundName);
 
