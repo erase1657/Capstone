@@ -60,7 +60,7 @@ public class AlarmManagerHelper {
      * 매일 반복 알람 등록
      */
     private static void registerDailyAlarms(Context context, AlarmData alarmData) {
-        if (ALARM_TEST_MODE) {
+        /*if (ALARM_TEST_MODE) {
             // 테스트: 1분 뒤 단발
             registerTestAlarm(context, alarmData);
         } else {
@@ -68,7 +68,8 @@ public class AlarmManagerHelper {
                 registerWeeklyAlarmForDay(context, alarmData, d);
             }
             Log.d("AlarmManagerHelper", "Registered daily alarms for id=" + alarmData.getId());
-        }
+        }*/
+        registerAlarm(context, alarmData);
     }
 
     /**

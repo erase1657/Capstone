@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -23,8 +25,9 @@ import com.example.alramapp.R;
 public class AlarmSoundService extends Service {
     public static final String ACTION_STOP = "com.example.alramapp.action.STOP";
     private static final String CHANNEL_ID = "alarm_channel";
-
     private MediaPlayer mediaPlayer;
+    private Vibrator vibrator;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         long alarmId = intent.getLongExtra("alarmId", -1);
@@ -43,7 +46,15 @@ public class AlarmSoundService extends Service {
             case "샘플 알람음2": soundResId = R.raw.sample2; break;
             case "샘플 알람음3": soundResId = R.raw.sample3; break;
             default:
-                //진동 구현
+                // 진동 구현
+                vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                long[] pattern = {0, 1000, 500, 1000, 500}; // {대기, on, off, on, off ...}
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    VibrationEffect effect = VibrationEffect.createWaveform(pattern, 0); // 0: 반복, -1: 한 번
+                    vibrator.vibrate(effect);
+                } else {
+                    vibrator.vibrate(pattern, 0);
+                }
                 break;
         }
         // MediaPlayer로 반복재생
@@ -112,6 +123,9 @@ public class AlarmSoundService extends Service {
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
+        }
+        if(vibrator != null) {
+            vibrator.cancel();
         }
     }
 
